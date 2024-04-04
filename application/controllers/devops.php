@@ -23,12 +23,15 @@ class devops extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Services_m');
 		// $this->load->model('Product_m');
 		
 	}
 	public function index()
 	{
-		$this->template->load('template', 'Devops/devops_v');
+		$this->load->library('upload');
+		$data['services'] = $this->Services_m->getservices();
+		$this->template->load('template', 'Devops/devops_v', $data);
 	}
 
 }

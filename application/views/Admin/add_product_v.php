@@ -1,113 +1,89 @@
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-      <div class="container-fluid">
-          <div class="row mb-2">
-              <div class="col-sm-6">
-                  <h1>Project Add</h1>
-              </div>
-              <div class="col-sm-6">
-                  <ol class="breadcrumb float-sm-right">
-                      <li class="breadcrumb-item"><a href="#">Home</a></li>
-                      <li class="breadcrumb-item active">Project Add</li>
-                  </ol>
-              </div>
-          </div>
-      </div><!-- /.container-fluid -->
-  </section>
+<main id="main" class="main">
 
-  <!-- Main content -->
-  <section class="content">
-      <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<?= base_url('Admin/Product/insert_product') ?>">
-          <div class="row">
+    <div class="pagetitle">
+      <h1>Add Products and Services</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Add Products and Services</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
 
-              <div class="col-md-6">
-                  <div class="card card-primary">
-                      <div class="card-header">
-                          <h3 class="card-title">General</h3>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
 
-                          <div class="card-tools">
-                              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                  <i class="fas fa-minus"></i>
-                              </button>
-                          </div>
-                      </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">General Form Elements</h5>
 
-                      <div class="card-body">
-                          <div class="form-group">
-                              <label for="exampleInputFile">File input</label>
-                              <div class="custom-file">
-                                  <!-- <?php echo form_open_multipart('upload/do_upload'); ?> -->
-                                  <input type="file" class="form-control" name="picture">
-                                  <label>Choose file</label>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label for="inputName">Product Name</label>
-                              <input type="text" id="inputName" name="product_name" class="form-control">
-                          </div>
-                          <div class="form-group">
-                              <label for="inputDescription">Product Description</label>
-                              <textarea id="inputDescription" class="form-control" name="product_desc" rows="4"></textarea>
-                          </div>
-                          <div class="form-group">
-                              <label for="inputStatus">Product Category</label>
-                              <select id="inputStatus" class="form-control custom-select" name="product_category">
-                                  <option selected disabled>Select one</option>
-                                  <option>Sold</option>
-                                  <option>Available</option>
-                                  <option>Coming soon</option>
-                              </select>
-                          </div>
-                      </div>
-                      <!-- /.card-body -->
+              <!-- General Form Elements -->
+              <form method="post" enctype="multipart/form-data" action="<?= base_url('Admin/Product/insert_service') ?>">
+                <div class="row mb-3">
+                  <label for="inputText" class="col-sm-2 col-form-label">Service Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="service_name" class="form-control">
                   </div>
-                  <!-- /.card -->
-              </div>
-              <div class="col-md-6">
-                  <div class="card card-secondary">
-                      <div class="card-header">
-                          <h3 class="card-title">Budget</h3>
-
-                          <div class="card-tools">
-                              <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                  <i class="fas fa-minus"></i>
-                              </button>
-                          </div>
-                      </div>
-                      <div class="card-body">
-                          <div class="form-group">
-                              <label for="inputStatus">Product Status</label>
-                              <select id="inputStatus" class="form-control custom-select" name="product_status">
-                                  <option selected disabled>Select one</option>
-                                  <option value="1">Available</option>
-                                  <option value="2">Sold</option>
-                                  <option value="3">Coming soon</option>
-                              </select>
-                          </div>
-                          <div class="form-group">
-                              <label for="inputEstimatedDuration">Stock</label>
-                              <input type="number" id="inputEstimatedDuration" name="stock" class="form-control">
-                          </div>
-                          <div class="form-group">
-                              <label for="inputEstimatedBudget">Price Discount</label>
-                              <input type="number" id="inputEstimatedBudget" name="discount_price" class="form-control">
-                          </div>
-                          <div class="form-group">
-                              <label for="inputSpentBudget">Price</label>
-                              <input type="number" id="inputSpentBudget" name="price" class="form-control">
-                          </div>
-                      </div>
-                      <!-- /.card-body -->
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Service Categorization</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" aria-label="Default select example" name="product_categories_id">
+                      <option selected>-- Select --</option>
+                      <option value="1">Infrastructure As Code</option>
+                      <option value="2">Containerazing</option>
+                      <option value="3">CI/CD</option>
+                      <option value="4">Monitoring Apps</option>
+                    </select>
                   </div>
-                  <!-- /.card -->
-              </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" name="service_description" style="height: 100px"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">Price</label>
+                  <div class="col-sm-10">
+                    <input type="number" name="service_price" class="form-control">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">Service Performed By</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" aria-label="Default select example" name="service_created_by">
+                      <option selected>Idris Abdul Azis</option>
+                      <option value="1">Ahmad Zaenuddin</option>
+                      <option value="2">Asep Containerazing</option>
+                      <option value="2">Joko Docker</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                  <div class="col-sm-10">
+                    <!-- <?php echo form_open_multipart('upload/do_upload'); ?> -->
+                    <!-- <input type="file" class="form-control" name="picture"> -->
+                    <input class="form-control" type="file" id="formFile" name="picture">
+                  </div>
+                </div>
+               
+
+                <div class="row mb-3">
+                  <div class="col-sm-10">
+                    <button type="submit" name="service_save" class="btn btn-primary">Submit Form</button>
+                  </div>
+                </div>
+
+              </form><!-- End General Form Elements -->
+
+            </div>
           </div>
-          <div class="row">
-              <div class="col-12">
-                  <a href="#" class="btn btn-secondary">Cancel</a>
-                  <button type="submit" name="product_save" class="btn btn-success float-right">
-              </div>
-          </div>
-      </form>
-  </section>
-  <!-- /.content -->
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
