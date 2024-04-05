@@ -25,7 +25,7 @@
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h4>
-                    <?= ucfirst($service->product_categories_id) ?>
+                    <?= ucfirst($service->product_category_name) ?>
                   </h4>
                   <p class="price">Rp.
                     <?= ucfirst($service->service_price) ?>
@@ -42,7 +42,7 @@
                   <div class="trainer-profile d-flex align-items-center">
                     <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
                     <span>
-                      <?= ucfirst($service->service_created_by) ?>
+                      <?= ucfirst($service->nickname) ?>
                     </span>
                   </div>
                   <div class="trainer-rank d-flex align-items-center">

@@ -7,6 +7,8 @@ class Services_m extends CI_Model {
     {
         $this->db->select('*');
         $this->db->from("services");
+        $this->db->join("user", "user.user_id = services.service_created_by");
+        $this->db->join("product_category", "product_category.product_category_id  = services.product_categories_id");
         return $this->db->get()->result();
     }
 

@@ -39,10 +39,10 @@
                   <tr>
                     <td><?= $no++ ?></td>
                     <td><?= ucfirst($service->service_name) ?></td>
-                    <td><?= ucfirst($service->product_categories_id) ?></td>
+                    <td><?= ucfirst($service->product_category_name) ?></td>
                     <td><?= ucfirst($service->service_description) ?></td>
                     <td>Rp. <?= ucfirst($service->service_price) ?></td>
-                    <td><?= ucfirst($service->service_created_by) ?></td>
+                    <td><?= ucfirst($service->nickname) ?></td>
                     <td>edit etc</td>
                   </tr>
                 <?php } ?>

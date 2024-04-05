@@ -366,22 +366,22 @@
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="<?= base_url("Admin/Product/add_product") ?>">
-              <i class="bi bi-circle"></i><span>Add Products and Services</span>
+              <i class="bi bi-circle"></i><span>Add Service</span>
             </a>
           </li>
           <li>
             <a href="<?= base_url("Admin/Product") ?>">
-              <i class="bi bi-circle"></i><span>Data Products and Services</span>
+              <i class="bi bi-circle"></i><span>Data Services</span>
             </a>
           </li>
           <li>
             <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Form Editors</span>
+              <i class="bi bi-circle"></i><span>Add Product</span>
             </a>
           </li>
           <li>
             <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Form Validation</span>
+              <i class="bi bi-circle"></i><span>Data Products</span>
             </a>
           </li>
         </ul>

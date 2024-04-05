@@ -64,7 +64,7 @@
               <li><a href="#">Web Development</a></li> -->
               <li><a href="<?= base_url("Product") ?>">B-Asset</a></li>
               <li><a href="#">SysAdministrator</a></li>
-              <li><a href="<?= base_url("devops") ?>">DevOps</a></li>
+              <li><a href="<?= base_url("Devops") ?>">DevOps</a></li>
               <li><a href="#">Courses</a></li>
             </ul>
           </li>
