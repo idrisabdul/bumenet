@@ -37,13 +37,31 @@
                 <?php $no = 1; ?>
                 <?php foreach ($services as $service) { ?>
                   <tr>
-                    <td><?= $no++ ?></td>
-                    <td><?= ucfirst($service->service_name) ?></td>
-                    <td><?= ucfirst($service->product_category_name) ?></td>
-                    <td><?= ucfirst($service->service_description) ?></td>
-                    <td>Rp. <?= ucfirst($service->service_price) ?></td>
-                    <td><?= ucfirst($service->nickname) ?></td>
-                    <td>edit etc</td>
+                    <td>
+                      <?= $no++ ?>
+                    </td>
+                    <td>
+                      <?= ucfirst($service->service_name) ?>
+                    </td>
+                    <td>
+                      <?= ucfirst($service->product_category_name) ?>
+                    </td>
+                    <td>
+                      <?= ucfirst($service->service_description) ?>
+                    </td>
+                    <td>Rp.
+                      <?= ucfirst($service->service_price) ?>
+                    </td>
+                    <td>
+                      <?= ucfirst($service->nickname) ?>
+                    </td>
+
+                    </td>
+                    <td>
+                      <button
+                        onclick="deleteConfirm('<?= base_url('Admin/Product/delete_service/' . $service->service_id) ?>')"
+                        class="btn btn-xs btn-danger" type="button" href="#!"><i class="bi bi-exclamation-octagon"></i></button>
+                    </td>
                   </tr>
                 <?php } ?>
 
@@ -58,3 +76,33 @@
   </section>
 
 </main>
+
+
+<div class="modal fade" id="basicModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Anda Yakin?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Data yang dihapus tidak akan bisa dikembalikan.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <a id="btn-delete" class="btn btn-danger" href="#">Hapus</a>
+      </div>
+    </div>
+  </div>
+</div><!-- End Basic Modal-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  function deleteConfirm(url) {
+    console.log(url);
+    $('#btn-delete').attr('href', url);
+    $('#basicModal').modal('show');
+  }
+</script>

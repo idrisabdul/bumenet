@@ -35,7 +35,24 @@ class Product extends CI_Controller
 
 	public function add_product()
 	{
-		$this->template->load('template_admin', 'Admin/add_product_v');
+		$data['product_category'] = $this->Services_m->getproductcategory();
+		$data['users'] = $this->Services_m->getusers();
+		$this->template->load('template_admin', 'Admin/add_product_v', $data);
+	}
+
+	public function delete_service($id)
+	{
+		$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<h5><i class="icon fas fa-check"></i> Danger!</h5>
+		Asset Berhasil Dihapus
+	  </div>');
+
+		$img_service = $this->db->query("SELECT img_service FROM services WHERE service_id = $id;")->row();
+
+		unlink('images/' . $img_service->img_service);
+		$this->db->delete('services', ['service_id' => $id]);
+		redirect('Admin/Product/');
 	}
 
 
@@ -111,10 +128,10 @@ class Product extends CI_Controller
 		}
 	}
 
-	public function show_all_services_user()
+	public function show_all_product_category()
 	{
 		$this->load->library('upload');
-		$data['services'] = $this->Services_m->getservices();
+		$data['services'] = $this->Services_m->getproductcategory();
 		var_dump($data['services']);
 		// $this->template->load('template', 'Devops/devops_v', $data);
 	}

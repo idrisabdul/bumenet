@@ -15,7 +15,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="<?= base_url() ?>assets/assets-admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -505,6 +507,21 @@
     </ul>
 
   </aside><!-- End Sidebar-->
+  <!-- Vendor JS Files -->
+  <!-- jQuery UI 1.11.4 -->
+  <!-- <script src="<?= base_url() ?>assets/assets-admin/vendor/jquery-ui/jquery-ui.min.js"></script> -->
+
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/chart.js/chart.umd.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/echarts/echarts.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/quill/quill.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/tinymce/tinymce.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="<?= base_url() ?>assets/assets-admin/js/main.js"></script>
 
   <!-- CONTENTS -->
   <?= $contents ?>
@@ -524,20 +541,11 @@
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/chart.js/chart.umd.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/echarts/echarts.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/quill/quill.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/tinymce/tinymce.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="<?= base_url() ?>assets/assets-admin/js/main.js"></script>
+  </script>
 
 </body>
 

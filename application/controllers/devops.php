@@ -34,4 +34,15 @@ class devops extends CI_Controller
 		$this->template->load('template', 'Devops/devops_v', $data);
 	}
 
+	public function delete_service($id)
+	{
+		$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<h5><i class="icon fas fa-check"></i> Danger!</h5>
+		Asset Berhasil Dihapus
+	  </div>');
+		$this->db->delete('services', ['service_id' => $id]);
+		redirect('Product');
+	}
+
 }
