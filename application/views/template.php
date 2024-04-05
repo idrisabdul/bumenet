@@ -49,45 +49,34 @@
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="active" href="index.html">Home</a></li>
-          <!-- <li><a href="https://asset.bumenet.com">B-Asset</a></li> -->
-          <li><a href="about.html">Tentang Kami</a></li>
-          <li class="dropdown"><a href="#"><span>Produk & Layanan</span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span>Academy</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <!-- <li class="dropdown"><a href="#"><span>Hosting dan Domain</span> <i class="bi bi-chevron-right"></i></a>
+              <li><a href="<?= base_url("Devops") ?>">Belajar Online</a></li>
+              <li class="dropdown"><a href="#"><span>Bumenet Mengajar</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Domain</a></li>
-                  <li><a href="#">Hosting</a></li>
-                  <li><a href="#">Website Instan</a></li>
+                  <li><a href="#">Instruktur</a></li>
+                  <li><a href="#">Live Class</a></li>
                 </ul>
               </li>
-              <li><a href="<?= base_url("Store") ?>">Hardware dan Software</a></li>
-              <li><a href="#">Web Development</a></li> -->
+              <li><a href="#">Seminar IT</a></li>
+              <li><a href="#">Sertifikat</a></li>
+            </ul>
+          </li>
+          <!-- <li class="dropdown"><a href="#"><span>Produk & Layanan</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
               <li><a href="<?= base_url("Product") ?>">B-Asset</a></li>
               <li><a href="#">SysAdministrator</a></li>
               <li><a href="<?= base_url("Devops") ?>">DevOps</a></li>
               <li><a href="#">Courses</a></li>
             </ul>
-          </li>
-          <li class="dropdown"><a href="#"><span>Courses</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Networking</a></li>
-              <li class="dropdown"><a href="#"><span>Micro Office</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Ms Word</a></li>
-                  <li><a href="#">Ms Excel</a></li>
-                  <li><a href="#">Ms PowerPoint</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Web Programming</a></li>
-              <li><a href="#">Cyber Security</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html">Hubungi Kami</a></li>
+          </li> -->
+          <li><a href="contact.html">IT Solution</a></li>
+          <li><a href="contact.html">Tentang Kami</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
 
-      <a href="https://asset.bumenet.com" class="get-started-btn">Try the Demo B-Asset</a>
+      <a href="https://asset.bumenet.com" class="get-started-btn">Login</a>
 
     </div>
   </header><!-- End Header -->
