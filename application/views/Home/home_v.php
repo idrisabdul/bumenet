@@ -273,8 +273,9 @@
                   <h4>
                     <?= ucfirst($service->product_category_name) ?>
                   </h4>
-                  <p class="price">Rp.
-                    <?= ucfirst($service->service_price) ?>
+                  <p class="price">
+                    <!-- <?php if ($service->service_price == 0)  ?> -->
+                    <?php echo $service->service_price == 0 ? 'FREE' : 'Rp. '.$service->service_price; // Sangat Baik ?>
                   </p>
                 </div>
 
@@ -292,7 +293,7 @@
                     </span>
                   </div>
                   <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
-                  <a href="<?= base_url('/product/course_detail/' . $service->service_id) ?>" class="more-btn">Learn More
+                  <a href="<?= base_url('/learning') ?>" class="more-btn">Learn More
                     <i class="bx bx-chevron-right"></i></a>
                 </div>
               </div>
