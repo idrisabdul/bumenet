@@ -32,7 +32,7 @@
                   </p>
                 </div>
 
-                <h3><a href="course-details.html">
+                <h3><a href="<?= base_url('/product/course_detail/' . $service->service_id) ?>">
                     <?= ucfirst($service->service_name) ?>
                   </a></h3>
                 <p>
@@ -41,13 +41,12 @@
                 <div class="trainer d-flex justify-content-between align-items-center">
                   <div class="trainer-profile d-flex align-items-center">
                     <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
-                  
                     <span>
                       <?= ucfirst($service->nickname) ?>
                     </span>
                   </div>
                   <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
-                  <a href="about.html" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+                  <a href="<?= base_url('/product/course_detail/' . $service->service_id) ?>" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
                 </div>
               </div>
             </div>
