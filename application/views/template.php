@@ -76,7 +76,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
 
-      <a href="https://www.bumenet.com/learning" class="get-started-btn">Belajar Sekarang</a>
+      <a href="<?= base_url("Devops") ?>" class="get-started-btn">Belajar Sekarang</a>
 
     </div>
   </header><!-- End Header -->
