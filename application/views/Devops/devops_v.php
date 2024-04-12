@@ -32,7 +32,7 @@
                   </p>
                 </div>
 
-                <h3><a href="<?= base_url('/product/course_detail/' . $service->service_id) ?>">
+                <h3><a href="<?= base_url('/learning/course_detail/' . $service->service_id) ?>">
                     <?= ucfirst($service->service_name) ?>
                   </a></h3>
                 <p>
@@ -46,7 +46,7 @@
                     </span>
                   </div>
                   <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
-                  <a href="<?= base_url('/product/course_detail/' . $service->service_id) ?>" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+                  <a href="<?= base_url('/learning/course_detail/' . $service->service_id) ?>" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
                 </div>
               </div>
             </div>

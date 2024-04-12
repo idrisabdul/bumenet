@@ -2,13 +2,11 @@
 
     <div class="pagetitle">
         <h1>Kelas Pengenalan DevOps</h1>
-        <nav>
+        <nav style="--bs-breadcrumb-divider: '';">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">Users</li>
-                <li class="breadcrumb-item active">Profile</li>
+                <li class="breadcrumb-item active"><i class="bi bi-clock"></i></li>
+                <li class="breadcrumb-item active">1 Jam 51 Menit Belajar</li>
             </ol>
-        </nav>
     </div><!-- End Page Title -->
 
     <section class="section profile">
@@ -37,7 +35,7 @@
 
                             <li class="nav-item">
                                 <button class="nav-link" data-bs-toggle="tab"
-                                    data-bs-target="#profile-change-password">Ulasan</button>
+                                    data-bs-target="#profile-change-password">Review Kelas (coming soon)</button>
                             </li>
 
                         </ul>
@@ -63,114 +61,91 @@
                                 </div>
                                 <h5 class="card-title fst-italic">*Kelas ini terdapat Kuis dan Ujian, Kamu akan
                                     mendapatkan Sertifikat Kelulusan setelah Menyelesaikan Ujian.</h5>
+                                <h5 class="card-title fst-italic">**Diharapkan untuk mengakses kelas ini dengan
+                                    menggunakan komputer atau laptop.</h5>
 
                             </div>
 
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                                 <h5 class="card-title">Materi yang akan Kamu pelajari pada kelas ini</h5>
-                                <div class="activity">
-
-                                    <div class="activity-item d-flex">
-                                        <div class="activite-label">32 min</div>
-                                        <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                                        <div class="activity-content">
-                                            Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a>
-                                            beatae
+                                <!-- List group with Advanced Contents -->
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Pengertian Konsep DevOps</h5>
+                                            <small class="text-muted">5 Menit</small>
                                         </div>
-                                    </div><!-- End activity item-->
-
-                                    <div class="activity-item d-flex">
-                                        <div class="activite-label">56 min</div>
-                                        <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                                        <div class="activity-content">
-                                            Voluptatem blanditiis blanditiis eveniet
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Git Version Control System</h5>
+                                            <small class="text-muted">3 Menit</small>
                                         </div>
-                                    </div><!-- End activity item-->
-
-                                    <div class="activity-item d-flex">
-                                        <div class="activite-label">2 hrs</div>
-                                        <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                                        <div class="activity-content">
-                                            Voluptates corrupti molestias voluptatem
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Sonarqube Code Analysis</h5>
+                                            <small class="text-muted">5 Menit</small>
                                         </div>
-                                    </div><!-- End activity item-->
-
-                                    <div class="activity-item d-flex">
-                                        <div class="activite-label">1 day</div>
-                                        <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                                        <div class="activity-content">
-                                            Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati
-                                                voluptatem</a> tempore
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Docker Containerization</h5>
+                                            <small class="text-muted">5 Menit</small>
                                         </div>
-                                    </div><!-- End activity item-->
-
-                                    <div class="activity-item d-flex">
-                                        <div class="activite-label">2 days</div>
-                                        <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                                        <div class="activity-content">
-                                            Est sit eum reiciendis exercitationem
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Jenkins CICD Tools</h5>
+                                            <small class="text-muted">8 Menit</small>
                                         </div>
-                                    </div><!-- End activity item-->
-
-                                    <div class="activity-item d-flex">
-                                        <div class="activite-label">4 weeks</div>
-                                        <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                                        <div class="activity-content">
-                                            Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">Konsep Kubernetes</h5>
+                                            <small class="text-muted">15 Menit</small>
                                         </div>
-                                    </div><!-- End activity item-->
+                                    </a>
+                                </div><!-- End List group Advanced Content -->
+                            </div>
 
+                            <div class="tab-pane fade profile-overview pt-3" id="profile-settings">
+
+                                <div class="row mb-3">
+                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label label ">Profile
+                                        Image</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <img src="<?= base_url() ?>assets/img/profile-img.jpg" alt="Profile">
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="tab-pane fade pt-3" id="profile-settings">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Tentang Instruktur</div>
+                                    <div class="col-lg-9 col-md-8">Sunt est soluta temporibus accusantium neque nam
+                                        maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut
+                                        sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea
+                                        saepe at unde.</div>
+                                </div>
 
-                                <!-- Settings Form -->
-                                <form>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label ">Nama Panjang</div>
+                                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                                </div>
 
-                                    <div class="row mb-3">
-                                        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email
-                                            Notifications</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="changesMade"
-                                                    checked>
-                                                <label class="form-check-label" for="changesMade">
-                                                    Changes made to your account
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="newProducts"
-                                                    checked>
-                                                <label class="form-check-label" for="newProducts">
-                                                    Information on new products and services
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="proOffers">
-                                                <label class="form-check-label" for="proOffers">
-                                                    Marketing and promo offers
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="securityNotify"
-                                                    checked disabled>
-                                                <label class="form-check-label" for="securityNotify">
-                                                    Security alerts
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Perusahaan</div>
+                                    <div class="col-lg-9 col-md-8">PT Telkomsigma</div>
+                                </div>
 
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                                    </div>
-                                </form><!-- End settings Form -->
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Job</div>
+                                    <div class="col-lg-9 col-md-8">DevOps Engineer</div>
+                                </div>
+
 
                             </div>
 
-                            <div class="tab-pane fade pt-3" id="profile-change-password">
-                                <!-- Change Password Form -->
+                            <!-- <div class="tab-pane fade pt-3" id="profile-change-password">
                                 <form>
 
                                     <div class="row mb-3">
@@ -203,9 +178,9 @@
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary">Change Password</button>
                                     </div>
-                                </form><!-- End Change Password Form -->
+                                </form>
 
-                            </div>
+                            </div> -->
 
                         </div><!-- End Bordered Tabs -->
 
@@ -216,7 +191,7 @@
             <div class="col-xl-3">
 
                 <div class="card">
-                    <img src="images/devops.jpg" class="card-img-top" alt="...">
+                    <img src="<?= base_url() ?>images/devops.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Kelas Pengenalan DevOps</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Kelas sudah termasuk: </h6>
@@ -235,7 +210,7 @@
 
                         <!-- <a href="#" class="btn btn-primary">Beli Sekarang</a> -->
                         <div class="d-grid gap-2 mt-3">
-                            <a href="" class="btn btn-warning" type="button"></i><b>FREE</b></a>
+                            <a href="" class="btn btn-warning" style="pointer-events: none" type="button"></i><b>FREE</b></a>
                         </div>
                         <div class="d-grid gap-2 mt-2">
                             <a href="" class="btn btn-primary" type="button">Beli Sekarang</a>

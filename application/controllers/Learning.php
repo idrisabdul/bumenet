@@ -34,6 +34,13 @@ class learning extends CI_Controller
 		$this->template->load('template_learning', 'learning/course_detail_v', $data);
 	}
 
+	public function course_detail($id)
+	{
+		$this->load->library('upload');
+		$data['services'] = $this->Services_m->getservices();
+		$this->template->load('template_learning', 'learning/course_detail_v', $data);
+	}
+
 	public function delete_service($id)
 	{
 		$this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible">
