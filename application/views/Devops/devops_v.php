@@ -3,9 +3,9 @@
   <!-- ======= Breadcrumbs ======= -->
   <div class="breadcrumbs">
     <div class="container">
-      <h2>Courses</h2>
-      <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit
-        quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+      <h2>Mulai Belajar sekarang</h2>
+      <!-- <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit
+        quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p> -->
     </div>
   </div><!-- End Breadcrumbs -->
 
@@ -36,7 +36,7 @@
                     <?= ucfirst($service->service_name) ?>
                   </a></h3>
                 <p>
-                  <?= ucfirst($service->service_description) ?>
+                  <!-- <?= ucfirst($service->service_description) ?> -->
                 </p>
                 <div class="trainer d-flex justify-content-between align-items-center">
                   <div class="trainer-profile d-flex align-items-center">

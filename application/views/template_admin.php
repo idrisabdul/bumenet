@@ -47,7 +47,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+        <img src="<?= base_url() ?>/assets/img/logo.png" alt="">
         <span class="d-none d-lg-block">BumenetAdmin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -213,7 +213,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="<?= base_url() ?>assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -363,20 +363,20 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Products and Services</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-journal-text"></i><span>Courses</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="<?= base_url("Admin/Product/add_product") ?>">
-              <i class="bi bi-circle"></i><span>Add Service</span>
+              <i class="bi bi-circle"></i><span>Add Course</span>
             </a>
           </li>
           <li>
             <a href="<?= base_url("Admin/Product") ?>">
-              <i class="bi bi-circle"></i><span>Data Services</span>
+              <i class="bi bi-circle"></i><span>Data Course</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="forms-editors.html">
               <i class="bi bi-circle"></i><span>Add Product</span>
             </a>
@@ -385,13 +385,13 @@
             <a href="forms-validation.html">
               <i class="bi bi-circle"></i><span>Data Products</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </li><!-- End Forms Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>User Management</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>

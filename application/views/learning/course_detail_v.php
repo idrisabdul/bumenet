@@ -1,7 +1,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Kelas Pengenalan DevOps</h1>
+        <h1>Kelas <?= $service->service_name ?></h1>
         <nav style="--bs-breadcrumb-divider: '';">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active"><i class="bi bi-clock"></i></li>
@@ -43,12 +43,7 @@
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
                                 <h5 class="card-title">Deskripsi</h5>
-                                <p class="fst-italic">Kelas belajar online "Pengenalan DevOps" dirancang sebagai
-                                    panduan komprehensif yang memperkenalkan peserta pada konsep dan praktik terkini
-                                    dalam melakukan proses deployment yang efisien. Dalam kelas ini, peserta akan
-                                    menjelajahi dunia
-                                    DevOps, memahami cara kerja dan peran penting dalam pengembangan sebuah
-                                    software.
+                                <p class="fst-italic"><?= $service->service_description ?>
                                 </p>
 
                                 <h5 class="card-title">Prasyarat Kelas ini:</h5>
@@ -120,26 +115,23 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label ">Tentang Instruktur</div>
-                                    <div class="col-lg-9 col-md-8">Sunt est soluta temporibus accusantium neque nam
-                                        maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut
-                                        sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea
-                                        saepe at unde.</div>
+                                    <div class="col-lg-3 col-md-4 label ">Nama Instruktur</div>
+                                    <div class="col-lg-9 col-md-8"><?= $service->nickname ?></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3 col-md-4 label ">Nama Panjang</div>
-                                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                                    <div class="col-lg-3 col-md-4 label ">Tentang Instruktur</div>
+                                    <div class="col-lg-9 col-md-8"><?= $service->about_person ?></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Perusahaan</div>
-                                    <div class="col-lg-9 col-md-8">PT Telkomsigma</div>
+                                    <div class="col-lg-9 col-md-8"><?= $service->current_company ?></div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">Job</div>
-                                    <div class="col-lg-9 col-md-8">DevOps Engineer</div>
+                                    <div class="col-lg-9 col-md-8"><?= $service->current_job ?></div>
                                 </div>
 
 
@@ -193,7 +185,7 @@
                 <div class="card">
                     <img src="<?= base_url() ?>images/devops.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Kelas Pengenalan DevOps</h5>
+                        <h5 class="card-title">Kelas <?php echo $service->service_name;?></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Kelas sudah termasuk: </h6>
                         <ul id="components-nav">
                             <li>
@@ -210,7 +202,8 @@
 
                         <!-- <a href="#" class="btn btn-primary">Beli Sekarang</a> -->
                         <div class="d-grid gap-2 mt-3">
-                            <a href="" class="btn btn-warning" style="pointer-events: none" type="button"></i><b>FREE</b></a>
+                            <a href="" class="btn btn-warning" style="pointer-events: none"
+                                type="button"></i><b><?php echo $service->service_price == 0 ? 'FREE' : 'Rp. ' . $service->service_price; // Sangat Baik ?></b></a>
                         </div>
                         <div class="d-grid gap-2 mt-2">
                             <a href="" class="btn btn-primary" type="button">Beli Sekarang</a>

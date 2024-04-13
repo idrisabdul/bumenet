@@ -283,7 +283,7 @@
                     <?= ucfirst($service->service_name) ?>
                   </a></h3>
                 <p>
-                  <?= ucfirst($service->service_description) ?>
+                  <!-- <?= ucfirst($service->service_description) ?> -->
                 </p>
                 <div class="trainer d-flex justify-content-between align-items-center">
                   <div class="trainer-profile d-flex align-items-center">

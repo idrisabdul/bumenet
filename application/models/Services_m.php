@@ -26,4 +26,13 @@ class Services_m extends CI_Model {
         return $this->db->get()->result();
     }
 
+    public function getcourse_by_id($course_id)
+    {
+        $this->db->select('*');
+        $this->db->from("services");
+        $this->db->join("users", "users.user_id = services.service_created_by");
+        $this->db->where("service_id", $course_id);
+        return $this->db->get()->row();
+    }
+
 }

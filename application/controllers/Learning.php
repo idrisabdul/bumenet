@@ -37,7 +37,8 @@ class learning extends CI_Controller
 	public function course_detail($id)
 	{
 		$this->load->library('upload');
-		$data['services'] = $this->Services_m->getservices();
+		$data['service'] = $this->Services_m->getcourse_by_id($id);
+		// var_dump($data['service']);
 		$this->template->load('template_learning', 'learning/course_detail_v', $data);
 	}
 
