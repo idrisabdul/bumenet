@@ -183,7 +183,7 @@
             <div class="col-xl-3">
 
                 <div class="card">
-                    <img src="<?= base_url() ?>images/devops.jpg" class="card-img-top" alt="...">
+                    <img src="<?= base_url() ?>images/<?= $service->img_service ?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Kelas <?php echo $service->service_name;?></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Kelas sudah termasuk: </h6>

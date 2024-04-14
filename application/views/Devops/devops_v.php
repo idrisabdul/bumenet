@@ -27,8 +27,9 @@
                   <h4>
                     <?= ucfirst($service->product_category_name) ?>
                   </h4>
-                  <p class="price">Rp.
-                    <?= ucfirst($service->service_price) ?>
+                  <p class="price">
+                    <!-- <?= ucfirst($service->service_price) ?> -->
+                    <?php echo $service->service_price == 0 ? 'FREE' : 'Rp. '.$service->service_price; // Sangat Baik ?>
                   </p>
                 </div>
 
