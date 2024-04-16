@@ -92,8 +92,8 @@
                 <h5 class="card-title">Module</h5>
               </div>
               <div class="col-sm-2">
-                <button type="button" id="add_module" class="btn btn-outline-primary"><i class="bi bi-plus me-1"></i>
-                  Add Module</button>
+                <button type="button" id="add_submodule" class="btn btn-outline-primary"><i class="bi bi-plus me-1"></i>
+                  Add SubModule</button>
               </div>
             </div>
 
@@ -101,17 +101,17 @@
             <form method="post" enctype="multipart/form-data" action="<?= base_url('Admin/Product/insert_service') ?>">
 
               <div class="row mb-3">
-                <label for="inputText" class="col-sm-2 col-form-label">Module Name</label>
+                <label for="inputText" class="col-sm-2 col-form-label"><b>Module Name</b></label>
                 <div class="col-sm-10">
                   <input type="text" name="service_name" class="form-control">
                 </div>
               </div>
               <div class="row mb-3">
-                <label for="inputText" class="col-sm-2 col-form-label">Action</label>
+                <!-- <label for="inputText" class="col-sm-2 col-form-label">Action</label>
                 <div class="col-sm-8">
                   <button type="button" id="add_submodule" class="btn btn-primary"><i class="bi bi-plus me-1"></i>add
                     Submodule</button>
-                </div>
+                </div> -->
               </div>
               <div class="row mb-3">
                 <label for="inputText" class="col-sm-2 col-form-label">SubModule Name</label>
@@ -132,7 +132,8 @@
 
               <div class="row mb-3">
                 <div class="col-sm-10">
-                  <button type="submit" name="service_save" class="btn btn-primary">Submit</button>
+                  <button type="submit" name="service_save" class="btn btn-info">Save And Add Module Again</button>
+                  <button type="submit" name="service_save" class="btn btn-primary">Save And Publish</button>
                 </div>
               </div>
 
@@ -151,11 +152,13 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
+    var x = 0;
     $('#add_module').click(function () {
+      x = x + 1;
       newRowAdd =
         '<div id="form_module">' +
         '<br><br><br><div class="row mb-3">' +
-        '<label for="inputText" class="col-sm-2 col-form-label">Module Name</label>' +
+        '<label for="inputText" class="col-sm-2 col-form-label"><b>Module Name ' + x + '</b></label>' +
         '<div class="col-sm-8">' +
         '<input type="text" name="service_name" class="form-control">' +
         '</div>' +
@@ -164,7 +167,7 @@
         '<div class="row mb-3">' +
         '<label for="inputText" class="col-sm-2 col-form-label">Action</label>' +
         '<div class="col-sm-8">' +
-        '<button type="button" id="add_submodule" class="btn btn-primary"><i class="bi bi-plus me-1"></i>add Submodule</button>' +
+        '<button type="button" id="add_submodule' + x + '" class="btn btn-primary"><i class="bi bi-plus me-1"></i>add Submodule</button>' +
         '</div>' +
         '</div>' +
         '<div class="row mb-3">' +
@@ -181,6 +184,29 @@
         '</div>' +
         '</div>';
       $('#course_module').append(newRowAdd);
+    });
+    var x = 0;
+    $('#add_submodule').click(function () {
+      x = x + 1;
+      newRowAdd =
+        '<div id="form_module">' +
+        '<br><br><div class="row mb-3">' +
+        '<div class="row mb-3">' +
+        '<label for="inputText" class="col-sm-2 col-form-label">SubModule Name </label>' +
+        '<div class="col-sm-8">' +
+        '<input type="text" name="service_name" class="form-control">' +
+        '</div>' +
+        '<button type="button" id="remove_module" class="col-sm-1 btn btn-danger float-end"><i class="bi bi-trash me-1"></i></button>' +
+        '</div>' +
+        '<div class="row mb-3">' +
+        '<label for="inputPassword" class="col-sm-2 col-form-label">SubContent Module</label>' +
+        '<div class="col-sm-10">' +
+        '<textarea class="form-control" name="service_description" style="height: 100px"></textarea>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
+      $('#course_module').append(newRowAdd);
+
     });
     $("body").on("click", "#remove_module", function () {
       $(this).parents("#form_module").remove();
