@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Services_m extends CI_Model {
+class Services_m extends CI_Model
+{
 
     public function getservices()
     {
@@ -26,6 +27,14 @@ class Services_m extends CI_Model {
         return $this->db->get()->result();
     }
 
+    public function getmodulecource_by_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from("module_course");
+        $this->db->where("course_id", $id);
+        return $this->db->get()->result();
+    }
+
     public function getcourse_by_id($course_id)
     {
         $this->db->select('*');
@@ -33,6 +42,11 @@ class Services_m extends CI_Model {
         $this->db->join("users", "users.user_id = services.service_created_by");
         $this->db->where("service_id", $course_id);
         return $this->db->get()->row();
+    }
+
+    public function save_batch($data)
+    {
+        return $this->db->insert_batch('submodule_course', $data);
     }
 
 }

@@ -49,9 +49,13 @@ class Product extends CI_Controller
 	  </div>');
 
 		$img_service = $this->db->query("SELECT img_service FROM services WHERE service_id = $id;")->row();
+		$course_id = $this->db->query("SELECT module_course_id FROM module_course WHERE course_id = $id;")->row();
 
+		// var_dump($course_id->module_course_id);
 		unlink('images/' . $img_service->img_service);
 		$this->db->delete('services', ['service_id' => $id]);
+		$this->db->delete('module_course', ['course_id' => $id]);
+		$this->db->delete('submodule_course', ['module_course_id' => $course_id->module_course_id]);
 		redirect('Admin/Product/');
 	}
 
@@ -106,9 +110,8 @@ class Product extends CI_Controller
 		$this->load->library('upload', $config);
 		if (!$this->upload->do_upload('picture')) {
 			echo "gagal upload";
-			// $error = array('error' => $this->upload->display_errors());
-			// $this->template->load('template_admin', 'Admin/add_product_v', $error);
 		} else {
+			// INSERT COURSE
 			$prod_filename = $this->upload->data('file_name');
 			$data = [
 				'img_service' => $prod_filename,
@@ -124,8 +127,104 @@ class Product extends CI_Controller
 			//     <h5><i class="icon fas fa-check"></i> Berhasil!</h5>
 			//     Asset Berhasil Ditambahkan
 			//   </div>');
-			redirect('Admin/Product/');
+
+
+			// INSERT MODULE COURSE
+			$course_id = $this->db->insert_id();
+			$data_module = [
+				'course_id' => $course_id,
+				'module_name' => $this->input->post('module_name'),
+				'duration ' => $this->input->post('duration'),
+				'status ' => 0,
+			];
+			$this->db->insert('module_course', $data_module);
+
+			// INSERT SUBMODULE COURSE
+			$module_course_id = $this->db->insert_id();
+			$submodule_name = $this->input->post('submodule_name');
+			$submodule_content = $this->input->post('submodule_content');
+			$data = array();
+			$index = 0;
+			if ($submodule_name != null) {
+				foreach ($submodule_name as $data_submodule) {
+					array_push(
+						$data,
+						array(
+							'module_course_id' => $module_course_id,
+							'submodule_name' => $data_submodule,
+							'submodule_content' => $submodule_content[$index],
+						)
+					);
+					$index++;
+				}
+			} else {
+				echo "kosong";
+			}
+			$sql = $this->Services_m->save_batch($data);
+			if ($sql) {
+				redirect('Admin/Product/add_next_module/' . $course_id);
+			} else {
+				echo "<script>alert('Data gagal disimpan');</script>";
+			}
 		}
+	}
+
+	public function insert_next_module()
+	{
+		// INSERT MODULE COURSE
+		$course_id = $this->input->post('course_id');
+		$data_module = [
+			'course_id' => $course_id,
+			'module_name' => $this->input->post('module_name'),
+			'duration ' => $this->input->post('duration'),
+			'status ' => 0,
+		];
+		$this->db->insert('module_course', $data_module);
+
+		// INSERT SUBMODULE COURSE
+		$module_course_id = $this->db->insert_id();
+		$submodule_name = $this->input->post('submodule_name');
+		$submodule_content = $this->input->post('submodule_content');
+		$data = array();
+		$index = 0;
+		if ($submodule_name != null) {
+			foreach ($submodule_name as $data_submodule) {
+				array_push(
+					$data,
+					array(
+						'module_course_id' => $module_course_id,
+						'submodule_name' => $data_submodule,
+						'submodule_content' => $submodule_content[$index],
+					)
+				);
+				$index++;
+			}
+		} else {
+			echo "kosong";
+		}
+		$sql = $this->Services_m->save_batch($data);
+		if ($sql) {
+			redirect('Admin/Product/add_next_module/' . $course_id);
+		} else {
+			echo "<script>alert('Data gagal disimpan');</script>";
+		}
+	}
+
+	public function add_next_module($id)
+	{
+		$data['service'] = $this->Services_m->getcourse_by_id($id);
+		$data['module_course'] = $this->Services_m->getmodulecource_by_id($id);
+		$this->template->load('template_admin', 'Admin/add_next_module_v', $data);
+	}
+
+	public function save_and_publish()
+	{
+		$course_id = $this->input->post('id', true);
+		$data = [
+			'status'=> 1,
+		];
+		$this->db->update('module_course', $data, ['course_id' => $course_id]);
+		echo json_encode($data);	
 	}
 
 	public function show_all_product_category()
@@ -133,6 +232,8 @@ class Product extends CI_Controller
 		$this->load->library('upload');
 		$data['services'] = $this->Services_m->getproductcategory();
 		var_dump($data['services']);
-		// $this->template->load('template', 'Devops/devops_v', $data);
 	}
+
+
+
 }

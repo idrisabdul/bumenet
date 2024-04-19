@@ -293,7 +293,7 @@
                     </span>
                   </div>
                   <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
-                  <a href="<?= base_url('/learning') ?>" class="more-btn">Learn More
+                  <a href="<?= base_url('/learning/course_detail/' . $service->service_id) ?>" class="more-btn">Learn More
                     <i class="bx bx-chevron-right"></i></a>
                 </div>
               </div>

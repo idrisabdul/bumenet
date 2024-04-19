@@ -1,11 +1,11 @@
 <main id="main" class="main">
 
   <div class="pagetitle">
-    <h1>Data Services</h1>
+    <h1>Data Courses</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Data Services</li>
+        <li class="breadcrumb-item active">Data Courses</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -16,7 +16,7 @@
 
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Data Services</h5>
+            <h5 class="card-title">Data Courses</h5>
 
             <!-- Table with stripped rows -->
             <table class="table datatable">
@@ -24,10 +24,10 @@
                 <tr>
                   <th>No</th>
                   <th>
-                    <b>Service</b> Name
+                    <b>Course</b> Name
                   </th>
-                  <th>Service Categorization</th>
-                  <th>Service Description</th>
+                  <th>Course Categorization</th>
+                  <th>Course Description</th>
                   <th>Price</th>
                   <th>Created By</th>
                   <th>Action</th>

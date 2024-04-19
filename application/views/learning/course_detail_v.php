@@ -43,7 +43,7 @@
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
                                 <h5 class="card-title">Deskripsi</h5>
-                                <p class="fst-italic"><?= $service->service_description ?>
+                                <p><?php echo nl2br($service->service_description) ?>
                                 </p>
 
                                 <h5 class="card-title">Prasyarat Kelas ini:</h5>
@@ -65,42 +65,14 @@
                                 <h5 class="card-title">Materi yang akan Kamu pelajari pada kelas ini</h5>
                                 <!-- List group with Advanced Contents -->
                                 <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Pengertian Konsep DevOps</h5>
-                                            <small class="text-muted">5 Menit</small>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Git Version Control System</h5>
-                                            <small class="text-muted">3 Menit</small>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Sonarqube Code Analysis</h5>
-                                            <small class="text-muted">5 Menit</small>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Docker Containerization</h5>
-                                            <small class="text-muted">5 Menit</small>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Jenkins CICD Tools</h5>
-                                            <small class="text-muted">8 Menit</small>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">Konsep Kubernetes</h5>
-                                            <small class="text-muted">15 Menit</small>
-                                        </div>
-                                    </a>
+                                    <?php foreach ($module_course as $mc) { ?>
+                                        <a href="#" class="list-group-item list-group-item-action">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1"><?= $mc->module_name ?></h5>
+                                                <small class="text-muted"><?= $mc->duration ?> Menit</small>
+                                            </div>
+                                        </a>
+                                    <?php } ?>
                                 </div><!-- End List group Advanced Content -->
                             </div>
 
@@ -185,7 +157,7 @@
                 <div class="card">
                     <img src="<?= base_url() ?>images/<?= $service->img_service ?>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Kelas <?php echo $service->service_name;?></h5>
+                        <h5 class="card-title">Kelas <?php echo $service->service_name; ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Kelas sudah termasuk: </h6>
                         <ul id="components-nav">
                             <li>

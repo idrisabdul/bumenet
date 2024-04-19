@@ -38,6 +38,7 @@ class learning extends CI_Controller
 	{
 		$this->load->library('upload');
 		$data['service'] = $this->Services_m->getcourse_by_id($id);
+		$data['module_course'] = $this->Services_m->getmodulecource_by_id($id);
 		// var_dump($data['service']);
 		$this->template->load('template_learning', 'learning/course_detail_v', $data);
 	}

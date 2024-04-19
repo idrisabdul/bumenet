@@ -277,7 +277,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="<?= base_url("Admin/admin") ?>">
+        <a class="nav-link collapsed" href="<?= base_url("Admin/admin") ?>">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -365,15 +365,20 @@
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Courses</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="<?= base_url("Admin/Product/add_product") ?>">
+            <a <?= $this->uri->segment(3) == 'add_product' || $this->uri->segment(3) == ''  ? 'class="active"' : '' ?> href="<?= base_url("Admin/Product/add_product") ?>">
               <i class="bi bi-circle"></i><span>Add Course</span>
             </a>
           </li>
           <li>
-            <a href="<?= base_url("Admin/Product") ?>">
+            <a <?= $this->uri->segment(2) == 'Product' || $this->uri->segment(2) == ''  ? 'class="active"' : '' ?>href="<?= base_url("Admin/Product") ?>">
               <i class="bi bi-circle"></i><span>Data Course</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?= base_url("Admin/Product") ?>">
+              <i class="bi bi-circle"></i><span>Data Course on Draft</span>
             </a>
           </li>
           <!-- <li>
@@ -391,7 +396,8 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>User Management</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>User Management</span><i
+            class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
@@ -509,19 +515,7 @@
   </aside><!-- End Sidebar-->
   <!-- Vendor JS Files -->
   <!-- jQuery UI 1.11.4 -->
-  <!-- <script src="<?= base_url() ?>assets/assets-admin/vendor/jquery-ui/jquery-ui.min.js"></script> -->
 
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/chart.js/chart.umd.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/echarts/echarts.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/quill/quill.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/tinymce/tinymce.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="<?= base_url() ?>assets/assets-admin/js/main.js"></script>
 
   <!-- CONTENTS -->
   <?= $contents ?>
@@ -545,8 +539,19 @@
       class="bi bi-arrow-up-short"></i></a>
 
 
-  </script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/jquery-ui/jquery-ui.min.js"></script>
 
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/chart.js/chart.umd.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/echarts/echarts.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/quill/quill.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/tinymce/tinymce.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="<?= base_url() ?>assets/assets-admin/js/main.js"></script>
 </body>
 
 </html>
