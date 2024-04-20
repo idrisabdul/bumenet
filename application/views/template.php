@@ -71,7 +71,7 @@
             </ul>
           </li> -->
           <li><a href="contact.html">IT Solution</a></li>
-          <li><a href="contact.html">Tentang Kami</a></li>
+          <li><a href="<?= base_url("Home/about") ?>">Tentang Kami</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>

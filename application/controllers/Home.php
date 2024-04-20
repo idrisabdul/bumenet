@@ -31,4 +31,8 @@ class Home extends CI_Controller {
 		$data['services'] = $this->Services_m->getservices();
 		$this->template->load('template','Home/home_v', $data);
 	}
+	public function about()
+	{
+		$this->template->load('template','Home/about_v');
+	}
 }
