@@ -29,7 +29,7 @@
                   </h4>
                   <p class="price">
                     <!-- <?= ucfirst($service->service_price) ?> -->
-                    <?php echo $service->service_price == 0 ? 'FREE' : 'Rp. '.$service->service_price; // Sangat Baik ?>
+                    <?php echo $service->service_price == 0 ? 'FREE' : 'Rp. '.number_format($service->service_price); // Sangat Baik ?>
                   </p>
                 </div>
 

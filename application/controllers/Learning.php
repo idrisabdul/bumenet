@@ -30,8 +30,8 @@ class learning extends CI_Controller
 	public function index()
 	{
 		$this->load->library('upload');
-		$data['services'] = $this->Services_m->getservices();
-		$this->template->load('template_learning', 'learning/course_detail_v', $data);
+		$data['courses'] = $this->Services_m->getservices();
+		$this->template->load('template_learning', 'learning/learning_v', $data);
 	}
 
 	public function course_detail($id)

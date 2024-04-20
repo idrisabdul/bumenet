@@ -175,7 +175,7 @@
                         <!-- <a href="#" class="btn btn-primary">Beli Sekarang</a> -->
                         <div class="d-grid gap-2 mt-3">
                             <a href="" class="btn btn-warning" style="pointer-events: none"
-                                type="button"></i><b><?php echo $service->service_price == 0 ? 'FREE' : 'Rp. ' . $service->service_price; // Sangat Baik ?></b></a>
+                                type="button"></i><b><?php echo $service->service_price == 0 ? 'FREE' : 'Rp. ' . number_format($service->service_price); // Sangat Baik ?></b></a>
                         </div>
                         <div class="d-grid gap-2 mt-2">
                             <a href="" class="btn btn-primary" type="button">Beli Sekarang</a>
@@ -184,8 +184,6 @@
                 </div><!-- End Card with an image on top -->
 
             </div>
-
-
         </div>
     </section>
 

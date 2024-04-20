@@ -95,7 +95,8 @@
 
             <div class="text-center">
 
-              <a href="<?= base_url("Devops") ?>" class="more-btn">Belajar Sekarang<i class="bx bx-chevron-right"></i></a>
+              <a href="<?= base_url("Devops") ?>" class="more-btn">Belajar Sekarang<i
+                  class="bx bx-chevron-right"></i></a>
 
             </div>
 
@@ -274,8 +275,8 @@
                     <?= ucfirst($service->product_category_name) ?>
                   </h4>
                   <p class="price">
-                    <!-- <?php if ($service->service_price == 0)  ?> -->
-                    <?php echo $service->service_price == 0 ? 'FREE' : 'Rp. '.$service->service_price; // Sangat Baik ?>
+                    <!-- <?php if ($service->service_price == 0) ?> -->
+                    <?php echo $service->service_price == 0 ? 'FREE' : 'Rp. ' . number_format($service->service_price); // Sangat Baik ?>
                   </p>
                 </div>
 
@@ -366,7 +367,8 @@
 
                   <h4>Ridwal Zakir Mudun</h4>
                   <h6>Mahasiswa</h6>
-                  <p>"Bumenet tentunya banyak sekali menberikan pengalaman, mulai dari perjalanan, ilmu dan juga relasi. dari Bumenet Academy saya belajar banyak hal yang pastinya akan berguna di masa depan."</p>
+                  <p>"Bumenet tentunya banyak sekali menberikan pengalaman, mulai dari perjalanan, ilmu dan juga relasi.
+                    dari Bumenet Academy saya belajar banyak hal yang pastinya akan berguna di masa depan."</p>
 
                 </div>
 
@@ -381,7 +383,8 @@
 
                   <h4>Muhammad Khadafi</h4>
                   <h6>Mahasiswa</h6>
-                  <p>"Materi training update terhadap kebutuhan industri terkini, cocok untuk persiapan sebelum masuk ke industri IT"</p>
+                  <p>"Materi training update terhadap kebutuhan industri terkini, cocok untuk persiapan sebelum masuk ke
+                    industri IT"</p>
 
                 </div>
 
@@ -396,7 +399,8 @@
 
                   <h4>Annisa Cahyani Anggita</h4>
                   <h6>Internship</h6>
-                  <p>"Overall materi yang disampaikan mencukupi kebutuhan dan penyampaian materi oleh trainer cukup jelas"</p>
+                  <p>"Overall materi yang disampaikan mencukupi kebutuhan dan penyampaian materi oleh trainer cukup
+                    jelas"</p>
 
                 </div>
 
@@ -411,14 +415,15 @@
 
                   <h4>Idris Abdul Azis</h4>
                   <h6>Karyawan</h6>
-                  <p>"Bumenet dengan metode belajar online yang mudah sehingga membantu saya meningkatkan karir saya terutama dibidang IT"</p>
+                  <p>"Bumenet dengan metode belajar online yang mudah sehingga membantu saya meningkatkan karir saya
+                    terutama dibidang IT"</p>
 
                 </div>
 
               </div>
 
 
-            
+
 
             </div>
 
