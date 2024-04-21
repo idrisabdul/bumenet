@@ -178,7 +178,12 @@
                                 type="button"></i><b><?php echo $service->service_price == 0 ? 'FREE' : 'Rp. ' . number_format($service->service_price); // Sangat Baik ?></b></a>
                         </div>
                         <div class="d-grid gap-2 mt-2">
-                            <a href="" class="btn btn-primary" type="button">Beli Sekarang</a>
+                            <?php if (!$this->session->userdata('username')) { ?>
+                                <button href="" onclick="alertLogin('<?= base_url('auth') ?>')"
+                                    class="btn btn-primary buy_now" type="button">Beli Sekarang</button>
+                            <?php } else { ?>
+                                <button href="" class="btn btn-primary" type="button">Beli Sekarang</button>
+                            <?php } ?>
                         </div>
                     </div>
                 </div><!-- End Card with an image on top -->
@@ -188,3 +193,33 @@
     </section>
 
 </main><!-- End #main -->
+
+<div class="modal fade" id="basicModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Daftar Sekarang</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tingkatkan keahlian kamu dengan mempelajari kelas ini. Daftar buruan sekarang, tunggu apalagi.
+            </div>
+            <div class="modal-footer">
+                <a href="<?= base_url('auth/registrasi') ?>" id="btn-daftar" class="btn btn-secondary">Daftar</a>
+                <a id="btn-login" class="btn btn-primary" href="#">Log in</a>
+            </div>
+        </div>
+    </div>
+</div><!-- End Basic Modal-->
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function alertLogin(url) {
+        console.log(url);
+        $('#btn-login').attr('href', url);
+        $('#basicModal').modal('show');
+    }
+</script>

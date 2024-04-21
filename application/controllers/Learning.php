@@ -25,13 +25,25 @@ class learning extends CI_Controller
 		parent::__construct();
 		$this->load->model('Services_m');
 		// $this->load->model('Product_m');
-		
+
 	}
 	public function index()
 	{
 		$this->load->library('upload');
 		$data['courses'] = $this->Services_m->getservices();
+		$data['categories'] = $this->Services_m->getproductcategory();
 		$this->template->load('template_learning', 'learning/learning_v', $data);
+	}
+
+	public function course_category()
+	{
+		$category_id = $this->input->post('id', true);
+		if ($category_id == 0) {
+			$data = $this->Services_m->getservices();
+		} else {
+			$data = $this->Services_m->getcategory_by_id($category_id);
+		}
+		echo json_encode($data);
 	}
 
 	public function course_detail($id)

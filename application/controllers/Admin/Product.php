@@ -32,6 +32,7 @@ class Product extends CI_Controller
 		$data['services'] = $this->Services_m->getservices();
 		$this->template->load('template_admin', 'Admin/list_product_v', $data);
 	}
+	
 
 	public function add_product()
 	{

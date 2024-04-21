@@ -13,10 +13,21 @@ class Services_m extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function getcategory_by_id($product_categories_id)
+    {
+        $this->db->select('*');
+        $this->db->from("services");
+        $this->db->join("users", "users.user_id = services.service_created_by");
+        $this->db->join("product_category", "product_category.product_category_id  = services.product_categories_id");
+        $this->db->where("product_categories_id", $product_categories_id);
+        return $this->db->get()->result();
+    }
+
     public function getproductcategory()
     {
         $this->db->select('*');
         $this->db->from("product_category");
+        $this->db->order_by('product_category_name', 'ASC');
         return $this->db->get()->result();
     }
 
@@ -43,6 +54,8 @@ class Services_m extends CI_Model
         $this->db->where("service_id", $course_id);
         return $this->db->get()->row();
     }
+
+
 
     public function save_batch($data)
     {

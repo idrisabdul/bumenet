@@ -61,11 +61,6 @@
       </form>
     </div><!-- End Search Bar -->
 
-    
-
-
-
-   
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
@@ -75,63 +70,75 @@
           </a>
         </li><!-- End Search Icon-->
 
-       
 
-        <li class="nav-item dropdown pe-3">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="<?= base_url() ?>/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Idris Abdul Azis</span>
-          </a><!-- End Profile Iamge Icon -->
+        <?php if (!$this->session->userdata('username')) { ?>
+          <!-- <a href="<?= base_url() ?>auth" class="btn btn-primary mr-3" type="button">Log In</a> -->
+          <a class="btn btn-outline-primary mt-1 mb-1" href="<?= base_url() ?>auth">
+            <!-- <font color="blue">Log in</font> -->
+            Log in
+          </a>
+          <button class="btn bg-white mt-1 mb-1 pr-2"><a href="<?= base_url() ?>auth/registrasi">
+              Daftar sekarang
+            </a></button>
+        <?php } else { ?>
+          <li class="nav-item dropdown pe-3">
+            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+              <img src="<?= base_url() ?>/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <span
+                class="d-none d-md-block dropdown-toggle ps-2"><?php echo ucfirst($this->session->userdata('username')) ?></span>
+            </a><!-- End Profile Iamge Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Idris Abdul Azis</h6>
-              <span>Student</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+              <li class="dropdown-header">
+                <h6>Idris Abdul Azis</h6>
+                <span>Student</span>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>Profile Saya</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                  <i class="bi bi-person"></i>
+                  <span>Profile Saya</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Kelas Saya</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                  <i class="bi bi-gear"></i>
+                  <span>Kelas Saya</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Ganti Password</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                  <i class="bi bi-question-circle"></i>
+                  <span>Ganti Password</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="<?= base_url() ?>auth/logout">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Keluar</span>
-              </a>
-            </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="<?= base_url() ?>auth/logout">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Keluar</span>
+                </a>
+              </li>
 
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
+            </ul><!-- End Profile Dropdown Items -->
+          </li><!-- End Profile Nav -->
+        <?php } ?>
+
 
       </ul>
     </nav><!-- End Icons Navigation -->

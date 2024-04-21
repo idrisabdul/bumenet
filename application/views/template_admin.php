@@ -381,16 +381,11 @@
               <i class="bi bi-circle"></i><span>Data Course on Draft</span>
             </a>
           </li>
-          <!-- <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Add Product</span>
-            </a>
-          </li>
           <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Data Products</span>
+            <a href="<?= base_url("Admin/Product") ?>">
+              <i class="bi bi-circle"></i><span>Data Course Category</span>
             </a>
-          </li> -->
+          </li>   
         </ul>
       </li><!-- End Forms Nav -->
 
