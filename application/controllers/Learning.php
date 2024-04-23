@@ -51,8 +51,22 @@ class learning extends CI_Controller
 		$this->load->library('upload');
 		$data['service'] = $this->Services_m->getcourse_by_id($id);
 		$data['module_course'] = $this->Services_m->getmodulecource_by_id($id);
-		// var_dump($data['service']);
-		$this->template->load('template_learning', 'learning/course_detail_v', $data);
+		$data['total_duration'] = $this->db
+			->query("Select SUM(duration) as total from module_course WHERE course_id='$id'")
+			->row();
+		$data['user_id'] = $this->db
+			->query("SELECT user_id FROM course_user WHERE course_id='$id'")
+			->row();
+
+		if ($data["user_id"] === NULL) {
+			$data["user_id"] = (object) [
+				'user_id' => '0',
+			];
+			$this->template->load('template_learning', 'learning/course_detail_v', $data);
+		} else {
+			$this->template->load('template_learning', 'learning/course_detail_v', $data);
+		}
+
 	}
 
 	public function delete_service($id)
@@ -64,6 +78,20 @@ class learning extends CI_Controller
 	  </div>');
 		$this->db->delete('services', ['service_id' => $id]);
 		redirect('Product');
+	}
+
+	public function add_course_user()
+	{
+		$user_id = $this->input->post('user_id', true);
+		$course_id = $this->input->post('course_id', true);
+		$data = [
+			'user_id' => $user_id,
+			'course_id' => $course_id,
+			'date_add_course' => date('Y-m-d H:i:s')
+		];
+		// var_dump($data);
+		$this->db->insert('course_user', $data);
+		echo json_encode($data);
 	}
 
 }

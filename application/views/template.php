@@ -51,7 +51,7 @@
           <li><a class="active" href="<?= base_url() ?>">Home</a></li>
           <li class="dropdown"><a href="#"><span>Academy</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="<?= base_url("Devops") ?>">Belajar Online</a></li>
+              <li><a href="<?= base_url("learning") ?>">Belajar Online</a></li>
               <li class="dropdown"><a href="#"><span>Bumenet Mengajar</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="#">Instruktur</a></li>
@@ -76,7 +76,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
 
-      <a href="<?= base_url("auth") ?>" class="get-started-btn">Belajar Sekarang</a>
+      <a href="<?= base_url("learning") ?>" class="get-started-btn">Belajar Sekarang</a>
 
     </div>
   </header><!-- End Header -->

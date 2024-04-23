@@ -95,7 +95,7 @@
 
             <div class="text-center">
 
-              <a href="<?= base_url("Devops") ?>" class="more-btn">Belajar Sekarang<i
+              <a href="<?= base_url("learning") ?>" class="more-btn">Belajar Sekarang<i
                   class="bx bx-chevron-right"></i></a>
 
             </div>

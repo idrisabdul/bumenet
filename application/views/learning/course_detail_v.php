@@ -5,7 +5,7 @@
         <nav style="--bs-breadcrumb-divider: '';">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active"><i class="bi bi-clock"></i></li>
-                <li class="breadcrumb-item active">1 Jam 51 Menit Belajar</li>
+                <li class="breadcrumb-item active"><?= $total_duration->total ?> Menit</li>
             </ol>
     </div><!-- End Page Title -->
 
@@ -65,9 +65,11 @@
                                 <h5 class="card-title">Materi yang akan Kamu pelajari pada kelas ini</h5>
                                 <!-- List group with Advanced Contents -->
                                 <div class="list-group">
+                                    <?php $sum = 0 ?>
                                     <?php foreach ($module_course as $mc) { ?>
                                         <a href="#" class="list-group-item list-group-item-action">
                                             <div class="d-flex w-100 justify-content-between">
+                                                <?php $sum = $sum + $mc->duration ?>
                                                 <h5 class="mb-1"><?= $mc->module_name ?></h5>
                                                 <small class="text-muted"><?= $mc->duration ?> Menit</small>
                                             </div>
@@ -85,6 +87,9 @@
                                         <img src="<?= base_url() ?>assets/img/profile-img.jpg" alt="Profile">
                                     </div>
                                 </div>
+                                <input type="text" hidden id="user_id"
+                                    value="<?= $this->session->userdata('user_id') ?>">
+                                <input type="text" hidden id="course_id" value="<?= $service->service_id ?>">
 
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label ">Nama Instruktur</div>
@@ -172,17 +177,20 @@
 
                         </ul>
 
-                        <!-- <a href="#" class="btn btn-primary">Beli Sekarang</a> -->
+
                         <div class="d-grid gap-2 mt-3">
                             <a href="" class="btn btn-warning" style="pointer-events: none"
                                 type="button"></i><b><?php echo $service->service_price == 0 ? 'FREE' : 'Rp. ' . number_format($service->service_price); // Sangat Baik ?></b></a>
                         </div>
                         <div class="d-grid gap-2 mt-2">
-                            <?php if (!$this->session->userdata('username')) { ?>
+                            <?php if (!$this->session->userdata('user_id')) { ?>
                                 <button href="" onclick="alertLogin('<?= base_url('auth') ?>')"
                                     class="btn btn-primary buy_now" type="button">Beli Sekarang</button>
-                            <?php } else { ?>
-                                <button href="" class="btn btn-primary" type="button">Beli Sekarang</button>
+                            <?php } else if ($user_id->user_id == 0) { ?>
+                                    <button href="" class="btn btn-primary" id="add_course" type="button">Beli Sekarang</button>
+                            <?php } else if ($this->session->userdata('user_id') == $user_id->user_id) { ?>
+                                        <button href="" class="btn btn-primary" id  ="start_learning" type="button">Mulai
+                                            Belajar</button>
                             <?php } ?>
                         </div>
                     </div>
@@ -191,6 +199,7 @@
             </div>
         </div>
     </section>
+
 
 </main><!-- End #main -->
 
@@ -222,4 +231,28 @@
         $('#btn-login').attr('href', url);
         $('#basicModal').modal('show');
     }
+
+    $(document).ready(function () {
+
+        $('#add_course').click(function () {
+            var user_id = $('#user_id').val();
+            var course_id = $('#course_id').val();
+            $.ajax({
+                url: "<?php echo site_url('Learning/add_course_user'); ?>",
+                method: "POST",
+                data: {
+                    user_id: user_id,
+                    course_id: course_id,
+                },
+                async: true,
+                dataType: 'json',
+                success: function (data) {
+                    alert('Berhasil ditambahkan');
+                    window.location.reload();
+                }
+            });
+            return false;
+        });
+    });
+
 </script>

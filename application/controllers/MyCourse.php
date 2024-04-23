@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class mycourse extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,18 +19,20 @@ class Admin extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
-	 public function __construct()
+	public function __construct()
 	{
 		parent::__construct();
-
-		if (!$this->session->userdata('user_id')) {
-			redirect('');
-		}
+		$this->load->model('Services_m');
+		
 	}
-	
 	public function index()
 	{
-		$this->template->load('template_admin','Admin/dashboard_v');
+        $data['courses'] = $this->Services_m->getservices();
+		$data['categories'] = $this->Services_m->getproductcategory();
+		$this->template->load('template','mycourse/my_course_v', $data);
 	}
-
+	public function about()
+	{
+		$this->template->load('template','Home/about_v');
+	}
 }
