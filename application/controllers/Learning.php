@@ -24,7 +24,6 @@ class learning extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Services_m');
-		// $this->load->model('Product_m');
 
 	}
 	public function index()
@@ -54,6 +53,8 @@ class learning extends CI_Controller
 		$data['total_duration'] = $this->db
 			->query("Select SUM(duration) as total from module_course WHERE course_id='$id'")
 			->row();
+
+		// cek jika user sudah beli atau belum
 		$data['user_id'] = $this->db
 			->query("SELECT user_id FROM course_user WHERE course_id='$id'")
 			->row();
@@ -66,7 +67,6 @@ class learning extends CI_Controller
 		} else {
 			$this->template->load('template_learning', 'learning/course_detail_v', $data);
 		}
-
 	}
 
 	public function delete_service($id)
@@ -82,6 +82,7 @@ class learning extends CI_Controller
 
 	public function add_course_user()
 	{
+		// INSERT COURSE TO USER
 		$user_id = $this->input->post('user_id', true);
 		$course_id = $this->input->post('course_id', true);
 		$data = [
@@ -89,9 +90,91 @@ class learning extends CI_Controller
 			'course_id' => $course_id,
 			'date_add_course' => date('Y-m-d H:i:s')
 		];
-		// var_dump($data);
 		$this->db->insert('course_user', $data);
+
+		$module = $this->Services_m->getmodulelearning_by_id($course_id);
+		$data = array();
+		$index = 0;
+		foreach ($module as $row) {
+			array_push(
+				$data,
+				array(
+					'learning_course_id' => $row->course_id,
+					'module_id' => $row->module_course_id,
+					'user_id' => $this->session->userdata('user_id'),
+				)
+			);
+			$index++;
+		}
+		$sql = $this->Services_m->save_batch_learning_progress_user($data);
+		echo json_encode($sql);
+	}
+
+	public function learning_course($id)
+	{
+		$this->load->library('upload');
+		$data['module_course'] = $this->Services_m->getmodulelearning_user_by_id($id);
+		$data['service'] = $this->Services_m->getcourse_by_id($id);
+		// $data['module_course'] = $this->Services_m->getmodulelearning_by_id($id);
+		// echo "<pre>";
+		// var_dump($data['module_course']);
+		// echo "</pre>";
+		$this->template->load('template_learning', 'learning/learning_course_v', $data);
+	}
+
+	public function submodule_js()
+	{
+		$submodule_id = $this->input->post('id', true);
+		$data = $this->Services_m->getsubmodule_by_id($submodule_id);
 		echo json_encode($data);
+	}
+
+	public function check_submodule_is_done_js()
+	{
+		$submodule_id = $this->input->post('submodule_id', true);
+		$data = $this->db
+			->query("SELECT user_id FROM learning_progress WHERE submodule_id='$submodule_id'")
+			->row();
+		echo json_encode($data);	
+	}
+
+	public function next_submodule_js()
+	{
+		$module_id = $this->input->post('module_id', true);
+		$submodule_id = $this->input->post('submodule_id', true);
+		$data = $this->db
+			->query("SELECT * FROM submodule_course where submodule_course_id = (select min(submodule_course_id) from submodule_course where submodule_course_id > $submodule_id) AND module_course_id = $module_id;")
+			->row();
+		echo json_encode($data);
+	}
+
+	public function previous_submodule_js()
+	{
+		$module_id = $this->input->post('module_id', true);
+		$submodule_id = $this->input->post('submodule_id', true);
+		$data = $this->db
+			->query("SELECT * FROM submodule_course where submodule_course_id = (select max(submodule_course_id) from submodule_course where submodule_course_id < $submodule_id) AND module_course_id = $module_id;")
+			->row();
+		echo json_encode($data);
+	}
+
+	public function done_submodule_js()
+	{
+		$module_id = $this->input->post('module_id', true);
+		$data = [
+			'status_progress'=> 1,
+		];
+		$this->db->update('learning_progress', $data, ['module_id' => $module_id]);
+		echo json_encode($data);
+	}
+
+	public function learning_progress($id)
+	{
+		$this->load->library('upload');
+		$data['course'] = $this->Services_m->getsubmodule_by_course_id($id);
+		echo "<pre>";
+		var_dump($data['course']);
+		echo "</pre>";
 	}
 
 }

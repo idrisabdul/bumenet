@@ -109,7 +109,7 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="<?= base_url() ?>mycourse">
+                <a class="dropdown-item d-flex align-items-center" href="<?= base_url() ?>mydashboard">
                   <i class="bi bi-gear"></i>
                   <span>Kelas Saya</span>
                 </a>

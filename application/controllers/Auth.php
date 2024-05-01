@@ -28,6 +28,7 @@ class auth extends CI_Controller
                 $params = [
                     'user_id' => $row['user_id'],
                     'username' => $row['username'],
+                    'nickname' => $row['nickname'],
                     'email' => $row['email'],
                     'current_job' => $row['current_job'],
                     'phone_number' => $row['phone_number'],

@@ -1,111 +1,58 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Learning</h1>
+        <h1>Dashboard Saya</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= base_url("learning") ?>">Home</a></li>
-                <li class="breadcrumb-item active">Learning</li>
+                <li class="breadcrumb-item active">Dashboard saya</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
+    <section class="section profile">
         <div class="row">
             <div class="col-xl-3">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
+                        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        <h2><?= ucfirst($this->session->userdata('nickname')) ?></h2>
+                        <h3>Web Designer</h3>
+                        <div class="social-links mt-2">
+                            <a href="#" class="twitter"><i class="ri ri-star-fill"> 10 Poin</i></a>
+                            <a href="#" class="facebook"><i class="ri ri-award-fill"> 20 XP</i></a>
+                        </div>
+                    </div>
+                    <div class="card-body">
                         <ul class="sidebar-nav" id="sidebar-nav">
-                            <h5 class="card-title">Kategori</h5>
+                        <li class="nav-item">
+                                <a class="nav-link collapsed" href="pages-blank.html">
+                                    <i class="bi bi-person"></i>
+                                    <span>Akun Saya</span>
+                                </a>
+                            </li><!-- End Blank Page Nav -->
 
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= base_url("mydashboard") ?>">
+                                <a class="nav-link collapsed" href="pages-error-404.html">
                                     <i class="bi bi-grid"></i>
-                                    <span>Dashboard Saya</span>
+                                    <span>Kelas yang Lulus</span>
                                 </a>
                             </li><!-- End Error 404 Page Nav -->
-
-
-                            <li class="nav-item">
-                                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
-                                    href="#">
-                                    <i class="bi bi-menu-button-wide"></i><span>Kelas</span><i
-                                        class="bi bi-chevron-down ms-auto"></i>
-                                </a>
-                                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                                    <li id='0'>
-                                        
-                                        <a
-                                                href="<?= base_url('/learning') ?>"
-                                                >
-                                                <i
-                                                    class="bi bi-circle"></i><span>Semua Kelas</span>
-                                            </a>
-                                    </li>
-                                    <?php foreach ($categories as $categori) { ?>
-                                        <li id='<?= $categori->product_category_id ?>'>
-                                            <a href="#">
-                                                <i
-                                                    class="bi bi-circle"></i><span><?= $categori->product_category_name ?></span>
-                                            </a>
-                                            <!-- <a
-                                                href="<?= base_url('/learning/course_category/' . $categori->product_category_id) ?>"
-                                                >
-                                                <i
-                                                    class="bi bi-circle"></i><span><?= $categori->product_category_name ?></span>
-                                            </a> -->
-                                        </li>
-                                    <?php } ?>
-
-                                </ul>
-                            </li><!-- End Components Nav -->
-
-
-                            <li class="nav-item">
-                                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse"
-                                    href="#">
-                                    <i class="bi bi-layout-text-window-reverse"></i><span>Harga</span><i
-                                        class="bi bi-chevron-down ms-auto"></i>
-                                </a>
-                                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                                    <li>
-                                        <a href="tables-general.html">
-                                            <i class="bi bi-circle"></i><span>Gratis</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="tables-data.html">
-                                            <i class="bi bi-circle"></i><span>Promo</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="tables-data.html">
-                                            <i class="bi bi-circle"></i><span>Berbayar</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li><!-- End Tables Nav -->
 
 
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="pages-error-404.html">
                                     <i class="bi bi-bar-chart"></i>
-                                    <span>Top Kelas</span>
+                                    <span>Progres Belajar</span>
                                 </a>
                             </li><!-- End Error 404 Page Nav -->
 
-                            <li class="nav-item">
-                                <a class="nav-link collapsed" href="pages-error-404.html">
-                                    <i class="bi bi-collection-play"></i>
-                                    <span>Seminar IT</span>
-                                </a>
-                            </li><!-- End Error 404 Page Nav -->
 
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="pages-blank.html">
-                                    <i class="bi bi-person"></i>
-                                    <span>Bumenet Mengajar</span>
+                                    <i class="bi bi-mortarboard"></i>
+                                    <span>Gabung     Bumenet Mengajar</span>
                                 </a>
                             </li><!-- End Blank Page Nav -->
 
@@ -114,31 +61,40 @@
                 </div>
             </div>
             <div class="col-xl-9">
-                <div class="row align-items-top" id="courses">
-                    <?php foreach ($courses as $cs) { ?>
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-header">
-                                    <img src="images/<?= $cs->img_service ?>" class="card-img-top" alt="...">
-                                    <a href="<?= base_url('/learning/course_detail/' . $cs->service_id) ?>"
-                                        class="card-link">
-                                        <h5 class="card-title"><?= $cs->service_name ?></h5>
-                                    </a>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?= $cs->product_category_name ?></h6>
+                <?php foreach ($mycourses as $mc) { ?>
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="images/<?= $mc->img_service ?>" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $mc->service_name ?></h5>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
                                 </div>
-                                <div class="card-body pt-3">
-                                    <a href="<?= base_url('/learning/course_detail/' . $cs->service_id) ?>"
-                                        class="card-link">Lihat detail</a>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <span>Progres belajar</span>
+                                            <div class="progress mt-2">
+                                                <div class="progress-bar" role="progressbar" style="width: 90%"
+                                                    aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mt-4">
+                                            <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
+                                                class="card-link">Lanjut
+                                                belajar</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
-                </div>
-                <div class="row align-items-top" id="courses_category">
-                </div>
+                    </div>
+                <?php } ?>
 
             </div>
-        </div>
     </section>
 
 </main><!-- End #main -->

@@ -234,7 +234,4 @@ class Product extends CI_Controller
 		$data['services'] = $this->Services_m->getproductcategory();
 		var_dump($data['services']);
 	}
-
-
-
 }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class mycourse extends CI_Controller {
+class mydashboard extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -23,16 +23,17 @@ class mycourse extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Services_m');
+		$this->load->model('Mycourse_m');
 		
 	}
 	public function index()
 	{
-        $data['courses'] = $this->Services_m->getservices();
+		$user_id = $this->session->userdata('user_id');
+		$data['courses'] = $this->Services_m->getservices();
 		$data['categories'] = $this->Services_m->getproductcategory();
-		$this->template->load('template','mycourse/my_course_v', $data);
+        $data['mycourses'] = $this->Mycourse_m->getmycourse($user_id);
+		// var_dump($data);
+		$this->template->load('template_learning','mydashboard/my_dashboard_v', $data);
 	}
-	public function about()
-	{
-		$this->template->load('template','Home/about_v');
-	}
+	
 }

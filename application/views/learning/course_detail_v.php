@@ -7,7 +7,7 @@
                 <li class="breadcrumb-item active"><i class="bi bi-clock"></i></li>
                 <li class="breadcrumb-item active"><?= $total_duration->total ?> Menit</li>
             </ol>
-    </div><!-- End Page Title -->
+    </div>
 
     <section class="section profile">
         <div class="row">
@@ -111,46 +111,7 @@
                                     <div class="col-lg-9 col-md-8"><?= $service->current_job ?></div>
                                 </div>
 
-
                             </div>
-
-                            <!-- <div class="tab-pane fade pt-3" id="profile-change-password">
-                                <form>
-
-                                    <div class="row mb-3">
-                                        <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current
-                                            Password</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="password" type="password" class="form-control"
-                                                id="currentPassword">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New
-                                            Password</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="newpassword" type="password" class="form-control"
-                                                id="newPassword">
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New
-                                            Password</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="renewpassword" type="password" class="form-control"
-                                                id="renewPassword">
-                                        </div>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Change Password</button>
-                                    </div>
-                                </form>
-
-                            </div> -->
-
                         </div><!-- End Bordered Tabs -->
 
                     </div>
@@ -189,12 +150,12 @@
                             <?php } else if ($user_id->user_id == 0) { ?>
                                     <button href="" class="btn btn-primary" id="add_course" type="button">Beli Sekarang</button>
                             <?php } else if ($this->session->userdata('user_id') == $user_id->user_id) { ?>
-                                        <button href="" class="btn btn-primary" id  ="start_learning" type="button">Mulai
-                                            Belajar</button>
+                                        <a href="<?= base_url() ?>learning/learning_course/<?= $service->service_id ?>" class="btn btn-primary" id="start_learning" type="button">Mulai
+                                            Belajar</a>
                             <?php } ?>
                         </div>
                     </div>
-                </div><!-- End Card with an image on top -->
+                </div>
 
             </div>
         </div>
