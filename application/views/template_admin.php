@@ -367,17 +367,17 @@
         </a>
         <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="<?= base_url("Admin/Product/add_product") ?>">
+            <a href="<?= base_url("Admin/product/add_product") ?>">
               <i class="bi bi-circle"></i><span>Add Course</span>
             </a>
           </li>
           <li>
-            <a href="<?= base_url("Admin/Product") ?>">
+            <a href="<?= base_url("Admin/product") ?>">
               <i class="bi bi-circle"></i><span>Data Course</span>
             </a>
           </li>
           <li>
-            <a href="<?= base_url("Admin/Product") ?>">
+            <a href="<?= base_url("Admin/product") ?>">
               <i class="bi bi-circle"></i><span>Data Course on Draft</span>
             </a>
           </li>

@@ -91,8 +91,8 @@
 
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
               <li class="dropdown-header">
-                <h6>Idris Abdul Azis</h6>
-                <span>Student</span>
+                <h6><?= $this->session->userdata('nickname') ?></h6>
+                <span><?= $this->session->userdata('role_name') ?></span>
               </li>
               <li>
                 <hr class="dropdown-divider">

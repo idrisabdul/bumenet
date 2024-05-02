@@ -18,7 +18,7 @@
 
                         <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                         <h2><?= ucfirst($this->session->userdata('nickname')) ?></h2>
-                        <h3>Web Designer</h3>
+                        <h3><?= ucfirst($this->session->userdata('role_name')) ?></h3>
                         <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="ri ri-star-fill"> 10 Poin</i></a>
                             <a href="#" class="facebook"><i class="ri ri-award-fill"> 20 XP</i></a>
