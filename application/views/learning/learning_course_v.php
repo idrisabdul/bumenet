@@ -105,7 +105,8 @@
                     dataType: 'json',
                     success: function (data) {
                         $(".card-footer").removeAttr("style");
-                        $("#btn-next").html("Lanjut");
+                        $("#next").removeAttr("style");
+                        $("#done").hide();
                         console.log(data);
                         function nl2br(str, is_xhtml) {
                             var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '</br>' : '<br>';

@@ -54,17 +54,21 @@ class learning extends CI_Controller
 			->query("Select SUM(duration) as total from module_course WHERE course_id='$id'")
 			->row();
 
+		$user_id = $this->session->userdata("user_id");
+
 		// cek jika user sudah beli atau belum
 		$data['user_id'] = $this->db
-			->query("SELECT user_id FROM course_user WHERE course_id='$id'")
+			->query("SELECT user_id FROM course_user WHERE course_id='$id' AND user_id=$user_id")
 			->row();
 
 		if ($data["user_id"] === NULL) {
 			$data["user_id"] = (object) [
 				'user_id' => '0',
 			];
+			// var_dump($data['user_id']);
 			$this->template->load('template_learning', 'learning/course_detail_v', $data);
 		} else {
+			// var_dump($data['user_id']);
 			$this->template->load('template_learning', 'learning/course_detail_v', $data);
 		}
 	}

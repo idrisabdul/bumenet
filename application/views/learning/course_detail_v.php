@@ -209,6 +209,7 @@
                 dataType: 'json',
                 success: function (data) {
                     alert('Berhasil ditambahkan');
+                    // console.log(data);
                     window.location.reload();
                 }
             });
