@@ -10,6 +10,16 @@ class Services_m extends CI_Model
         $this->db->from("services");
         $this->db->join("users", "users.user_id = services.service_created_by");
         $this->db->join("product_category", "product_category.product_category_id  = services.product_categories_id");
+        // $this->db->where("status_course", 1);
+        return $this->db->get()->result();
+    }
+    public function getservices_publish()
+    {
+        $this->db->select('*');
+        $this->db->from("services");
+        $this->db->join("users", "users.user_id = services.service_created_by");
+        $this->db->join("product_category", "product_category.product_category_id  = services.product_categories_id");
+        $this->db->where("status_course", 1);
         return $this->db->get()->result();
     }
 
@@ -20,6 +30,7 @@ class Services_m extends CI_Model
         $this->db->join("users", "users.user_id = services.service_created_by");
         $this->db->join("product_category", "product_category.product_category_id  = services.product_categories_id");
         $this->db->where("product_categories_id", $product_categories_id);
+        $this->db->where("status_course", 1);
         return $this->db->get()->result();
     }
     
@@ -54,11 +65,19 @@ class Services_m extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function getmodule_by_id($id)
+    {
+        $this->db->select('*');
+        $this->db->from("module_course");
+        $this->db->where("module_course_id", $id);
+        return $this->db->get()->row();
+    }
+
     public function getsubmodule_by_moduleid($id)
     {
         $this->db->select('*');
         $this->db->from("submodule_course");
-        $this->db->where("submodule_course", $id);
+        $this->db->where("module_course_id", $id);
         return $this->db->get()->result();
     }
 
@@ -99,7 +118,7 @@ class Services_m extends CI_Model
         return $this->db->get()->result();
     }
 
-    public function getmodulelearning_user_by_id($id)
+    public function getmodulelearning_user_by_id($id, $user_id)
     {
         $this->db->select('*');
         $this->db->from("services");
@@ -107,6 +126,7 @@ class Services_m extends CI_Model
         $this->db->join("learning_progress", "learning_progress.module_id  = module_course.module_course_id");
         // $this->db->group_by('module_id'); 
         $this->db->where("service_id", $id);
+        $this->db->where("learning_progress.user_id", $user_id);
         return $this->db->get()->result();
     }
 

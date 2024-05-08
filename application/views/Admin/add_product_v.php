@@ -13,7 +13,8 @@
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
-        <form method="post" enctype="multipart/form-data" action="<?= base_url('Admin/Product/insert_service') ?>">
+        <form method="post" enctype="multipart/form-data" action="<?= base_url('Admin/Product/insert_service') ?> "
+          id="identifier">
           <div class="card">
             <div class="card-body mb-5">
               <h5 class="card-title">Add Course</h5>
@@ -42,10 +43,11 @@
               <div class="row mb-3">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" name="service_description" style="height: 100px" required></textarea>
+                  <div class="quill-editor-full" id="desc">
+                  </div>
                 </div>
               </div>
-              <div class="row mb-3">
+              <div class="row mb-3 pt-5">
                 <label for="inputNumber" class="col-sm-2 col-form-label">Price</label>
                 <div class="col-sm-5">
                   <input type="number" name="service_price" class="form-control" required>
@@ -118,7 +120,9 @@
               <div class="row mb-5">
                 <label for="inputPassword" class="col-sm-2 col-form-label">SubContent Module</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" name="submodule_content[]" style="height: 100px" required></textarea>
+                  <!-- <textarea class="form-control" name="submodule_content[]" style="height: 100px"></textarea> -->
+                  <div class="quill-editor-default" id="submodule_content">
+                  </div>
                 </div>
               </div>
               <div id="course_module">
@@ -149,40 +153,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <script type="text/javascript">
+
+
   $(document).ready(function () {
-    var x = 0;
-    $('#add_module').click(function () {
-      x = x + 1;
-      newRowAdd =
-        '<div id="form_module">' +
-        '<br><br><br><div class="row mb-3">' +
-        '<label for="inputText" class="col-sm-2 col-form-label"><b>Module Name ' + x + '</b></label>' +
-        '<div class="col-sm-8">' +
-        '<input type="text" name="service_name" class="form-control">' +
-        '</div>' +
-        '<button type="button" id="remove_module" class="col-sm-1 btn btn-danger float-end"><i class="bi bi-trash me-1"></i></button>' +
-        '</div>' +
-        '<div class="row mb-3">' +
-        '<label for="inputText" class="col-sm-2 col-form-label">Action</label>' +
-        '<div class="col-sm-8">' +
-        '<button type="button" id="add_submodule' + x + '" class="btn btn-primary"><i class="bi bi-plus me-1"></i>add Submodule</button>' +
-        '</div>' +
-        '</div>' +
-        '<div class="row mb-3">' +
-        '<label for="inputText" class="col-sm-2 col-form-label">SubModule Name</label>' +
-        '<div class="col-sm-10">' +
-        '<input type="text" name="service_name" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="row mb-3">' +
-        '<label for="inputPassword" class="col-sm-2 col-form-label">SubContent Module</label>' +
-        '<div class="col-sm-10">' +
-        '<textarea class="form-control" name="service_description" style="height: 100px"></textarea>' +
-        '</div>' +
-        '</div>' +
-        '</div>';
-      $('#course_module').append(newRowAdd);
+    $("#identifier").on("submit", function () {
+      var myEditor = document.querySelector('.quill-editor-full')
+      var html = myEditor.children[0].innerHTML
+      $(this).append("<textarea name='service_description' style='display:none'>" + html + "</textarea>");
+
+
+      var submoduleContent = document.querySelector('#submodule_content')
+      var submodule_content = submoduleContent.children[0].innerHTML
+      $(this).append("<textarea name='submodule_content[]' style='display:none'>" + submodule_content + "</textarea>");
     });
+  });
+
+  $(document).ready(function () {
     var x = 0;
     $('#add_submodule').click(function () {
       x = x + 1;
@@ -237,8 +223,6 @@
 
     $('#select_ass_num').change(function () {
       var id = $(this).val();
-      //  var string_text = $(this).text();
-      // alert(id);
       var string = $("#select_ass_num option:selected").text();
 
       $.ajax({
@@ -255,9 +239,6 @@
           $("#asset_number_txtowe").val(string + '-' + data);
           $("#numbering").val(data);
           $("#id_asset_number").val(id);
-
-
-          //  alert(s);
         }
       });
       return false;
@@ -269,12 +250,6 @@
   $(function () {
     bsCustomFileInput.init();
   });
-
-  //  $('input[type="checkbox"]').change(function() {
-  //      console.log('click');
-
-  //  });
-
   $("#checkbox_inp").prop("checked", false);
 
 
@@ -285,7 +260,6 @@
       alert('no');
     } else {
       alert('yes');
-      // return true;
     }
   }
 </script>

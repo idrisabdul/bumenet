@@ -29,7 +29,7 @@ class learning extends CI_Controller
 	public function index()
 	{
 		$this->load->library('upload');
-		$data['courses'] = $this->Services_m->getservices();
+		$data['courses'] = $this->Services_m->getservices_publish();
 		$data['categories'] = $this->Services_m->getproductcategory();
 		$this->template->load('template_learning', 'learning/learning_v', $data);
 	}
@@ -38,7 +38,7 @@ class learning extends CI_Controller
 	{
 		$category_id = $this->input->post('id', true);
 		if ($category_id == 0) {
-			$data = $this->Services_m->getservices();
+			$data = $this->Services_m->getservices_publish();
 		} else {
 			$data = $this->Services_m->getcategory_by_id($category_id);
 		}
@@ -56,10 +56,19 @@ class learning extends CI_Controller
 
 		$user_id = $this->session->userdata("user_id");
 
-		// cek jika user sudah beli atau belum
-		$data['user_id'] = $this->db
+		if ($this->session->userdata("user_id")) {
+			$data['user_id'] = $this->db
 			->query("SELECT user_id FROM course_user WHERE course_id='$id' AND user_id=$user_id")
 			->row();
+		} else {
+			$data['user_id'] = $this->db
+			->query("SELECT user_id FROM course_user WHERE course_id='$id'")
+			->row();
+
+		}
+
+		// cek jika user sudah beli atau belum
+		
 
 		if ($data["user_id"] === NULL) {
 			$data["user_id"] = (object) [
@@ -117,13 +126,15 @@ class learning extends CI_Controller
 	public function learning_course($id)
 	{
 		$this->load->library('upload');
-		$data['module_course'] = $this->Services_m->getmodulelearning_user_by_id($id);
+		$user_id = $this->session->userdata("user_id");
+		$data['module_course'] = $this->Services_m->getmodulelearning_user_by_id($id, $user_id);
 		$data['service'] = $this->Services_m->getcourse_by_id($id);
 		// $data['module_course'] = $this->Services_m->getmodulelearning_by_id($id);
 		// echo "<pre>";
 		// var_dump($data['module_course']);
 		// echo "</pre>";
-		$this->template->load('template_learning', 'learning/learning_course_v', $data);
+		// $this->template->load('template_learning', 'learning/learning_course_v', $data);
+		$this->load->view('learning/learning_course_v2', $data);
 	}
 
 	public function submodule_js()

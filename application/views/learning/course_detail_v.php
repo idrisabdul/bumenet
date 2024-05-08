@@ -5,7 +5,7 @@
         <nav style="--bs-breadcrumb-divider: '';">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active"><i class="bi bi-clock"></i></li>
-                <li class="breadcrumb-item active"><?= $total_duration->total ?> Menit</li>
+                <li class="breadcrumb-item active">Durasi Belajar <?= $total_duration->total ?> Menit</li>
             </ol>
     </div>
 

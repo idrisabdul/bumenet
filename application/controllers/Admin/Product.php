@@ -32,13 +32,22 @@ class product extends CI_Controller
 		$data['services'] = $this->Services_m->getservices();
 		$this->template->load('template_admin', 'Admin/list_product_v', $data);
 	}
+
+	public function course_publish($id)
+	{
+		$data = [
+			'status_course'=> 1,
+		];
+		$this->db->update('services', $data, ['course_id' => $id]);
+		redirect('Admin/Product/');
+	}
 	
 
 	public function add_product()
 	{
 		$data['product_category'] = $this->Services_m->getproductcategory();
 		$data['users'] = $this->Services_m->getusers();
-		$this->template->load('template_admin', 'Admin/add_product_v', $data);
+		$this->template->load('template_admin', 'Admin/add_course_v', $data);
 	}
 
 	public function delete_service($id)
@@ -99,7 +108,7 @@ class product extends CI_Controller
 		}
 	}
 
-	public function insert_service()
+	public function insert_course()
 	{
 		$ori_filename = $_FILES['picture']['name'];
 		$new_name = time() . "" . str_replace(' ', '-', $ori_filename);
@@ -234,4 +243,7 @@ class product extends CI_Controller
 		$data['services'] = $this->Services_m->getproductcategory();
 		var_dump($data['services']);
 	}
+
+
+
 }

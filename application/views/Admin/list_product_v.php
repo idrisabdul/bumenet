@@ -27,9 +27,11 @@
                     <b>Course</b> Name
                   </th>
                   <th>Course Categorization</th>
-                  <th>Course Description</th>
+                  <!-- <th>Course Description</th> -->
                   <th>Price</th>
                   <th>Created By</th>
+                  <th>Total Module</th>
+                  <th>Status Course</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -46,21 +48,39 @@
                     <td>
                       <?= ucfirst($service->product_category_name) ?>
                     </td>
-                    <td>
+                    <!-- <td>
                       <?= ucfirst($service->service_description) ?>
-                    </td>
+                    </td> -->
                     <td>Rp.
                       <?= ucfirst($service->service_price) ?>
                     </td>
                     <td>
                       <?= ucfirst($service->nickname) ?>
                     </td>
+                    <td>
+                      <?php $module = $this->db->query("SELECT COUNT(module_course_id) AS total_module FROM module_course WHERE course_id='$service->service_id'")->row(); ?>
+                      <?= $module->total_module ?>
+                    </td>
+                    <td>
+                      <?php if ($service->status_course == 0) { ?>
+                        <span class="badge bg-warning">Draft</span>
+                      <?php } else if ($service->status_course == 1) { ?>
+                          <span class="badge bg-success">Publish</span>
+                      <?php } ?>
+                    </td>
 
                     </td>
                     <td>
+                      <a href="<?= base_url('Admin/course/course_publish/' . $service->service_id) ?>" id="edit_module"
+                      href="javascript:;" class="btn btn-xs btn-success"><i class="bi bi-cloud-upload mr-1"></i></a>
+                      <a href="<?= base_url('Admin/course/list_module/' . $service->service_id) ?>" id="edit_module"
+                      href="javascript:;" class="btn btn-xs btn-info"><i class="bi bi-eye mr-1"></i></a>
+                      <a href="<?= base_url('Admin/course/list_module/' . $service->service_id) ?>" id="edit_module"
+                        href="javascript:;" class="btn btn-xs btn-warning"><i class="bi bi-pencil mr-1"></i></a>
                       <button
                         onclick="deleteConfirm('<?= base_url('Admin/Product/delete_service/' . $service->service_id) ?>')"
-                        class="btn btn-xs btn-danger" type="button" href="#!"><i class="bi bi-exclamation-octagon"></i></button>
+                        class="btn btn-xs btn-danger" type="button" href="#!"><i
+                          class="bi bi-exclamation-octagon"></i></button>
                     </td>
                   </tr>
                 <?php } ?>

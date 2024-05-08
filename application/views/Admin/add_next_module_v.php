@@ -28,6 +28,22 @@
                   <input type="text" name="course_id" id="course_id" class="form-control" hidden value="<?= $service->service_id ?>">
                 </div>
               </div>
+              <div class="row mb-1">
+                <label for="inputText" class="col-sm-2 col-form-label">Course Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="service_name" class="form-control" value="<?= $service->service_name ?>"
+                    disabled>
+                  <input type="text" name="course_id" id="course_id" class="form-control" hidden value="<?= $service->service_id ?>">
+                </div>
+              </div>
+              <div class="row mb-1">
+                <label for="inputText" class="col-sm-2 col-form-label">Course Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="service_name" class="form-control" value="<?= $service->service_name ?>"
+                    disabled>
+                  <input type="text" name="course_id" id="course_id" class="form-control" hidden value="<?= $service->service_id ?>">
+                </div>
+              </div>
               <div class="row mb-3">
               </div>
 
