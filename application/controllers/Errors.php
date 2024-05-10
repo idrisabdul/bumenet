@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class devops extends CI_Controller
+class errors extends CI_Controller
 {
 
 	/**
@@ -20,17 +20,22 @@ class devops extends CI_Controller
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->model('Services_m');
-		// $this->load->model('Product_m');
-		
-	}
-	public function index()
-	{
-		$this->load->view('errors/html/error_404');
-	}
+	public function __construct() {
+        parent::__construct();
+    }
+
+    public function index(){
+		$this->output->set_status_header('404');
+
+        // Make sure you actually have some view file named 404.php
+        $this->load->view('errors/show_404_v');
+    }
+    // public function page_missing(){
+    //     $this->output->set_status_header('404');
+
+    //     // Make sure you actually have some view file named 404.php
+    //     $this->load->view('errors/show_404_v');
+    // }
 
 
 

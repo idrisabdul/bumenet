@@ -97,6 +97,36 @@
               <li>
                 <hr class="dropdown-divider">
               </li>
+              <?php if ($this->session->userdata('role') == 1) { ?>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Admin/admin") ?>">
+                    <i class="bi bi-grid"></i>
+                    <span>Admin Area</span>
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Mentor/mentor") ?>">
+                    <i class="bi bi-mortarboard"></i>
+                    <span>Mentor Area</span>
+                  </a>
+                </li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+              <?php } else if ($this->session->userdata('role') == 2) { ?>
+                  <li>
+                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Mentor/mentor") ?>">
+                      <i class="bi bi-mortarboard"></i>
+                      <span>Mentor Area</span>
+                    </a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+              <?php } ?>
 
               <li>
                 <a class="dropdown-item d-flex align-items-center" href="users-profile.html">

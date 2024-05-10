@@ -59,7 +59,6 @@
                                     </th>
                                     <th>Total submodule</th>
                                     <th>Duration</th>
-                                    <th>Status Module</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -75,24 +74,20 @@
                                         </td>
 
                                         <td>
-                                        <?php $submodule = $this->db->query("SELECT COUNT(submodule_course_id) AS total_submodule FROM submodule_course WHERE module_course_id='$module->module_course_id'")->row(); ?>
-                                        <?= $submodule->total_submodule ?>
+                                            <?php $submodule = $this->db->query("SELECT COUNT(submodule_course_id) AS total_submodule FROM submodule_course WHERE module_course_id='$module->module_course_id'")->row(); ?>
+                                            <?= $submodule->total_submodule ?>
                                         </td>
                                         <td>
                                             <?= ucfirst($module->duration) ?> Menit
                                         </td>
-                                        <td>
-                                            <span class="badge bg-warning">Draft</span>
-                                        </td>
+
 
                                         <td>
-                                            <a href="<?= base_url('Admin/course/list_submodule/' . $module->module_course_id) ?>" id="edit_module" href="javascript:;" class="btn btn-xs btn-info"><i
-                                                    class="bi bi-eye mr-1"></i></a>
-                                            <button href="#" id="edit_module" href="javascript:;"
-                                                class="btn btn-xs btn-warning" data-toggle="modal" data-target="#edit"><i
-                                                    class="bi bi-pencil-square"></i></button>
+                                            <a href="<?= base_url('Admin/course/list_submodule/' . $module->module_course_id) ?>"
+                                                id="edit_module" href="javascript:;" class="btn btn-xs btn-warning"><i
+                                                    class="bi bi-pencil-square mr-1"></i></a>
                                             <button
-                                                onclick="deleteConfirm('<?= base_url('Admin/Product/delete_service/' . $service->service_id) ?>')"
+                                                onclick="deleteConfirm('<?= base_url('Admin/course/delete_module/' . $module->module_course_id) ?>')"
                                                 class="btn btn-xs btn-danger" type="button" href="#!"><i
                                                     class="bi bi-trash"></i></button>
                                         </td>
@@ -138,7 +133,8 @@
                         <div class="col-sm-12">
                             <label for="">Duration</label>
                             <div class="form-group">
-                                <input type="number" name="duration" class="form-control" placeholder="Dalam hitungan menit" required />
+                                <input type="number" name="duration" class="form-control"
+                                    placeholder="Dalam hitungan menit" required />
                             </div>
                         </div>
                     </div>

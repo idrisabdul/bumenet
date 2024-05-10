@@ -28,20 +28,18 @@ class product extends CI_Controller
 	 */
 	public function index()
 	{
+		$user_id = $this->session->userdata('user_id');
 		$this->load->library('upload');
-		$data['services'] = $this->Services_m->getservices();
+		if ($this->session->userdata('role') == 2) {
+			$data['services'] = $this->Services_m->getservices_byuserid($user_id);
+		} else {
+			$data['services'] = $this->Services_m->getservices();
+		}
 		$this->template->load('template_admin', 'Admin/list_product_v', $data);
 	}
 
-	public function course_publish($id)
-	{
-		$data = [
-			'status_course'=> 1,
-		];
-		$this->db->update('services', $data, ['course_id' => $id]);
-		redirect('Admin/Product/');
-	}
-	
+
+
 
 	public function add_product()
 	{
@@ -231,10 +229,10 @@ class product extends CI_Controller
 	{
 		$course_id = $this->input->post('id', true);
 		$data = [
-			'status'=> 1,
+			'status' => 1,
 		];
 		$this->db->update('module_course', $data, ['course_id' => $course_id]);
-		echo json_encode($data);	
+		echo json_encode($data);
 	}
 
 	public function show_all_product_category()

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Mentor extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -23,14 +23,14 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 
-		if ($this->session->userdata('role') != 1) {
-			show_404();
-		}
+		// if ($this->session->userdata('role') != 2 OR $this->session->userdata('role') != 1) {
+		// 	show_404();
+		// }
 	}
 	
 	public function index()
 	{
-		$this->template->load('template_admin','Admin/dashboard_v');
+		$this->template->load('template_admin','mentor/mentor_v');
 	}
 
 }

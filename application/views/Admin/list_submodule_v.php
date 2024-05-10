@@ -63,12 +63,12 @@
                                         </td>
 
                                         <td>
-                                            <a href="<?= base_url('Admin/course/create_content/' . $submodule->submodule_course_id) ?>"
+                                            <!-- <a href="<?= base_url('Admin/course/create_content/' . $submodule->submodule_course_id) ?>"
                                                 href="javascript:;" class="btn btn-xs btn-info"><i
-                                                    class="bi bi-eye mr-1"></i></a>
-                                            <button href="#" id="edit_module" href="javascript:;"
-                                                class="btn btn-xs btn-warning" data-toggle="modal" data-target="#edit"><i
-                                                    class="bi bi-pencil-square"></i></button>
+                                                    class="bi bi-eye mr-1"></i></a> -->
+                                            <a href="<?= base_url('Admin/course/edit_submodule/' . $submodule->submodule_course_id) ?>"
+                                                id="edit_module" href="javascript:;" class="btn btn-xs btn-warning"><i
+                                                    class="bi bi-pencil-square"></i></a>
                                             <button
                                                 onclick="deleteConfirm('<?= base_url('Admin/course/delete_submodule/' . $submodule->submodule_course_id) ?>')"
                                                 class="btn btn-xs btn-danger" type="button" href="#!"><i
@@ -82,7 +82,8 @@
 
                     </div>
                     <div class="card-footer">
-                        <a href="<?= base_url('Admin/course/list_module/' . $module->course_id) ?>" id="btn-previous" class="card-link btn btn-outline-primary">Back to list module</a>
+                        <a href="<?= base_url('Admin/course/list_module/' . $module->course_id) ?>" id="btn-previous"
+                            class="card-link btn btn-outline-primary">Back to list module</a>
                     </div>
                 </div>
 
@@ -111,6 +112,26 @@
         </div>
     </div>
 </div><!-- End Basic Modal-->
+
+<div class="modal fade" id="fullscreenModal" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Full Screen Modal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat
+                autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet
+                incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div><!-- End Full Screen Modal-->
 
 
 

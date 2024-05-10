@@ -138,22 +138,19 @@
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
+            <h4><span class="badge bg-secondary">PREVIEW</span></h4>
             <h5 class="card-title">Daftar Modul</h5>
+
             <?php $no = 1; ?>
             <?php $no2 = 1; ?>
             <?php foreach ($module_course as $mc) { ?>
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#components-nav<?= $no++ ?>" data-bs-toggle="collapse"
                         href="#">
-                        <?php if ($mc->status_progress == 1) { ?>
-                            <i class="bi bi-check-circle-fill"></i><span>
-                                <?= $mc->module_name ?></span>
-                            <i class="bi bi-chevron-down ms-auto"></i>
-                        <?php } else { ?>
-                            <i class="bi bi-circle"></i><span>
-                                <?= $mc->module_name ?></span>
-                            <i class="bi bi-chevron-down ms-auto"></i>
-                        <?php } ?>
+                        <i class="bi bi-circle"></i><span>
+                            <?= $mc->module_name ?></span>
+                        <i class="bi bi-chevron-down ms-auto"></i>
+                        
                     </a>
                     <ul id="components-nav<?= $no2++ ?>" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <?php $submodule = $this->db->query("SELECT * FROM submodule_course WHERE module_course_id='$mc->module_course_id'"); ?>
@@ -185,7 +182,8 @@
 
                     <div class="card mb-3">
                         <div class="card-body" id="submodule_content">
-                            <h5 class="card-title mt-2" id="judul_submodule">Overview <?= $service->service_name ?></h5>
+                            <!-- <h2><span class="badge bg-secondary">Secondary</span></h2> -->
+                            <h5 class="card-title mt-2" id="judul_submodule"> <?= $service->service_name ?></h5>
                             <div id="content_submodule"><?php echo nl2br($service->service_description) ?>
                             </div>
                         </div>

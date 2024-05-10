@@ -13,6 +13,26 @@ class Services_m extends CI_Model
         // $this->db->where("status_course", 1);
         return $this->db->get()->result();
     }
+
+    public function getservices_byuserid($user_id)
+    {
+        $this->db->select('*');
+        $this->db->from("services");
+        $this->db->join("users", "users.user_id = services.service_created_by");
+        $this->db->join("product_category", "product_category.product_category_id  = services.product_categories_id");
+        $this->db->where("service_created_by", $user_id);
+        return $this->db->get()->result();
+    }
+
+    public function getservices_preview($id)
+    {
+        $this->db->select('*');
+        $this->db->from("services");
+        $this->db->join("users", "users.user_id = services.service_created_by");
+        $this->db->join("product_category", "product_category.product_category_id  = services.product_categories_id");
+        $this->db->where("service_id", $id);
+        return $this->db->get()->row();
+    }
     public function getservices_publish()
     {
         $this->db->select('*');
@@ -127,6 +147,18 @@ class Services_m extends CI_Model
         // $this->db->group_by('module_id'); 
         $this->db->where("service_id", $id);
         $this->db->where("learning_progress.user_id", $user_id);
+        return $this->db->get()->result();
+    }
+
+    public function getpreview_user($id)
+    {
+        $this->db->select('*');
+        $this->db->from("services");
+        $this->db->join("module_course", "module_course.course_id  = services.service_id");
+        // $this->db->join("learning_progress", "learning_progress.module_id  = module_course.module_course_id");
+        // $this->db->group_by('module_id'); 
+        $this->db->where("service_id", $id);
+        // $this->db->where("learning_progress.user_id", $user_id);
         return $this->db->get()->result();
     }
 

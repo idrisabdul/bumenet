@@ -33,6 +33,7 @@ class auth extends CI_Controller
                     'current_job' => $row['current_job'],
                     'phone_number' => $row['phone_number'],
                     'role_name' => $row['role_name'],
+                    'role' => $row['role'],
                 ];
                 $this->session->set_userdata($params);
                 echo "<script>window.location='" . base_url('learning') . "'</script>";

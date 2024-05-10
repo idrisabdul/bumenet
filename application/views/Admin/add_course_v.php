@@ -58,20 +58,32 @@
                                         required>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Course Created By</label>
-                                <div class="col-sm-10">
-                                    <select class="form-select" aria-label="Default select example"
-                                        name="service_created_by" required>
-                                        <option disabled selected value>-- Pilih --</option>
-                                        <?php foreach ($users as $user) { ?>
-                                            <option value="<?= $user->user_id ?>">
-                                                <?= $user->nickname ?>
-                                            </option>
-                                        <?php } ?>
-                                    </select>
+                            <?php if ($this->session->userdata('role') == 1) { ?>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Course Created By</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select" aria-label="Default select example"
+                                            name="service_created_by" required>
+                                            <option disabled selected value>-- Pilih --</option>
+                                            <?php foreach ($users as $user) { ?>
+                                                <option value="<?= $user->user_id ?>">
+                                                    <?= $user->nickname ?>
+                                                </option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php } else if ($this->session->userdata('role') == 2) { ?>
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label">Course Created By</label>
+                                        <div class="col-sm-10">
+                                            <input name="service_created_by" class="form-control" hidden value="<?= $this->session->userdata('user_id') ?>"
+                                                required>
+                                            <input class="form-control" disabled value="<?= $this->session->userdata('nickname') ?>"
+                                                required>
+                                        </div>
+                                    </div>
+                            <?php } ?>
                             <div class="row mb-3">
                                 <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
                                 <div class="col-sm-10">

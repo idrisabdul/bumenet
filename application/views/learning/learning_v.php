@@ -18,13 +18,23 @@
 
                         <ul class="sidebar-nav" id="sidebar-nav">
                             <h5 class="card-title">Kategori</h5>
+                            <?php if (!$this->session->userdata('user_id')) { ?>
 
-                            <li class="nav-item">
-                                <a class="nav-link collapsed" href="<?= base_url("mydashboard") ?>">
-                                    <i class="bi bi-grid"></i>
-                                    <span>Dashboard Saya</span>
-                                </a>
-                            </li><!-- End Error 404 Page Nav -->
+                                <li class="nav-item">
+                                    <a class="nav-link collapsed" data-bs-toggle="modal"
+                                        data-bs-target="#verticalycentered-2">
+                                        <i class="bi bi-grid"></i>
+                                        <span>Dashboard Saya</span>
+                                    </a>
+                                </li>
+                            <?php } else { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link collapsed" href="<?= base_url("mydashboard") ?>">
+                                        <i class="bi bi-grid"></i>
+                                        <span>Dashboard Saya</span>
+                                    </a>
+                                </li>
+                            <?php } ?>
 
 
                             <li class="nav-item">
@@ -35,13 +45,10 @@
                                 </a>
                                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                                     <li id='0'>
-                                        
-                                        <a
-                                                href="<?= base_url('/learning') ?>"
-                                                >
-                                                <i
-                                                    class="bi bi-circle"></i><span>Semua Kelas</span>
-                                            </a>
+
+                                        <a href="<?= base_url('/learning') ?>">
+                                            <i class="bi bi-circle"></i><span>Semua Kelas</span>
+                                        </a>
                                     </li>
                                     <?php foreach ($categories as $categori) { ?>
                                         <li id='<?= $categori->product_category_id ?>'>
@@ -85,28 +92,33 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li><!-- End Tables Nav -->
+                            </li>
 
 
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="pages-error-404.html">
                                     <i class="bi bi-bar-chart"></i>
-                                    <span>Top Kelas</span>
+                                    <span>Top Kelas (On Development)</span>
                                 </a>
-                            </li><!-- End Error 404 Page Nav -->
+                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="pages-error-404.html">
                                     <i class="bi bi-collection-play"></i>
-                                    <span>Seminar IT</span>
+                                    <span>Seminar IT (On Development)</span>
                                 </a>
                             </li><!-- End Error 404 Page Nav -->
 
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="pages-blank.html">
-                                    <i class="bi bi-person"></i>
-                                    <span>Bumenet Mengajar</span>
-                                </a>
+
+                                <?php if ($this->session->userdata('role') == 0) { ?>
+                                    <a class="nav-link collapsed" data-bs-toggle="modal"
+                                        data-bs-target="#verticalycentered">
+                                        <i class="bi bi-mortarboard"></i>
+                                        <span>Gabung Bumenet Mengajar</span>
+                                    </a>
+                                <?php } ?>
+
                             </li><!-- End Blank Page Nav -->
 
                         </ul>
@@ -143,11 +155,106 @@
 
 </main><!-- End #main -->
 
+<div class="modal fade" id="verticalycentered" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="assets/img/bumenet-mengajar-2.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/bumenet-mengajar-4.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/img/bumenet-mengajar-3.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="card-title">Selamat datang di Bumenet Mengajar</h5>
+                <span> Pengetahuan dan Pengalaman anda tentu sangat luar biasa hingga sampai di posisi ini. Yuk saatnya
+                    bagikan pengetahuan dan pengalaman anda kepada orang lain. Dan jadilah sosok yang inspiratif</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <?php if (!$this->session->userdata('user_id')) { ?>
+                    <a href="<?= base_url("auth") ?>" class="btn btn-primary">Yuk
+                        Login</a>
+                <?php } else { ?>
+                    <a href="<?= base_url("mydashboard/bumenet_mengajar/" . $this->session->userdata("user_id")) ?>"
+                        class="btn btn-primary">Yuk Gabung</a>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="verticalycentered-2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="assets/img/learning.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="card-title">Upgrade Your Skill</h5>
+                <span> Investasi terbaik adalah Investasi dari leher sampai ke atas</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+
+                <a href="<?= base_url("auth") ?>" class="btn btn-primary">Yuk
+                    Login</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <script type="text/javascript">
 
     $(document).ready(function () {
+        function alertLogin(url) {
+            console.log(url);
+            $('#btn-login').attr('href', url);
+            $('#basicModal').modal('show');
+        }
         // show_course();
 
         function show_course() {

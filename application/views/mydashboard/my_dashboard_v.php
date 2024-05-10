@@ -17,8 +17,14 @@
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                         <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <h2><?= ucfirst($this->session->userdata('nickname')) ?></h2>
+                        <h2>Hai, <?= ucfirst($this->session->userdata('nickname')) ?></h2>
                         <h3><?= ucfirst($this->session->userdata('role_name')) ?></h3>
+                        <?php if ($this->session->userdata('role') == 4) { ?>
+                            <div class="alert alert-info fade show" role="alert">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Pengajuan anda sedang direview oleh tim kami. Mohon ditunggu.
+                            </div>
+                        <?php } ?>
                         <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="ri ri-star-fill"> 10 Poin</i></a>
                             <a href="#" class="facebook"><i class="ri ri-award-fill"> 20 XP</i></a>
@@ -26,8 +32,8 @@
                     </div>
                     <div class="card-body">
                         <ul class="sidebar-nav" id="sidebar-nav">
-                        <li class="nav-item">
-                                <a class="nav-link collapsed" href="pages-blank.html">
+                            <li class="nav-item">
+                                <a class="nav-link collapsed" href="<?= base_url("mydashboard/myaccount") ?>">
                                     <i class="bi bi-person"></i>
                                     <span>Akun Saya</span>
                                 </a>
@@ -49,18 +55,18 @@
                             </li><!-- End Error 404 Page Nav -->
 
 
-                            <li class="nav-item">
-                                <a class="nav-link collapsed" href="pages-blank.html">
-                                    <i class="bi bi-mortarboard"></i>
-                                    <span>Gabung     Bumenet Mengajar</span>
-                                </a>
-                            </li><!-- End Blank Page Nav -->
 
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="col-xl-9">
+                <?php if (!$mycourses) { ?>
+                    <img src="<?= base_url() ?>/assets/img/empty-removebg-preview.png" class="rounded mx-auto d-block"
+                        alt="...">
+                    <!-- <h5 class="card-title text-center">Yuk Ambil kelas sekar</h5> -->
+
+                <?php } ?>
                 <?php foreach ($mycourses as $mc) { ?>
                     <div class="card mb-3">
                         <div class="row g-0">
@@ -70,16 +76,36 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $mc->service_name ?></h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.</p>
+
+                                    <p class="card-text">
+                                        <?php
+                                        $string = strip_tags($mc->service_description);
+                                        if (strlen($string) > 150) {
+                                            $stringCut = substr($string, 0, 150);
+                                            $endPoint = strrpos($stringCut, ' ');
+
+                                            //if the string doesn't contain any space then it will cut without word basis.
+                                            $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                            $string .= '...';
+                                        }
+                                        echo $string;
+                                        ?>
+                                    </p>
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col-md-9">
                                             <span>Progres belajar</span>
+                                            <?php
+                                            $progress_done = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id' && status_progress='1';")->row();
+                                            $all_progress = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id';")->row();
+                                            // echo $progress_done->total_progress;
+                                            // echo $progress_done->total_progress;
+                                            $progress = round($progress_done->total_progress / $all_progress->total_progress * 100,2);
+                                            ?>
                                             <div class="progress mt-2">
-                                                <div class="progress-bar" role="progressbar" style="width: 90%"
-                                                    aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                                <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%"
+                                                    aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= $progress ?>%</div>
                                             </div>
                                         </div>
                                         <div class="col-md-3 mt-4">
@@ -93,7 +119,6 @@
                         </div>
                     </div>
                 <?php } ?>
-
             </div>
     </section>
 

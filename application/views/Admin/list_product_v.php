@@ -73,7 +73,7 @@
                     <td>
                       <a href="<?= base_url('Admin/course/course_publish/' . $service->service_id) ?>" id="edit_module"
                       href="javascript:;" class="btn btn-xs btn-success"><i class="bi bi-cloud-upload mr-1"></i></a>
-                      <a href="<?= base_url('Admin/course/list_module/' . $service->service_id) ?>" id="edit_module"
+                      <a target="_blank" href="<?= base_url('Admin/course/preview_course/' . $service->service_id) ?>" id="edit_module"
                       href="javascript:;" class="btn btn-xs btn-info"><i class="bi bi-eye mr-1"></i></a>
                       <a href="<?= base_url('Admin/course/list_module/' . $service->service_id) ?>" id="edit_module"
                         href="javascript:;" class="btn btn-xs btn-warning"><i class="bi bi-pencil mr-1"></i></a>
