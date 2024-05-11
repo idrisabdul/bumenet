@@ -19,7 +19,7 @@
                         <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
                         <h2>Hai, <?= ucfirst($this->session->userdata('nickname')) ?></h2>
                         <h3><?= ucfirst($this->session->userdata('role_name')) ?></h3>
-                        <?php if ($this->session->userdata('role') == 4) { ?>
+                        <?php if ($user->role == 4) { ?>
                             <div class="alert alert-info fade show" role="alert">
                                 <i class="bi bi-info-circle me-1"></i>
                                 Pengajuan anda sedang direview oleh tim kami. Mohon ditunggu.

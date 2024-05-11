@@ -8,7 +8,7 @@
 
     <h2>Bumenet Academy membantu anda menjadi percaya diri dengan potensimu</h2>
 
-    <a href="<?= base_url("Devops") ?>" class="btn-get-started">Mulai Belajar</a>
+    <a href="<?= base_url("learning") ?>" class="btn-get-started">Mulai Belajar</a>
 
   </div>
 

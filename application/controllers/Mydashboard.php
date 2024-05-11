@@ -28,12 +28,14 @@ class mydashboard extends CI_Controller {
 		}
 		$this->load->model('Services_m');
 		$this->load->model('Mycourse_m');
+		$this->load->model('Users_m');
 		
 	}
 	public function index()
 	{
 		$user_id = $this->session->userdata('user_id');
 		$data['courses'] = $this->Services_m->getservices();
+		$data['user'] = $this->Users_m->getuser_byid($user_id);
 		$data['categories'] = $this->Services_m->getproductcategory();
         $data['mycourses'] = $this->Mycourse_m->getmycourse($user_id);
 
