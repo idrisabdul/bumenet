@@ -81,6 +81,18 @@ class course extends CI_Controller
 		redirect('Admin/course/list_module/' . $course_id);
 	}
 
+	public function update_module()
+	{
+		$course_id = $this->input->post('course_id');
+		$id = $this->input->post('module_course_id');
+		$data = [
+			'module_name' => $this->input->post('module_name'),
+			'duration' => $this->input->post('duration'),
+		];
+		$this->db->update('module_course', $data, ['module_course_id' => $id]);
+		redirect('Admin/course/list_module/'. $course_id);
+	}
+
 	public function create_content($module_id)
 	{
 		$data['module'] = $this->Services_m->getmodule_by_id($module_id);

@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class mydashboard extends CI_Controller {
+class mydashboard extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -21,7 +22,7 @@ class mydashboard extends CI_Controller {
 
 	public function __construct()
 	{
-		
+
 		parent::__construct();
 		if (!$this->session->userdata('user_id')) {
 			redirect('auth');
@@ -29,7 +30,7 @@ class mydashboard extends CI_Controller {
 		$this->load->model('Services_m');
 		$this->load->model('Mycourse_m');
 		$this->load->model('Users_m');
-		
+
 	}
 	public function index()
 	{
@@ -37,16 +38,15 @@ class mydashboard extends CI_Controller {
 		$data['courses'] = $this->Services_m->getservices();
 		$data['user'] = $this->Users_m->getuser_byid($user_id);
 		$data['categories'] = $this->Services_m->getproductcategory();
-        $data['mycourses'] = $this->Mycourse_m->getmycourse($user_id);
-
-		$this->template->load('template_learning','mydashboard/my_dashboard_v', $data);
+		$data['mycourses'] = $this->Mycourse_m->getmycourse($user_id);
+		$this->template->load('template_learning', 'mydashboard/my_dashboard_v', $data);
 	}
 
 	public function myaccount()
 	{
 		$user_id = $this->session->userdata('user_id');
-        $data['user'] = $this->Mycourse_m->getuser($user_id);
-		$this->template->load('template_learning','mydashboard/my_account_v', $data);
+		$data['user'] = $this->Mycourse_m->getuser($user_id);
+		$this->template->load('template_learning', 'mydashboard/my_account_v', $data);
 	}
 
 	public function update_account()
@@ -73,5 +73,107 @@ class mydashboard extends CI_Controller {
 		$this->db->update('users', $data, ['user_id' => $user_id]);
 		redirect('mydashboard');
 	}
-	
+
+	public function get_certificate_bkp($course_id)
+	{
+		$data['certificate'] = $this->Mycourse_m->getcertificate($course_id);
+
+		$data['service'] = $this->Mycourse_m->getcourse_byuserid($course_id);
+		// var_dump($data);
+		$this->load->view('mydashboard/certificate_course_v', $data);
+		// redirect('mydashboard');
+	}
+
+	public function get_certificate($course_id)
+	{
+		$data['certificate'] = $this->Mycourse_m->getcertificate($course_id);
+		if ($data['certificate']->nickname) {
+			$this->generate($data['certificate']->nickname, $data['certificate']->service_name);
+		}
+	}
+
+	public function generate($fullname = '', $course_name = '')
+	{
+		//direktori template sertifikat dan file hasil generate
+		$directory = "./assets/img/certificate";
+		if (!is_dir($directory)) {
+			mkdir($directory, 0775, TRUE);
+		}
+
+		//path file template
+		$image = $directory . '/template/1.png';
+
+		//fungsi php untuk membuat image baru dari file atau URL
+		$createimage = imagecreatefrompng($image);
+
+		//mendapatkan width dan height dari image yang baru saja dibuat
+		$image_width = imagesx($createimage);
+		$image_height = imagesy($createimage);
+
+		//set variabel yang isinya path tempat menyimpan sertifikat hasil generate
+		//untuk format nama file sertifikat nya, gua menggunakan input fullname dengan menghapus spasi
+		//dan di konversi ke huruf kecil semua, plus disisipkan angka random, supaya nama file nya identik
+		//contoh : nama yang diinputkan "Roronoa Zoro", maka nama file nya kurang lebih menjadi roronoazoro345.png
+		$output = $directory . '/' . str_replace(" ", "", strtolower($fullname)) ."-". strtolower($course_name) .".png";
+
+		//fungsi untuk set warna text dalam format RGB
+		$color = imagecolorallocate($createimage, 5, 85, 86);
+		$black = imagecolorallocate($createimage, 0,0,0);
+
+		//variabel untuk set, jika text mau di putar. Jika posisi text mau yang normal, set nilainya 0
+		$rotation = 0;
+		//variabel untuk set nama di sertifikat
+		$certificate_text = $fullname;
+		$certificate_course_text = $course_name;
+		$certificate_instructure = 'Idris Abdul Azis';
+		//ukuran font text sertifikat, sesuaikan dengan ukuran font yang sesuai dengan template sertifikat
+		$font_size = 35;
+		$font_size_course = 20;
+		$font_size_instructure = 25;
+		//font directory untuk text
+		$drFont = FCPATH . "/assets/fonts/Zetafonts-reguler.otf";
+		$drFont_course = FCPATH . "/assets/fonts/Zetafonts.otf";
+		$drFont_instructure = FCPATH . "/assets/fonts/Lora-reguler.ttf";
+
+		//fungsi untuk memberikan kotak batas text
+		//return nya berupa array
+		$text_box = imagettfbbox($font_size, $rotation, $drFont, $certificate_text);
+
+		//fungsi untuk mengetahui panjang text ditambah padding
+		//silahkan sesuaikan value variable padding ini dengan template sertifikat kalian
+		$padding = 700;
+		$text_width = ($text_box[2] - $text_box[0]) + intval($padding);
+
+		//setup posisi x dan y terhadap template sertifikat (silahkan sesuaikan dengan template kalian)
+		// $origin_x = $image_width - $text_width;
+		$origin_x = 280;
+		$origin_y = 600;
+		$origin_x_course = 670;
+		$origin_y_course = 320;
+		$origin_x_instructure = 1393;
+		$origin_y_instructure = 1150;
+
+		//function untuk "menempelkan" text nama di sertifikat dengan parameter yang sudah di set sebelumnya
+		imagettftext($createimage, $font_size, $rotation, $origin_x, $origin_y, $color, $drFont, $certificate_text);
+		imagettftext($createimage, $font_size_course, $rotation, $origin_x_course, $origin_y_course, $color, $drFont_course, $certificate_course_text);
+		imagettftext($createimage, $font_size_instructure, $rotation, $origin_x_instructure, $origin_y_instructure, $black, $drFont_instructure, $certificate_instructure);
+
+		//membuat image sertifikat yang sudah ada text namanya dengan format png dan simpan sesuai dengan value variabel output
+		imagepng($createimage, $output, 3);
+
+		//memanggil fungsi untuk proses download sertifikat
+		$this->download_file($output);
+	}
+
+	public function download_file($path_file)
+	{
+
+		header("Content-Description: File Transfer");
+		header("Content-Type: application/octet-stream");
+		header("Content-Disposition: attachment; filename=\"" . basename($path_file) . "\"");
+		readfile($path_file);
+		redirect('/Mydashboard', 'reload');
+		exit();
+	}
+
 }

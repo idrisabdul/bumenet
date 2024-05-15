@@ -40,7 +40,7 @@
                             <li class="nav-item">
                                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
                                     href="#">
-                                    <i class="bi bi-menu-button-wide"></i><span>Kelas</span><i
+                                    <i class="bi bi-menu-button-wide"></i><span>Kelas Hard skill</span><i
                                         class="bi bi-chevron-down ms-auto"></i>
                                 </a>
                                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -72,23 +72,33 @@
                             <li class="nav-item">
                                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse"
                                     href="#">
-                                    <i class="bi bi-layout-text-window-reverse"></i><span>Harga</span><i
+                                    <i class="bi bi-layout-text-window-reverse"></i><span>Kelas Business</span><i
                                         class="bi bi-chevron-down ms-auto"></i>
                                 </a>
                                 <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                                     <li>
                                         <a href="tables-general.html">
-                                            <i class="bi bi-circle"></i><span>Gratis</span>
+                                            <i class="bi bi-circle"></i><span>Management</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="tables-data.html">
-                                            <i class="bi bi-circle"></i><span>Promo</span>
+                                            <i class="bi bi-circle"></i><span>Communication</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="tables-data.html">
-                                            <i class="bi bi-circle"></i><span>Berbayar</span>
+                                            <i class="bi bi-circle"></i><span>Business Strategy</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="tables-data.html">
+                                            <i class="bi bi-circle"></i><span>Leadership</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="tables-data.html">
+                                            <i class="bi bi-circle"></i><span>Self Development</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -111,7 +121,14 @@
 
                             <li class="nav-item">
 
-                                <?php if ($this->session->userdata('role') == 0) { ?>
+                                <?php if (!$this->session->userdata('user_id')) { ?>
+                                    <a class="nav-link collapsed" data-bs-toggle="modal"
+                                        data-bs-target="#verticalycentered">
+                                        <i class="bi bi-mortarboard"></i>
+                                        <span>Gabung Bumenet Mengajar</span>
+                                    </a>
+                                <?php } else if ($user->role == 0) { ?>
+
                                     <a class="nav-link collapsed" data-bs-toggle="modal"
                                         data-bs-target="#verticalycentered">
                                         <i class="bi bi-mortarboard"></i>

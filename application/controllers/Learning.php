@@ -24,11 +24,14 @@ class learning extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Services_m');
+		$this->load->model('Users_m');
 
 	}
 	public function index()
 	{
 		$this->load->library('upload');
+		$user_id = $this->session->userdata('user_id');
+		$data['user'] = $this->Users_m->getuser_byid($user_id);
 		$data['courses'] = $this->Services_m->getservices_publish();
 		$data['categories'] = $this->Services_m->getproductcategory();
 		$this->template->load('template_learning', 'learning/learning_v', $data);

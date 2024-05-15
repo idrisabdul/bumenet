@@ -41,7 +41,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-3 pb-3">
                                 <label for="inputPassword" class="col-sm-2 col-form-label">Description</label>
                                 <div class="col-sm-10">
                                     <div class="quill-editor-full" id="desc">

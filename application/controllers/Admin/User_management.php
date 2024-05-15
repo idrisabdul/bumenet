@@ -7,6 +7,9 @@ class user_management extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if ($this->session->userdata('role') != 1) {
+			show_404();
+		}
         $this->load->helper('form');
         $this->load->model('Users_m');
     }

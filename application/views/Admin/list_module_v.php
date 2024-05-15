@@ -84,8 +84,15 @@
 
                                         <td>
                                             <a href="<?= base_url('Admin/course/list_submodule/' . $module->module_course_id) ?>"
-                                                id="edit_module" href="javascript:;" class="btn btn-xs btn-warning"><i
-                                                    class="bi bi-pencil-square mr-1"></i></a>
+                                                id="edit_module" href="javascript:;" class="btn btn-xs btn-info"><i
+                                                    class="bi bi-eye mr-1"></i></a>
+                                            <button href="#" id="editmodule" href="javascript:;"
+                                                data-id="<?php echo $module->module_course_id ?>"
+                                                data-module_name="<?php echo $module->module_name ?>"
+                                                data-duration="<?php echo $module->duration ?>"
+                                                class="btn btn-xs btn-warning" data-bs-toggle="modal"
+                                                data-bs-target="#edit"><i class="bi bi-pencil-square mr-1"></i></button>
+
                                             <button
                                                 onclick="deleteConfirm('<?= base_url('Admin/course/delete_module/' . $module->module_course_id) ?>')"
                                                 class="btn btn-xs btn-danger" type="button" href="#!"><i
@@ -148,6 +155,46 @@
     </div>
 </div>
 
+<!-- EDIT ITEM MODAL -->
+<div class="modal fade" id="edit" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title" id="defaultModalLabel">Add Module</h4>
+            </div>
+            <form action="<?= base_url('Admin/course/update_module') ?>" method="POST">
+                <div class="modal-body">
+                    <div class="row clearfix mb-3">
+                        <div class="col-sm-12">
+                            <label for="">Module Name</label>
+                            <div class="form-group">
+                                <input type="text" name="course_id" class="form-control" hidden
+                                    value="<?= $service->service_id ?>" id="course_id" required />
+                                <input type="text" name="module_course_id" class="form-control" hidden
+                                    value="" id="id" required />
+                                <input type="text" name="module_name" id="module_name" class="form-control" placeholder="" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row clearfix mb-3">
+                        <div class="col-sm-12">
+                            <label for="">Duration</label>
+                            <div class="form-group">
+                                <input type="number" name="duration" id="duration" class="form-control"
+                                    placeholder="Dalam hitungan menit" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="basicModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -177,4 +224,18 @@
         $('#btn-delete').attr('href', url);
         $('#basicModal').modal('show');
     }
+
+    $(document).ready(function () {
+        $(document).on('click', '#editmodule', function () {
+
+            var id = $(this).data('id');
+            var module_name = $(this).data('module_name');
+            var duration = $(this).data('duration');
+            var course_id = $(this).data('course_id');
+
+            $('#id').val(id);
+            $('#module_name').val(module_name);
+            $('#duration').val(duration);
+        });
+    });
 </script>

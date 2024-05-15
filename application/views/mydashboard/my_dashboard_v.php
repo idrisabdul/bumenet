@@ -39,16 +39,16 @@
                                 </a>
                             </li><!-- End Blank Page Nav -->
 
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link collapsed" href="pages-error-404.html">
                                     <i class="bi bi-grid"></i>
                                     <span>Kelas yang Lulus</span>
                                 </a>
-                            </li><!-- End Error 404 Page Nav -->
+                            </li> -->
 
 
                             <li class="nav-item">
-                                <a class="nav-link collapsed" href="pages-error-404.html">
+                                <a class="nav-link collapsed" href="<?= base_url("mydashboard") ?>">
                                     <i class="bi bi-bar-chart"></i>
                                     <span>Progres Belajar</span>
                                 </a>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
-                                        <div class="col-md-9">
+                                        <div class="col-md-7">
                                             <span>Progres belajar</span>
                                             <?php
                                             $progress_done = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id' && status_progress='1';")->row();
@@ -108,10 +108,18 @@
                                                     aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= $progress ?>%</div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mt-4">
-                                            <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
+                                        <div class="col-md-5 mt-4">
+                                            <?php if ($progress < 100) { ?>
+                                                <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
                                                 class="card-link">Lanjut
                                                 belajar</a>
+                                                <?php } else { ?>
+                                                    <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
+                                                    class="card-link">Review ulang</a>
+                                                    <a href="<?= base_url() ?>mydashboard/get_certificate/<?= $mc->service_id ?>"
+                                                    class="card-link">Unduh Sertifikat</a>
+                                            <?php } ?>
+                                            
                                         </div>
                                     </div>
                                 </div>
