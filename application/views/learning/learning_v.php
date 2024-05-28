@@ -69,7 +69,7 @@
                             </li><!-- End Components Nav -->
 
 
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse"
                                     href="#">
                                     <i class="bi bi-layout-text-window-reverse"></i><span>Kelas Business</span><i
@@ -102,7 +102,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
 
 
                             <li class="nav-item">

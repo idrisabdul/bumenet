@@ -119,7 +119,8 @@
                             <?php } ?>
 
                             <li>
-                                <a class="dropdown-item d-flex align-items-center" href="<?= base_url("mydashboard/myaccount") ?>">
+                                <a class="dropdown-item d-flex align-items-center"
+                                    href="<?= base_url("mydashboard/myaccount") ?>">
                                     <i class="bi bi-person"></i>
                                     <span>Profile Saya</span>
                                 </a>
@@ -185,7 +186,7 @@
                             <i class="bi bi-chevron-down ms-auto"></i>
                         <?php } ?>
                     </a>
-                    <ul id="components-nav<?= $no2++ ?>" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <ul id="components-nav<?= $no2++ ?>" class="nav-content collapse" data-bs-parent="#sidebar-nav">
                         <?php $submodule = $this->db->query("SELECT * FROM submodule_course WHERE module_course_id='$mc->module_course_id'"); ?>
                         <?php foreach ($submodule->result() as $sm) { ?>
                             <li id='<?= $sm->submodule_course_id ?>'>
@@ -197,14 +198,18 @@
                     </ul>
                 </li>
             <?php } ?>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<?= base_url('learning/exam/' . $service->service_id) ?>">
+                    <i class="bi bi-lock-fill"></i>
+                    <span>Ujian</span>
+                </a>
+            </li>
         </ul>
         <ul class="sidebar-nav" id="list_module">
             <input id="count" hidden value="<?= count((array) $module_course) ?>">
         </ul>
 
-    </aside><!-- End Sidebar-->
-    <!-- Vendor JS Files -->
-    <!-- jQuery UI 1.11.4 -->
+    </aside>
 
 
     <main id="main" class="main">
@@ -227,10 +232,7 @@
                                     <a href="#" id="btn-previous" class="card-link btn btn-outline-primary">Kembali</a>
                                 </div>
                                 <div class="col-md-2">
-                                    <!-- <button id="btn-done"
-                                    class="card-link btn btn-outline-success d-flex align-items-center justify-content-center">Tandai
-                                    sudah dipelajari
-                                </button> -->
+
                                 </div>
                                 <div class="col-md-4">
                                     <div id="next">
@@ -249,6 +251,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
         </section>
 
     </main>

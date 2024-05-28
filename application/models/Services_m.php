@@ -122,6 +122,10 @@ class Services_m extends CI_Model
     {
         return $this->db->insert_batch('submodule_course', $data);
     }
+    public function save_batch_answer($data)
+    {
+        return $this->db->insert_batch('answer', $data);
+    }
 
     public function save_batch_learning_progress_user($data)
     {
@@ -162,6 +166,34 @@ class Services_m extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function getquiz_bycourseid($course_id)
+    {
+        $this->db->select('*');
+        $this->db->from("questions");
+        $this->db->join("answer", "answer.question_answer_id = questions.question_id");
+        $this->db->where("course_id", $course_id);
+        $this->db->where("correct_answer", 1);
+        return $this->db->get()->result();
+    }
+
+    public function findAnswerIdCorrect($question_id)
+    {
+        $this->db->select('*');
+        $this->db->from("answer");
+        $this->db->where("correct_answer", 1);
+        $this->db->where("question_answer_id", $question_id);
+        return $this->db->get()->row()->answer_id;
+    }
+
+    
+    public function list_result($course_id, $user_learn_id)
+    {
+        $this->db->select('*');
+        $this->db->from("result_exam");
+        $this->db->where("course_id", $course_id);
+        $this->db->where("user_learn_id", $user_learn_id);
+        return $this->db->get()->result();
+    }
     
 
 }

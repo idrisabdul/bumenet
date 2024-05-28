@@ -195,4 +195,72 @@ class learning extends CI_Controller
 		echo "</pre>";
 	}
 
+	public function exam($id)
+	{
+		$this->load->library('upload');
+		$data['service'] = $this->Services_m->getcourse_by_id($id);
+		$data['questions'] = $this->Services_m->getquiz_bycourseid($id);
+		$this->template->load('template_learning', 'ujian/ujian_v', $data);
+	}
+
+	public function result()
+	{
+		$score = 0;
+		$user_learn_id = $this->session->userdata('user_id');
+		$course_id = $this->input->post('course_id');
+		foreach ($_POST['questionIds'] as $questionId) {
+			if ($this->Services_m->findAnswerIdCorrect($questionId) == $_POST['question_'.$questionId]) {
+				$score++;
+			}
+		}
+		
+		$data['service'] = $this->Services_m->getcourse_by_id($course_id);
+
+		$final_score = $score * 20;
+		if ($final_score >= 80) {
+			$status = 1;
+		} else {
+			$status = 0;
+		}
+
+		$data['score'] = $final_score;
+
+		$data['results'] = $this->Services_m->list_result($course_id, $user_learn_id);
+		$this->template->load('template_learning', 'ujian/result_v', $data);
+	}
+
+	public function certificate()
+	{
+		$score = 0;
+		$user_learn_id = $this->session->userdata('user_id');
+		$course_id = $this->input->post('course_id');
+		foreach ($_POST['questionIds'] as $questionId) {
+			if ($this->Services_m->findAnswerIdCorrect($questionId) == $_POST['question_'.$questionId]) {
+				$score++;
+			}
+		}
+		$data['score'] = $score;
+		$data['service'] = $this->Services_m->getcourse_by_id($course_id);
+
+		$final_score = $score * 20;
+		if ($final_score >= 80) {
+			$status = 1;
+		} else {
+			$status = 0;
+		}
+
+		// $data_result = [
+		// 	'course_id' => $course_id,
+		// 	'user_learn_id' => $user_learn_id,
+		// 	'date_exam' => date('Y-m-d H:i:s'),
+		// 	'score' => $final_score,
+		// 	'status' => $status,
+		// ];
+		// $this->db->insert('result_exam', $data_result);
+
+		$data['results'] = $this->Services_m->list_result($course_id, $user_learn_id);
+
+		$this->template->load('template_learning', 'ujian/certificate_v', $data);
+	}
+
 }

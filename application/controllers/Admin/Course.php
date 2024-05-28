@@ -6,8 +6,6 @@ class course extends CI_Controller
 
 	public function __construct()
 	{
-		// $user_id = $this->session->userdata('user_id');
-		
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->model('Services_m');
@@ -56,6 +54,7 @@ class course extends CI_Controller
 		$this->load->library('upload');
 		$data['service'] = $this->Services_m->getcourse_by_id($course_id);
 		$data['modules'] = $this->Services_m->getmodulecource_by_id($course_id);
+		$data['questions'] = $this->Services_m->getquiz_bycourseid($course_id);
 		$data['total_duration'] = $this->db->query("Select SUM(duration) as total from module_course WHERE course_id='$course_id'")->row();
 
 		$this->template->load('template_admin', 'Admin/list_module_v', $data);
@@ -90,7 +89,7 @@ class course extends CI_Controller
 			'duration' => $this->input->post('duration'),
 		];
 		$this->db->update('module_course', $data, ['module_course_id' => $id]);
-		redirect('Admin/course/list_module/'. $course_id);
+		redirect('Admin/course/list_module/' . $course_id);
 	}
 
 	public function create_content($module_id)
@@ -190,6 +189,93 @@ class course extends CI_Controller
 		$this->db->delete('submodule_course', ['module_course_id' => $id]);
 
 		redirect('Admin/course/list_module/' . $course_id->course_id);
+	}
+
+	public function insert_quiz()
+	{
+		$course_id = $this->input->post('course_id');
+		$data_question = [
+			'course_id' => $course_id,
+			'question' => $this->input->post('question'),
+		];
+		$this->db->insert('questions', $data_question);
+
+
+		$question_id = $this->db->insert_id();
+		$answer_content_correct = $this->input->post('answer_content_correct');
+		$data_correct = [
+			'question_answer_id' => $question_id,
+			'answer_content' => $answer_content_correct,
+			'correct_answer' => 1,
+		];
+		$this->db->insert('answer', $data_correct);
+		$answer_content = $this->input->post('answer_content');
+		$data = array();
+		$index = 0;
+		if ($answer_content != null) {
+			foreach ($answer_content as $data_answer) {
+				array_push(
+					$data,
+					array(
+						'question_answer_id' => $question_id,
+						'answer_content' => $data_answer,
+					)
+				);
+				$index++;
+			}
+		} else {
+			echo "kosong";
+		}
+
+		$sql = $this->Services_m->save_batch_answer($data);
+		if ($sql) {
+			redirect('Admin/course/list_module/' . $course_id);
+		} else {
+			echo "<script>alert('Data gagal disimpan');</script>";
+		}
+	}
+
+	public function update_course()
+	{
+		$course_id = $this->input->post('course_id');
+		$data = [
+			'service_name' => $this->input->post('service_name'),
+			'service_price' => $this->input->post('service_price'),
+			'discount' => $this->input->post('discount'),
+			'service_description' => $this->input->post('service_description'),
+		];
+		$this->db->update('services', $data, ['service_id' => $course_id]);
+		redirect('Admin/course/list_module/' . $course_id);
+	}
+
+	public function update_question()
+	{
+		$course_id = $this->input->post('course_id');
+		$question_id = $this->input->post('question_id');
+		$data = [
+			'question' => $this->input->post('question'),
+		];
+		$this->db->update('questions', $data, ['question_id' => $question_id]);
+		redirect('Admin/course/list_module/' . $course_id);
+	}
+
+	public function delete_question($question_id)
+	{
+		$course = $this->db->query("SELECT course_id FROM questions WHERE question_id = $question_id;")->row();
+		$this->db->delete('questions', ['question_id' => $question_id]);
+		$this->db->delete('answer', ['question_answer_id' => $question_id]);
+		redirect('Admin/course/list_module/' . $course->course_id);
+	}
+
+	public function update_answer()
+	{
+		$course_id = $this->input->post('course_id');
+		$answer_id = $this->input->post('answer_id');
+		$data = [
+			'answer_content' => $this->input->post('answer_content'),
+		];
+		$this->db->update('answer', $data, ['answer_id' => $answer_id]);
+		redirect('Admin/course/list_module/' . $course_id);
 	}
 
 }
