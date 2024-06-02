@@ -17,9 +17,9 @@
                     <div class="card-body mb-2 mt-4">
 
                         <h5 class="card-title">Unduh E-Sertifikat</h5>
-                        <button href="#" class="btn btn-primary" id="editquestion" href="javascript:;"><i
+                        <a href="<?= base_url() ?>mydashboard/get_certificate/<?= $service->service_id ?>" class="btn btn-primary" id="editquestion" href="javascript:;"><i
                                 class="bi bi-download mr-1"></i>
-                            Unduh (File PNG)</button>
+                            Unduh Sertifikat</a>
 
                         <br>
                         <br>
@@ -64,11 +64,11 @@
                                 <h5 class="card-title">Organisasi yang Menerbitkan</h5>
                                 <span>Bumenet Academy Indonesia</span>
                                 <h5 class="card-title">ID Kredensial</h5>
-                                <span>BAIBDDD280520240</span>
+                                <span><?= $certificate->credential_id; ?></span>
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="card-title">Tanggal Terbit</h5>
-                                <span>28 Mei 2024</span>
+                                <span><?= $certificate->created_date ?></span>
                                 <h5 class="card-title">Tanggal Kadaluarsa</h5>
                                 <span>-</span>
                             </div>

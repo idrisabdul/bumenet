@@ -101,25 +101,37 @@
                                             $all_progress = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id';")->row();
                                             // echo $progress_done->total_progress;
                                             // echo $progress_done->total_progress;
-                                            $progress = round($progress_done->total_progress / $all_progress->total_progress * 100,2);
+                                            $progress = round($progress_done->total_progress / $all_progress->total_progress * 100, 2);
                                             ?>
                                             <div class="progress mt-2">
                                                 <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%"
-                                                    aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= $progress ?>%</div>
+                                                    aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= $progress ?>%
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-5 mt-4">
                                             <?php if ($progress < 100) { ?>
                                                 <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
-                                                class="card-link">Lanjut
-                                                belajar</a>
-                                                <?php } else { ?>
-                                                    <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
+                                                    class="card-link">Lanjut
+                                                    belajar</a>
+                                            <?php } else { ?>
+                                                <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
                                                     class="card-link">Review ulang</a>
-                                                    <a href="<?= base_url() ?>mydashboard/get_certificate/<?= $mc->service_id ?>"
-                                                    class="card-link">Unduh Sertifikat</a>
+                                                    &nbsp;&nbsp;
+                                                <!-- <a href="<?= base_url() ?>mydashboard/get_certificate/<?= $mc->service_id ?>"
+                                                    class="card-link">Unduh Sertifikat</a> -->
+                                                <?php
+                                                $check_certificate = $this->db->query("SELECT credential_id FROM certificates WHERE course_id='$mc->service_id' && user_learn_id='$mc->user_id';")->row();
+                                                ?>
+                                                <?php if ($check_certificate) { ?>
+                                                    <a href="<?= base_url() ?>learning/certificates/<?= $mc->service_id ?>"
+                                                        class="card-link">Lihat Sertifikat</a>
+                                                <?php } else { ?>
+                                                    <a href="<?= base_url() ?>learning/exam/<?= $mc->service_id ?>"
+                                                        class="card-link">Kerjakan Ujian</a>
+                                                <?php } ?>
                                             <?php } ?>
-                                            
+
                                         </div>
                                     </div>
                                 </div>

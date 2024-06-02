@@ -194,6 +194,52 @@ class Services_m extends CI_Model
         $this->db->where("user_learn_id", $user_learn_id);
         return $this->db->get()->result();
     }
+
+    public function checking_user($user_id, $course_id)
+    {
+        $this->db->select('*');
+        $this->db->from("course_user");
+        $this->db->where("user_id", $user_id);
+        $this->db->where("course_id", $course_id);
+        return $this->db->get();
+    }
+
+    public function checking_exam_user($user_id, $course_id)
+    {
+        $this->db->select('*');
+        $this->db->from("result_exam");
+        $this->db->where("user_learn_id", $user_id);
+        $this->db->where("course_id", $course_id);
+        return $this->db->get();
+    }
+
+    public function last_result($course_id, $user_learn_id)
+    {
+        $this->db->select('*')->limit(1)->order_by('result_exam_id', 'DESC');
+        $this->db->from("result_exam");
+        $this->db->where("course_id", $course_id);
+        $this->db->where("user_learn_id", $user_learn_id);
+        return $this->db->get()->row();
+    }
+
+    public function certificate($course_id, $user_learn_id)
+    {
+        $this->db->select('*');
+        $this->db->from("certificates");
+        $this->db->where("course_id", $course_id);
+        $this->db->where("user_learn_id", $user_learn_id);
+        return $this->db->get()->row();
+    }
+
+    public function check_result_passed($course_id, $user_learn_id)
+    {
+        $this->db->select('*')->limit(1)->order_by('result_exam_id', 'DESC');
+        $this->db->from("result_exam");
+        $this->db->where("course_id", $course_id);
+        $this->db->where("user_learn_id", $user_learn_id);
+        $this->db->where("status", 1);
+        return $this->db->get()->row();
+    }
     
 
 }

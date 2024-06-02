@@ -51,38 +51,46 @@ class learning extends CI_Controller
 	public function course_detail($id)
 	{
 		$this->load->library('upload');
-		$data['service'] = $this->Services_m->getcourse_by_id($id);
-		$data['module_course'] = $this->Services_m->getmodulecource_by_id($id);
-		$data['total_duration'] = $this->db
-			->query("Select SUM(duration) as total from module_course WHERE course_id='$id'")
-			->row();
+		$check_course = $this->Services_m->getcourse_by_id($id);
+		if ($check_course != null) {
+			$data['service'] = $this->Services_m->getcourse_by_id($id);
 
-		$user_id = $this->session->userdata("user_id");
 
-		if ($this->session->userdata("user_id")) {
-			$data['user_id'] = $this->db
-			->query("SELECT user_id FROM course_user WHERE course_id='$id' AND user_id=$user_id")
-			->row();
+			$data['module_course'] = $this->Services_m->getmodulecource_by_id($id);
+			$data['total_duration'] = $this->db
+				->query("Select SUM(duration) as total from module_course WHERE course_id='$id'")
+				->row();
+
+			$user_id = $this->session->userdata("user_id");
+
+			if ($this->session->userdata("user_id")) {
+				$data['user_id'] = $this->db
+					->query("SELECT user_id FROM course_user WHERE course_id='$id' AND user_id=$user_id")
+					->row();
+			} else {
+				$data['user_id'] = $this->db
+					->query("SELECT user_id FROM course_user WHERE course_id='$id'")
+					->row();
+
+			}
+
+			// cek jika user sudah beli atau belum
+
+
+			if ($data["user_id"] === NULL) {
+				$data["user_id"] = (object) [
+					'user_id' => '0',
+				];
+				// var_dump($data['user_id']);
+				$this->template->load('template_learning', 'learning/course_detail_v', $data);
+			} else {
+				// var_dump($data['user_id']);
+				$this->template->load('template_learning', 'learning/course_detail_v', $data);
+			}
 		} else {
-			$data['user_id'] = $this->db
-			->query("SELECT user_id FROM course_user WHERE course_id='$id'")
-			->row();
-
+			show_404();
 		}
 
-		// cek jika user sudah beli atau belum
-		
-
-		if ($data["user_id"] === NULL) {
-			$data["user_id"] = (object) [
-				'user_id' => '0',
-			];
-			// var_dump($data['user_id']);
-			$this->template->load('template_learning', 'learning/course_detail_v', $data);
-		} else {
-			// var_dump($data['user_id']);
-			$this->template->load('template_learning', 'learning/course_detail_v', $data);
-		}
 	}
 
 	public function delete_service($id)
@@ -130,14 +138,15 @@ class learning extends CI_Controller
 	{
 		$this->load->library('upload');
 		$user_id = $this->session->userdata("user_id");
-		$data['module_course'] = $this->Services_m->getmodulelearning_user_by_id($id, $user_id);
-		$data['service'] = $this->Services_m->getcourse_by_id($id);
-		// $data['module_course'] = $this->Services_m->getmodulelearning_by_id($id);
-		// echo "<pre>";
-		// var_dump($data['module_course']);
-		// echo "</pre>";
-		// $this->template->load('template_learning', 'learning/learning_course_v', $data);
-		$this->load->view('learning/learning_course_v2', $data);
+		$check_user = $this->Services_m->checking_user($user_id, $id);
+
+		if ($check_user->num_rows() > 0) {
+			$data['module_course'] = $this->Services_m->getmodulelearning_user_by_id($id, $user_id);
+			$data['service'] = $this->Services_m->getcourse_by_id($id);
+			$this->load->view('learning/learning_course_v2', $data);
+		} else {
+			show_404();
+		}
 	}
 
 	public function submodule_js()
@@ -153,7 +162,7 @@ class learning extends CI_Controller
 		$data = $this->db
 			->query("SELECT user_id FROM learning_progress WHERE submodule_id='$submodule_id'")
 			->row();
-		echo json_encode($data);	
+		echo json_encode($data);
 	}
 
 	public function next_submodule_js()
@@ -180,7 +189,7 @@ class learning extends CI_Controller
 	{
 		$module_id = $this->input->post('module_id', true);
 		$data = [
-			'status_progress'=> 1,
+			'status_progress' => 1,
 		];
 		$this->db->update('learning_progress', $data, ['module_id' => $module_id]);
 		echo json_encode($data);
@@ -197,10 +206,27 @@ class learning extends CI_Controller
 
 	public function exam($id)
 	{
-		$this->load->library('upload');
-		$data['service'] = $this->Services_m->getcourse_by_id($id);
-		$data['questions'] = $this->Services_m->getquiz_bycourseid($id);
-		$this->template->load('template_learning', 'ujian/ujian_v', $data);
+		$user_id = $this->session->userdata('user_id');
+		$check_passed = $this->Services_m->check_result_passed($id, $user_id);
+
+		$check_user_failed = $this->Services_m->checking_exam_user($user_id, $id);
+		if ($check_passed) {
+			redirect('learning/result_exam/' . $id);
+		} else if ($check_user_failed->num_rows() == 3) {
+			redirect('learning/certificates/' . $id);
+			// echo "anda sudah 3 kali tidak lulus";
+		} else {
+			$check_user = $this->Services_m->checking_user($user_id, $id);
+			if ($check_user->num_rows() > 0) {
+
+				$data['service'] = $this->Services_m->getcourse_by_id($id);
+				$data['questions'] = $this->Services_m->getquiz_bycourseid($id);
+				$this->template->load('template_learning', 'ujian/ujian_v', $data);
+
+			} else {
+				show_404();
+			}
+		}
 	}
 
 	public function result()
@@ -208,39 +234,70 @@ class learning extends CI_Controller
 		$score = 0;
 		$user_learn_id = $this->session->userdata('user_id');
 		$course_id = $this->input->post('course_id');
-		foreach ($_POST['questionIds'] as $questionId) {
-			if ($this->Services_m->findAnswerIdCorrect($questionId) == $_POST['question_'.$questionId]) {
-				$score++;
+		if ($course_id != null) {
+
+			foreach ($_POST['questionIds'] as $questionId) {
+				if ($this->Services_m->findAnswerIdCorrect($questionId) == $_POST['question_' . $questionId]) {
+					$score++;
+				}
 			}
-		}
-		
-		$data['service'] = $this->Services_m->getcourse_by_id($course_id);
 
-		$final_score = $score * 20;
-		if ($final_score >= 80) {
-			$status = 1;
+			$data['service'] = $this->Services_m->getcourse_by_id($course_id);
+
+			$final_score = $score * 20;
+			if ($final_score >= 80) {
+				$status = 1;
+			} else {
+				$status = 0;
+			}
+
+			$data_result = [
+				'course_id' => $course_id,
+				'user_learn_id' => $user_learn_id,
+				'date_exam' => date('Y-m-d'),
+				'score' => $final_score,
+				'status' => $status,
+			];
+			$this->db->insert('result_exam', $data_result);
+
+			if ($status == 1) {
+				$data_certificate = [
+					'course_id' => $course_id,
+					'credential_id' => 'BMNTACDMY' . $course_id . rand(),
+					'user_learn_id' => $user_learn_id,
+					'created_date' => date('Y-m-d'),
+				];
+				$this->db->insert('certificates', $data_certificate);
+			}
+
+			$data['score'] = $final_score;
+
+			$data['results'] = $this->Services_m->list_result($course_id, $user_learn_id);
+			// $this->template->load('template_learning', 'ujian/result_v', $data);
+			redirect('learning/result_exam/' . $course_id);
 		} else {
-			$status = 0;
+			show_404();
 		}
-
-		$data['score'] = $final_score;
-
-		$data['results'] = $this->Services_m->list_result($course_id, $user_learn_id);
-		$this->template->load('template_learning', 'ujian/result_v', $data);
 	}
 
-	public function certificate()
+	public function certificates($course_id)
 	{
 		$score = 0;
 		$user_learn_id = $this->session->userdata('user_id');
-		$course_id = $this->input->post('course_id');
-		foreach ($_POST['questionIds'] as $questionId) {
-			if ($this->Services_m->findAnswerIdCorrect($questionId) == $_POST['question_'.$questionId]) {
-				$score++;
-			}
-		}
+	
 		$data['score'] = $score;
 		$data['service'] = $this->Services_m->getcourse_by_id($course_id);
+
+		$certificate = $this->Services_m->certificate($course_id, $user_learn_id);
+		
+		if ($certificate) {
+			$data['certificate'] = $this->Services_m->certificate($course_id, $user_learn_id);
+		} else {
+			$data['certificate'] = (object) [
+				'credential_id' => '-',
+				'created_date' => '-',
+			];
+		}
 
 		$final_score = $score * 20;
 		if ($final_score >= 80) {
@@ -248,19 +305,25 @@ class learning extends CI_Controller
 		} else {
 			$status = 0;
 		}
-
-		// $data_result = [
-		// 	'course_id' => $course_id,
-		// 	'user_learn_id' => $user_learn_id,
-		// 	'date_exam' => date('Y-m-d H:i:s'),
-		// 	'score' => $final_score,
-		// 	'status' => $status,
-		// ];
-		// $this->db->insert('result_exam', $data_result);
 
 		$data['results'] = $this->Services_m->list_result($course_id, $user_learn_id);
 
 		$this->template->load('template_learning', 'ujian/certificate_v', $data);
 	}
 
+
+	public function result_exam($course_id)
+	{
+		$user_learn_id = $this->session->userdata('user_id');
+
+		$check_user = $this->Services_m->checking_exam_user($user_learn_id, $course_id);
+		if ($check_user->num_rows() > 0) {
+			$data['service'] = $this->Services_m->getcourse_by_id($course_id);
+			$data['last_result'] = $this->Services_m->last_result($course_id, $user_learn_id);
+			$data['results'] = $this->Services_m->list_result($course_id, $user_learn_id);
+			$this->template->load('template_learning', 'ujian/result_v', $data);
+		} else {
+			show_404();
+		}
+	}
 }

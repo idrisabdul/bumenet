@@ -20,7 +20,7 @@
                         <br> -->
                         <div class="row">
                             <div class="col-lg-6">
-                                <?php if ($score >= 80) { ?>
+                                <?php if ($last_result->score >= 80) { ?>
                                     <img src="<?= base_url() ?>/assets/img/graduate.png" class="rounded mx-auto d-block"
                                         alt="...">
                                 <?php } else { ?>
@@ -39,12 +39,13 @@
                                     <div class="col-lg-6">
                                         <h5 class="card-title">Nilai</h5>
                                         <div class="d-flex">
-                                            <h5 style="font-size:4vw; font-weight: bold;"><?= $score ?></h5>
+                                            <h5 style="font-size:4vw; font-weight: bold;"><?= $last_result->score ?>
+                                            </h5>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <h5 class="card-title">Dinyatakan</h5>
-                                        <?php if ($score >= 80) { ?>
+                                        <?php if ($last_result->score >= 80) { ?>
                                             <h4><span class="badge bg-success">Lulus</span></h4>
                                         <?php } else { ?>
                                             <h4><span class="badge bg-danger">Belum Lulus</span></h4>
@@ -52,8 +53,8 @@
                                     </div>
                                 </div>
                                 <h5 class="card-title">Informasi</h5>
-                                <?php if ($score >= 80) { ?>
-                                    Selamat anda sudah berhasil lulus dari kelas ini dengan nilai yang sangat baik. Ini
+                                <?php if ($last_result->score >= 80) { ?>
+                                    Selamat anda sudah dinyatakan lulus dari kelas ini dengan nilai yang sangat baik. Ini
                                     membuktikan bahwa anda sudah memahami dari setiap modul kelas ini.
                                 <?php } else { ?>
                                     Untuk dinyatakan lulus dan mendapatkan sertifikat, anda harus mendapatkan setidaknya
@@ -62,15 +63,21 @@
                                 <?php } ?>
 
                                 <h5 class="card-title">Action</h5>
-                                <?php if ($score >= 80) { ?>
-                                    <button href="#" class="btn btn-primary" id="editquestion" href="javascript:;"><i
+                                <?php if ($last_result->score >= 80) { ?>
+                                    <a href="<?= base_url() ?>mydashboard/get_certificate/<?= $service->service_id ?>"
+                                        class="btn btn-primary" id="editquestion" href="javascript:;"><i
                                             class="bi bi-file-earmark-text mr-1"></i>
-                                        Lihat Sertifikat</button>
+                                        Unduh Sertifikat</a>
                                 <?php } else { ?>
-                                    <button href="#" class="btn btn-warning" id="editquestion" href="javascript:;"><i
+                                    <a href="<?= base_url('learning/exam/' . $service->service_id) ?>"
+                                        class="btn btn-warning" id="editquestion" href="javascript:;"><i
                                             class="bi bi-pencil mr-1"></i>
-                                        Mulai Ujian lagi</button>
+                                        Mulai Ujian lagi</a>
                                 <?php } ?>
+                                <a href="<?= base_url('learning/certificates/' . $service->service_id) ?>"
+                                    class="btn btn-info" id="editquestion" href="javascript:;"><i
+                                        class="bi bi-card-checklist mr-1"></i>
+                                    Lihat Hasil Ujian</a>
                             </div>
                         </div>
                     </div>

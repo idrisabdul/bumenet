@@ -88,12 +88,16 @@ class mydashboard extends CI_Controller
 	{
 		$data['certificate'] = $this->Mycourse_m->getcertificate($course_id);
 		if ($data['certificate']->nickname) {
-			$this->generate($data['certificate']->nickname, $data['certificate']->service_name);
+			$this->generate($course_id, $data['certificate']->nickname, $data['certificate']->service_name);
 		}
 	}
 
-	public function generate($fullname = '', $course_name = '')
+	public function generate($course_id, $fullname = '', $course_name = '')
 	{
+		$user_id = $this->session->userdata('user_id');
+		$certificate = $this->Services_m->certificate($course_id, $user_id);
+		$course = $this->Services_m->getservices_preview($course_id);
+
 		//direktori template sertifikat dan file hasil generate
 		$directory = "./assets/img/certificate";
 		if (!is_dir($directory)) {
@@ -102,6 +106,7 @@ class mydashboard extends CI_Controller
 
 		//path file template
 		$image = $directory . '/template/1.png';
+		$ttd = $directory . '/template/ttd.png';
 
 		//fungsi php untuk membuat image baru dari file atau URL
 		$createimage = imagecreatefrompng($image);
@@ -125,15 +130,21 @@ class mydashboard extends CI_Controller
 		//variabel untuk set nama di sertifikat
 		$certificate_text = $fullname;
 		$certificate_course_text = $course_name;
-		$certificate_instructure = 'Idris Abdul Azis';
+		$certificate_instructure = $course->nickname;
+		$credential_id = $certificate->credential_id;
+		$date = $certificate->created_date;
 		//ukuran font text sertifikat, sesuaikan dengan ukuran font yang sesuai dengan template sertifikat
 		$font_size = 35;
 		$font_size_course = 20;
 		$font_size_instructure = 25;
+		$font_size_cred_id = 25;
+		$font_size_date = 24;
 		//font directory untuk text
 		$drFont = FCPATH . "/assets/fonts/Zetafonts-reguler.otf";
 		$drFont_course = FCPATH . "/assets/fonts/Zetafonts.otf";
 		$drFont_instructure = FCPATH . "/assets/fonts/Lora-reguler.ttf";
+		$drFont_cred_id = FCPATH . "/assets/fonts/Lora-reguler.ttf";
+		$drFont_date = FCPATH . "/assets/fonts/Lora-reguler.ttf";
 
 		//fungsi untuk memberikan kotak batas text
 		//return nya berupa array
@@ -152,11 +163,18 @@ class mydashboard extends CI_Controller
 		$origin_y_course = 320;
 		$origin_x_instructure = 1393;
 		$origin_y_instructure = 1150;
+		$origin_x_cred_id = 350;
+		$origin_y_cred_id = 765;
+		$origin_x_date = 510;
+		$origin_y_date = 937;
 
 		//function untuk "menempelkan" text nama di sertifikat dengan parameter yang sudah di set sebelumnya
 		imagettftext($createimage, $font_size, $rotation, $origin_x, $origin_y, $color, $drFont, $certificate_text);
 		imagettftext($createimage, $font_size_course, $rotation, $origin_x_course, $origin_y_course, $color, $drFont_course, $certificate_course_text);
 		imagettftext($createimage, $font_size_instructure, $rotation, $origin_x_instructure, $origin_y_instructure, $black, $drFont_instructure, $certificate_instructure);
+		imagettftext($createimage, $font_size_cred_id, $rotation, $origin_x_cred_id, $origin_y_cred_id, $black, $drFont_cred_id, $credential_id);
+		imagettftext($createimage, $font_size_date, $rotation, $origin_x_date, $origin_y_date, $black, $drFont_date, $date);
+		// imagecopy($$createimage, $ttd, 500, 200, 0, 0, 100, 100);
 
 		//membuat image sertifikat yang sudah ada text namanya dengan format png dan simpan sesuai dengan value variabel output
 		imagepng($createimage, $output, 3);
@@ -167,7 +185,6 @@ class mydashboard extends CI_Controller
 
 	public function download_file($path_file)
 	{
-
 		header("Content-Description: File Transfer");
 		header("Content-Type: application/octet-stream");
 		header("Content-Disposition: attachment; filename=\"" . basename($path_file) . "\"");
