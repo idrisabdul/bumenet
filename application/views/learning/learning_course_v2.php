@@ -198,12 +198,26 @@
                     </ul>
                 </li>
             <?php } ?>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="<?= base_url('learning/exam/' . $service->service_id) ?>">
+            <?php
+            $progress_done = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id' && status_progress='1';")->row();
+            $all_progress = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id';")->row();
+            // echo $progress_done->total_progress;
+            // echo $progress_done->total_progress;
+            $progress = round($progress_done->total_progress / $all_progress->total_progress * 100, 2);
+            ?>
+            <?php if ($progress < 100) { ?>
+                <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#basicModal">
                     <i class="bi bi-lock-fill"></i>
                     <span>Ujian</span>
                 </a>
-            </li>
+            <?php } else { ?>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="<?= base_url('learning/exam/' . $service->service_id) ?>">
+                        <i class="bi bi-circle"></i>
+                        <span>Ujian</span>
+                    </a>
+                </li>
+            <?php } ?>
         </ul>
         <ul class="sidebar-nav" id="list_module">
             <input id="count" hidden value="<?= count((array) $module_course) ?>">
@@ -257,16 +271,29 @@
 
     </main>
 
+    <div class="modal fade" id="basicModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title"></h5> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Anda belum menuntaskan semua modul pada kelas ini.
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
             &copy; Copyright <strong><span>Bumenet</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
             Powered by <a href="https://www.bumenet.com/">Bumenet</a>
         </div>
     </footer><!-- End Footer -->

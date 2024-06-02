@@ -125,15 +125,15 @@
                                     <a class="nav-link collapsed" data-bs-toggle="modal"
                                         data-bs-target="#verticalycentered">
                                         <i class="bi bi-mortarboard"></i>
-                                        <span>Gabung Bumenet Mengajar</span>
+                                        <span>Gabung Bumenet Inspiratif</span>
                                     </a>
                                 <?php } else if ($user->role == 0) { ?>
 
-                                    <a class="nav-link collapsed" data-bs-toggle="modal"
-                                        data-bs-target="#verticalycentered">
-                                        <i class="bi bi-mortarboard"></i>
-                                        <span>Gabung Bumenet Mengajar</span>
-                                    </a>
+                                        <a class="nav-link collapsed" data-bs-toggle="modal"
+                                            data-bs-target="#verticalycentered">
+                                            <i class="bi bi-mortarboard"></i>
+                                            <span>Gabung Bumenet Inspiratif</span>
+                                        </a>
                                 <?php } ?>
 
                             </li><!-- End Blank Page Nav -->
@@ -204,7 +204,7 @@
 
             </div>
             <div class="modal-body text-center">
-                <h5 class="card-title">Selamat datang di Bumenet Mengajar</h5>
+                <h5 class="card-title">Selamat datang di Bumenet Inspiratif</h5>
                 <span> Pengetahuan dan Pengalaman anda tentu sangat luar biasa hingga sampai di posisi ini. Yuk saatnya
                     bagikan pengetahuan dan pengalaman anda kepada orang lain. Dan jadilah sosok yang inspiratif</span>
             </div>
@@ -272,7 +272,6 @@
             $('#btn-login').attr('href', url);
             $('#basicModal').modal('show');
         }
-        // show_course();
 
         function show_course() {
             $.ajax({
@@ -303,7 +302,6 @@
                             '</div>';
                     }
                     $('#courses').html(html);
-                    // console.log(data.length);
                 }
 
             });

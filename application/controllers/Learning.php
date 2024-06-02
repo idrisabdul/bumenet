@@ -214,15 +214,16 @@ class learning extends CI_Controller
 			redirect('learning/result_exam/' . $id);
 		} else if ($check_user_failed->num_rows() == 3) {
 			redirect('learning/certificates/' . $id);
-			// echo "anda sudah 3 kali tidak lulus";
 		} else {
 			$check_user = $this->Services_m->checking_user($user_id, $id);
-			if ($check_user->num_rows() > 0) {
+			$progress_done = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$id' && user_id='$user_id' && status_progress='1';")->row();
+			$all_progress = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$id' && user_id='$user_id';")->row();
+			$progress = round($progress_done->total_progress / $all_progress->total_progress * 100, 2);
 
+			if ($check_user->num_rows() > 0 && $progress == 100) {
 				$data['service'] = $this->Services_m->getcourse_by_id($id);
 				$data['questions'] = $this->Services_m->getquiz_bycourseid($id);
 				$this->template->load('template_learning', 'ujian/ujian_v', $data);
-
 			} else {
 				show_404();
 			}
@@ -284,12 +285,12 @@ class learning extends CI_Controller
 	{
 		$score = 0;
 		$user_learn_id = $this->session->userdata('user_id');
-	
+
 		$data['score'] = $score;
 		$data['service'] = $this->Services_m->getcourse_by_id($course_id);
 
 		$certificate = $this->Services_m->certificate($course_id, $user_learn_id);
-		
+
 		if ($certificate) {
 			$data['certificate'] = $this->Services_m->certificate($course_id, $user_learn_id);
 		} else {
