@@ -27,6 +27,7 @@ class mydashboard extends CI_Controller
 		if (!$this->session->userdata('user_id')) {
 			redirect('auth');
 		}
+		$this->load->helper('form');
 		$this->load->model('Services_m');
 		$this->load->model('Mycourse_m');
 		$this->load->model('Users_m');
@@ -34,6 +35,7 @@ class mydashboard extends CI_Controller
 	}
 	public function index()
 	{
+		$this->load->library('upload');
 		$user_id = $this->session->userdata('user_id');
 		$data['courses'] = $this->Services_m->getservices();
 		$data['user'] = $this->Users_m->getuser_byid($user_id);
@@ -52,16 +54,47 @@ class mydashboard extends CI_Controller
 	public function update_account()
 	{
 		$user_id = $this->session->userdata('user_id');
-		$data = [
-			'about_person' => $this->input->post('about_person'),
-			'current_company' => $this->input->post('current_company'),
-			'current_job' => $this->input->post('current_job'),
-			'address' => $this->input->post('address'),
-			'phone_number' => $this->input->post('phone_number'),
-			'email' => $this->input->post('email'),
-		];
-		$this->db->update('users', $data, ['user_id' => $user_id]);
-		redirect('mydashboard/myaccount');
+		$ori_filename = $_FILES['img_profile']['name'];
+		$new_name = time() . "" . str_replace(' ', '-', $ori_filename);
+		$config = array(
+			'upload_path' => "./images/profile/",
+			'allowed_types' => "jpg|png|jpeg",
+			'file_name' => $new_name,
+		);
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload('img_profile')) {
+			$data = [
+				'nickname' => $this->input->post('nickname'),
+				'about_person' => $this->input->post('about_person'),
+				'current_company' => $this->input->post('current_company'),
+				'current_job' => $this->input->post('current_job'),
+				'address' => $this->input->post('address'),
+				'phone_number' => $this->input->post('phone_number'),
+				'email' => $this->input->post('email'),
+			];
+			$this->db->update('users', $data, ['user_id' => $user_id]);
+			redirect('mydashboard/myaccount');
+		} else {
+			$user_id = $this->session->userdata('user_id');
+			$img_profile_del = $this->db->query("SELECT img_profile FROM users WHERE user_id='$user_id';")->row();
+			if ($img_profile_del->img_profile != 'profile-img.jpg') {
+				unlink('images/profile/' . $img_profile_del->img_profile);
+			}
+
+			$prod_filename = $this->upload->data('file_name');
+			$data = [
+				'img_profile' => $prod_filename,
+				'nickname' => $this->input->post('nickname'),
+				'about_person' => $this->input->post('about_person'),
+				'current_company' => $this->input->post('current_company'),
+				'current_job' => $this->input->post('current_job'),
+				'address' => $this->input->post('address'),
+				'phone_number' => $this->input->post('phone_number'),
+				'email' => $this->input->post('email'),
+			];
+			$this->db->update('users', $data, ['user_id' => $user_id]);
+			redirect('mydashboard/myaccount');
+		}
 	}
 
 	public function bumenet_mengajar($user_id)
@@ -98,6 +131,8 @@ class mydashboard extends CI_Controller
 		$certificate = $this->Services_m->certificate($course_id, $user_id);
 		$course = $this->Services_m->getservices_preview($course_id);
 
+		$nickname = $this->db->query("SELECT nickname FROM users WHERE user_id='$user_id';")->row();
+
 		//direktori template sertifikat dan file hasil generate
 		$directory = "./assets/img/certificate";
 		if (!is_dir($directory)) {
@@ -119,16 +154,16 @@ class mydashboard extends CI_Controller
 		//untuk format nama file sertifikat nya, gua menggunakan input fullname dengan menghapus spasi
 		//dan di konversi ke huruf kecil semua, plus disisipkan angka random, supaya nama file nya identik
 		//contoh : nama yang diinputkan "Roronoa Zoro", maka nama file nya kurang lebih menjadi roronoazoro345.png
-		$output = $directory . '/' . str_replace(" ", "", strtolower($fullname)) ."-". strtolower($course_name) .".png";
+		$output = $directory . '/' . str_replace(" ", "", strtolower($nickname->nickname)) . "-" . strtolower($course_name) . ".png";
 
 		//fungsi untuk set warna text dalam format RGB
 		$color = imagecolorallocate($createimage, 5, 85, 86);
-		$black = imagecolorallocate($createimage, 0,0,0);
+		$black = imagecolorallocate($createimage, 0, 0, 0);
 
 		//variabel untuk set, jika text mau di putar. Jika posisi text mau yang normal, set nilainya 0
 		$rotation = 0;
 		//variabel untuk set nama di sertifikat
-		$certificate_text = $fullname;
+		$certificate_text = $nickname->nickname;
 		$certificate_course_text = $course_name;
 		$certificate_instructure = $course->nickname;
 		$credential_id = $certificate->credential_id;
@@ -192,5 +227,37 @@ class mydashboard extends CI_Controller
 		redirect('/Mydashboard', 'reload');
 		exit();
 	}
+
+	public function update_img_profile()
+	{
+		$ori_filename = $_FILES['picture']['name'];
+		$new_name = time() . "" . str_replace(' ', '-', $ori_filename);
+		$config = array(
+			'upload_path' => "./images/profile/",
+			'allowed_types' => "jpg|png|jpeg",
+			'file_name' => $ori_filename,
+		);
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload('picture')) {
+			echo "gagal upload";
+			// $error = array('error' => $this->upload->display_errors());
+			// $this->template->load('template_admin', 'Admin/add_product_v', $error);
+		} else {
+			$prod_filename = $this->upload->data('file_name');
+			$data = [
+				'img_profile' => $prod_filename,
+			];
+			$this->db->insert('products', $data);
+			// 	$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible">
+			//     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			//     <h5><i class="icon fas fa-check"></i> Berhasil!</h5>
+			//     Asset Berhasil Ditambahkan
+			//   </div>');
+			redirect('Admin/Product/add_product');
+		}
+	}
+
+
+
 
 }

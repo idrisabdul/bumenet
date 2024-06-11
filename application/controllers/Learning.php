@@ -25,6 +25,7 @@ class learning extends CI_Controller
 		parent::__construct();
 		$this->load->model('Services_m');
 		$this->load->model('Users_m');
+		$this->load->model('Mycourse_m');
 
 	}
 	public function index()
@@ -51,6 +52,8 @@ class learning extends CI_Controller
 	public function course_detail($id)
 	{
 		$this->load->library('upload');
+		$user_id = $this->session->userdata('user_id');
+		$data['user'] = $this->Mycourse_m->getuser($user_id);
 		$check_course = $this->Services_m->getcourse_by_id($id);
 		if ($check_course != null) {
 			$data['service'] = $this->Services_m->getcourse_by_id($id);
@@ -208,6 +211,7 @@ class learning extends CI_Controller
 	{
 		$user_id = $this->session->userdata('user_id');
 		$check_passed = $this->Services_m->check_result_passed($id, $user_id);
+		$data['user'] = $this->Mycourse_m->getuser($user_id);
 
 		$check_user_failed = $this->Services_m->checking_exam_user($user_id, $id);
 		if ($check_passed) {
@@ -283,6 +287,8 @@ class learning extends CI_Controller
 
 	public function certificates($course_id)
 	{
+		$user_id = $this->session->userdata('user_id');
+		$data['user'] = $this->Mycourse_m->getuser($user_id);
 		$score = 0;
 		$user_learn_id = $this->session->userdata('user_id');
 
@@ -316,6 +322,8 @@ class learning extends CI_Controller
 	public function result_exam($course_id)
 	{
 		$user_learn_id = $this->session->userdata('user_id');
+		$user_id = $this->session->userdata('user_id');
+		$data['user'] = $this->Mycourse_m->getuser($user_id);
 
 		$check_user = $this->Services_m->checking_exam_user($user_learn_id, $course_id);
 		if ($check_user->num_rows() > 0) {

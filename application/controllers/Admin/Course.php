@@ -9,6 +9,7 @@ class course extends CI_Controller
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->model('Services_m');
+		$this->load->model('Mycourse_m');
 	}
 
 	public function index()

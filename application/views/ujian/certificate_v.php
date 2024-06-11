@@ -15,12 +15,18 @@
             <div class="col-xl">
                 <div class="card">
                     <div class="card-body mb-2 mt-4">
-
-                        <h5 class="card-title">Unduh E-Sertifikat</h5>
-                        <a href="<?= base_url() ?>mydashboard/get_certificate/<?= $service->service_id ?>" class="btn btn-primary" id="editquestion" href="javascript:;"><i
-                                class="bi bi-download mr-1"></i>
-                            Unduh Sertifikat</a>
-
+                        <?php if ($certificate->credential_id == '-') { ?>
+                            <h5 class="card-title">Ujian</h5>
+                            <a href="<?= base_url('learning/exam/' . $service->service_id) ?>" class="btn btn-warning"
+                                id="editquestion" href="javascript:;"><i class="bi bi-pencil mr-1"></i>
+                                Mulai Ujian lagi</a>
+                        <?php } else { ?>
+                            <h5 class="card-title">Unduh E-Sertifikat</h5>
+                            <a href="<?= base_url() ?>mydashboard/get_certificate/<?= $service->service_id ?>"
+                                class="btn btn-primary" id="editquestion" href="javascript:;"><i
+                                    class="bi bi-download mr-1"></i>
+                                Unduh Sertifikat</a>
+                        <?php } ?>
                         <br>
                         <br>
                         <table class="table table-sm">

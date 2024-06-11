@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Admin extends CI_Controller
+{
 
 	/**
 	 * Index Page for this controller.
@@ -19,18 +20,21 @@ class Admin extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
-	 public function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 
 		if ($this->session->userdata('role') != 1) {
 			show_404();
 		}
+		$this->load->model('Mycourse_m');
 	}
-	
+
 	public function index()
 	{
-		$this->template->load('template_admin','Admin/dashboard_v');
+		$user_id = $this->session->userdata('user_id');
+		$data['user'] = $this->Mycourse_m->getuser($user_id);
+		$this->template->load('template_admin', 'Admin/dashboard_v', $data);
 	}
 
 }

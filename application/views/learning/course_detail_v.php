@@ -52,7 +52,6 @@
                                     <div class="col-lg-9 col-md-8">Memiliki niat yang ikhlas kepada Tuhan Yang Maha
                                         Esa
                                     </div>
-                                    <!-- <div class="col-lg-3 col-md-8">Kevin Anderson</div> -->
                                 </div>
                                 <h5 class="card-title fst-italic">*Kelas ini terdapat Kuis dan Ujian, Kamu akan
                                     mendapatkan Sertifikat Kelulusan setelah Menyelesaikan Ujian.</h5>
@@ -63,28 +62,51 @@
 
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
                                 <h5 class="card-title">Materi yang akan Kamu pelajari pada kelas ini</h5>
-                                <!-- List group with Advanced Contents -->
                                 <div class="list-group">
-                                    <?php $sum = 0 ?>
-                                    <?php foreach ($module_course as $mc) { ?>
-                                        <a href="#" class="list-group-item list-group-item-action">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <?php $sum = $sum + $mc->duration ?>
-                                                <h5 class="mb-1"><?= $mc->module_name ?></h5>
-                                                <small class="text-muted"><?= $mc->duration ?> Menit</small>
+                                    <div class="accordion" id="accordionExample">
+                                        <?php $no = 1; ?>
+                                        <?php $no2 = 1; ?>
+                                        <?php foreach ($module_course as $mc) { ?>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingOne">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseOne<?= $no++ ?>"
+                                                        aria-expanded="false" aria-controls="collapseOne">
+                                                        <?= $mc->module_name ?>
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseOne<?= $no2++ ?>" class="accordion-collapse collapse"
+                                                    aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                    <?php $submodule = $this->db->query("SELECT * FROM submodule_course WHERE module_course_id='$mc->module_course_id'"); ?>
+                                                    <ul class="list-group list-group-flush"></ul>
+                                                    <?php foreach ($submodule->result() as $sm) { ?>
+                                                        <li class="list-group-item">
+                                                            <a href="#">
+                                                                <span><?= $sm->submodule_name ?></span>
+                                                            </a>
+                                                        </li>
+                                                    <?php } ?>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </a>
-                                    <?php } ?>
-                                </div><!-- End List group Advanced Content -->
+                                        <?php } ?>
+
+                                    </div><!-- End Default Accordion Example -->
+                                </div>
                             </div>
 
-                            <div class="tab-pane fade profile-overview pt-3" id="profile-settings">
+                            <div class="tab-pane fade profile-edit profile-overview pt-3" id="profile-settings">
 
                                 <div class="row mb-3">
-                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label label ">Profile
+                                    <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
                                         Image</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <img src="<?= base_url() ?>assets/img/profile-img.jpg" alt="Profile">
+                                        <img src="<?= base_url() ?>images/profile/<?= $service->img_profile ?>"
+                                            alt="Profile">
+                                        <div class="pt-2">
+                                            <!-- <a href="#" class="btn btn-primary btn-sm"
+                                                    title="Upload new profile image"><i class="bi bi-upload"></i></a> -->
+                                        </div>
                                     </div>
                                 </div>
                                 <input type="text" hidden id="user_id"
@@ -150,7 +172,8 @@
                             <?php } else if ($user_id->user_id == 0) { ?>
                                     <button href="" class="btn btn-primary" id="add_course" type="button">Beli Sekarang</button>
                             <?php } else if ($this->session->userdata('user_id') == $user_id->user_id) { ?>
-                                        <a href="<?= base_url() ?>learning/learning_course/<?= $service->service_id ?>" class="btn btn-primary" id="start_learning" type="button">Mulai
+                                        <a href="<?= base_url() ?>learning/learning_course/<?= $service->service_id ?>"
+                                            class="btn btn-primary" id="start_learning" type="button">Mulai
                                             Belajar</a>
                             <?php } ?>
                         </div>

@@ -10,7 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="<?= base_url() ?>assets/assets-admin/img/favicon-bumenet.png" rel="icon">
+    <link href="<?= base_url() ?>assets/assets-admin/img/favicon.png" rel="icon">
     <link href="<?= base_url() ?>assets/assets-admin/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -87,40 +87,9 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <?php if ($this->session->userdata('role') == 1) { ?>
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Admin/admin") ?>">
-                                        <i class="bi bi-grid"></i>
-                                        <span>Admin Area</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Mentor/mentor") ?>">
-                                        <i class="bi bi-mortarboard"></i>
-                                        <span>Mentor Area</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                            <?php } else if ($this->session->userdata('role') == 2) { ?>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Mentor/mentor") ?>">
-                                            <i class="bi bi-mortarboard"></i>
-                                            <span>Mentor Area</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                            <?php } ?>
 
                             <li>
-                                <a class="dropdown-item d-flex align-items-center"
-                                    href="<?= base_url("mydashboard/myaccount") ?>">
+                                <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                     <i class="bi bi-person"></i>
                                     <span>Profile Saya</span>
                                 </a>
@@ -169,24 +138,21 @@
     <aside id="sidebar" class="sidebar">
 
         <ul class="sidebar-nav" id="sidebar-nav">
+            <h4><span class="badge bg-secondary">PREVIEW</span></h4>
             <h5 class="card-title">Daftar Modul</h5>
+
             <?php $no = 1; ?>
             <?php $no2 = 1; ?>
             <?php foreach ($module_course as $mc) { ?>
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#components-nav<?= $no++ ?>" data-bs-toggle="collapse"
                         href="#">
-                        <?php if ($mc->status_progress == 1) { ?>
-                            <i class="bi bi-check-circle-fill"></i><span>
-                                <?= $mc->module_name ?></span>
-                            <i class="bi bi-chevron-down ms-auto"></i>
-                        <?php } else { ?>
-                            <i class="bi bi-circle"></i><span>
-                                <?= $mc->module_name ?></span>
-                            <i class="bi bi-chevron-down ms-auto"></i>
-                        <?php } ?>
+                        <i class="bi bi-circle"></i><span>
+                            <?= $mc->module_name ?></span>
+                        <i class="bi bi-chevron-down ms-auto"></i>
+                        
                     </a>
-                    <ul id="components-nav<?= $no2++ ?>" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <ul id="components-nav<?= $no2++ ?>" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <?php $submodule = $this->db->query("SELECT * FROM submodule_course WHERE module_course_id='$mc->module_course_id'"); ?>
                         <?php foreach ($submodule->result() as $sm) { ?>
                             <li id='<?= $sm->submodule_course_id ?>'>
@@ -198,47 +164,14 @@
                     </ul>
                 </li>
             <?php } ?>
-            <?php
-            $progress_done = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id' && status_progress='1';")->row();
-            $all_progress = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id';")->row();
-            // echo $progress_done->total_progress;
-            // echo $progress_done->total_progress;
-            $progress = round($progress_done->total_progress / $all_progress->total_progress * 100, 2);
-            ?>
-            <?php if ($progress < 100) { ?>
-                <a class="nav-link collapsed" data-bs-toggle="modal" data-bs-target="#basicModal">
-                    <i class="bi bi-lock-fill"></i>
-                    <span>Ujian</span>
-                </a>
-            <?php } else { ?>
-                <?php
-                $check_certificate = $this->db->query("SELECT credential_id FROM certificates WHERE course_id='$mc->service_id' && user_learn_id='$mc->user_id';")->row();
-                if ($check_certificate->credential_id) {
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="<?= base_url('learning/exam/' . $service->service_id) ?>">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span>Ujian</span>
-                        </a>
-                    </li>
-
-                <?php } else { ?>
-
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" href="<?= base_url('learning/exam/' . $service->service_id) ?>">
-                            <i class="bi bi-circle"></i>
-                            <span>Ujian</span>
-                        </a>
-                    </li>
-
-                <?php } ?>
-            <?php } ?>
         </ul>
         <ul class="sidebar-nav" id="list_module">
             <input id="count" hidden value="<?= count((array) $module_course) ?>">
         </ul>
 
-    </aside>
+    </aside><!-- End Sidebar-->
+    <!-- Vendor JS Files -->
+    <!-- jQuery UI 1.11.4 -->
 
 
     <main id="main" class="main">
@@ -249,7 +182,8 @@
 
                     <div class="card mb-3">
                         <div class="card-body" id="submodule_content">
-                            <h5 class="card-title mt-2" id="judul_submodule">Overview <?= $service->service_name ?></h5>
+                            <!-- <h2><span class="badge bg-secondary">Secondary</span></h2> -->
+                            <h5 class="card-title mt-2" id="judul_submodule"> <?= $service->service_name ?></h5>
                             <div id="content_submodule"><?php echo nl2br($service->service_description) ?>
                             </div>
                         </div>
@@ -261,7 +195,10 @@
                                     <a href="#" id="btn-previous" class="card-link btn btn-outline-primary">Kembali</a>
                                 </div>
                                 <div class="col-md-2">
-
+                                    <!-- <button id="btn-done"
+                                    class="card-link btn btn-outline-success d-flex align-items-center justify-content-center">Tandai
+                                    sudah dipelajari
+                                </button> -->
                                 </div>
                                 <div class="col-md-4">
                                     <div id="next">
@@ -280,28 +217,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
         </section>
 
     </main>
-
-    <div class="modal fade" id="basicModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <!-- <h5 class="modal-title"></h5> -->
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Anda belum menuntaskan semua modul pada kelas ini.
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button> -->
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
@@ -309,6 +227,10 @@
             &copy; Copyright <strong><span>Bumenet</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
             Powered by <a href="https://www.bumenet.com/">Bumenet</a>
         </div>
     </footer><!-- End Footer -->

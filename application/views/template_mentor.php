@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Dashboard - Bumenet Admin</title>
+  <title>Dashboard - Bumenet Mentor</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?= base_url() ?>assets/assets-admin/img/favicon.png" rel="icon">
+  <link href="<?= base_url() ?>assets/assets-admin/img/favicon-bumenet.png" rel="icon">
   <link href="<?= base_url() ?>assets/assets-admin/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -49,7 +49,7 @@
       <a href="#" class="logo d-flex align-items-center">
         <img src="<?= base_url() ?>/assets/img/logo.png" alt="">
         <?php if ($this->session->userdata('role') == 1) { ?>
-          <span class="d-none d-lg-block">Admin Area</span>
+          <span class="d-none d-lg-block">Mentor Area</span>
         <?php } else if ($this->session->userdata('role') == 2) { ?>
             <span class="d-none d-lg-block">Mentor Area</span>
         <?php } ?>
@@ -199,102 +199,23 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url("Admin/admin") ?>">
+        <a class="nav-link collapsed" href="<?= base_url("mentor/mentor") ?>">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Alerts</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>Accordion</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-badges.html">
-              <i class="bi bi-circle"></i><span>Badges</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-breadcrumbs.html">
-              <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-buttons.html">
-              <i class="bi bi-circle"></i><span>Buttons</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-cards.html">
-              <i class="bi bi-circle"></i><span>Cards</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-carousel.html">
-              <i class="bi bi-circle"></i><span>Carousel</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-list-group.html">
-              <i class="bi bi-circle"></i><span>List group</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-modal.html">
-              <i class="bi bi-circle"></i><span>Modal</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-tabs.html">
-              <i class="bi bi-circle"></i><span>Tabs</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-pagination.html">
-              <i class="bi bi-circle"></i><span>Pagination</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-progress.html">
-              <i class="bi bi-circle"></i><span>Progress</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-spinners.html">
-              <i class="bi bi-circle"></i><span>Spinners</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-tooltips.html">
-              <i class="bi bi-circle"></i><span>Tooltips</span>
-            </a>
-          </li>
-        </ul>
-      </li> -->
-
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Courses</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="<?= base_url("Admin/product/add_product") ?>">
+            <a href="<?= base_url("mentor/mentor/add_course") ?>">
               <i class="bi bi-circle"></i><span>Add Course</span>
             </a>
           </li>
           <li>
-            <a href="<?= base_url("Admin/product") ?>">
+            <a href="<?= base_url("mentor/mentor/courses") ?>">
               <i class="bi bi-circle"></i><span>Data Course</span>
             </a>
           </li>

@@ -16,13 +16,13 @@
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img src="<?= base_url() ?>assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <h2><?= ucfirst($this->session->userdata('nickname')) ?></h2>
+                        <img src="<?= base_url() ?>images/profile/<?= $user->img_profile ?>" alt="Profile" class="rounded-circle">
+                        <h2><?= ucfirst($user->nickname) ?></h2>
                         <h3><?= ucfirst($this->session->userdata('role_name')) ?></h3>
-                        <div class="social-links mt-2">
+                        <!-- <div class="social-links mt-2">
                             <a href="#" class="twitter"><i class="ri ri-star-fill"> 10 Poin</i></a>
                             <a href="#" class="facebook"><i class="ri ri-award-fill"> 20 XP</i></a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card-body">
                         <ul class="sidebar-nav" id="sidebar-nav">
@@ -68,11 +68,6 @@
                                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit
                                     Profile</button>
                             </li>
-<!-- 
-                            <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab"
-                                    data-bs-target="#profile-settings">Settings</button>
-                            </li> -->
 
                             <li class="nav-item">
                                 <button class="nav-link" data-bs-toggle="tab"
@@ -141,12 +136,14 @@
                                         <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
                                             Image</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <img src="<?= base_url() ?>assets/img/profile-img.jpg" alt="Profile">
+                                            <img src="<?= base_url() ?>images/profile/<?= $user->img_profile ?>" alt="Profile">
                                             <div class="pt-2">
-                                                <a href="#" class="btn btn-primary btn-sm"
-                                                    title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                                                <a href="#" class="btn btn-danger btn-sm"
-                                                    title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                                <!-- <a href="#" class="btn btn-primary btn-sm"
+                                                    title="Upload new profile image"><i class="bi bi-upload"></i></a> -->
+                                                <input class="form-control" type="file" id="formFile"
+                                                    name="img_profile">
+                                                <!-- <a href="#" class="btn btn-danger btn-sm"
+                                                    title="Remove my profile image"><i class="bi bi-trash"></i></a> -->
                                             </div>
                                         </div>
                                     </div>
@@ -209,23 +206,15 @@
                                         </div>
                                     </div>
 
-                                    <!-- <div class="row mb-3">
-                                        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin
-                                            Profile</label>
-                                        <div class="col-md-8 col-lg-9">
-                                            <input name="linkedin" type="text" class="form-control" id="Linkedin"
-                                                value="https://linkedin.com/#">
-                                        </div>
-                                    </div> -->
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                     </div>
                                 </form><!-- End Profile Edit Form -->
 
                             </div>
 
-                            
+
 
                             <div class="tab-pane fade pt-3" id="profile-change-password">
                                 <!-- Change Password Form -->
