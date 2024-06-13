@@ -141,6 +141,7 @@ class learning extends CI_Controller
 	{
 		$this->load->library('upload');
 		$user_id = $this->session->userdata("user_id");
+		$data['user'] = $this->Users_m->getuser_byid($user_id);
 		$check_user = $this->Services_m->checking_user($user_id, $id);
 
 		if ($check_user->num_rows() > 0) {

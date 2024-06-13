@@ -108,7 +108,7 @@
                   <hr class="dropdown-divider">
                 </li>
                 <li>
-                  <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Mentor/mentor") ?>">
+                  <a class="dropdown-item d-flex align-items-center" href="<?= base_url("mentor/mentor") ?>">
                     <i class="bi bi-mortarboard"></i>
                     <span>Mentor Area</span>
                   </a>
@@ -118,7 +118,7 @@
                 </li>
               <?php } else if ($this->session->userdata('role') == 2) { ?>
                   <li>
-                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Mentor/mentor") ?>">
+                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url("mentor/mentor") ?>">
                       <i class="bi bi-mortarboard"></i>
                       <span>Mentor Area</span>
                     </a>

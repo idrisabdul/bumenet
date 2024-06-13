@@ -74,7 +74,8 @@
                 <?php } else { ?>
                     <li class="nav-item dropdown pe-3">
                         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                            <img src="<?= base_url() ?>/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                            <img src="<?= base_url() ?>/images/profile/<?= $user->img_profile ?>" alt="Profile"
+                                class="rounded-circle">
                             <span
                                 class="d-none d-md-block dropdown-toggle ps-2"><?php echo ucfirst($this->session->userdata('username')) ?></span>
                         </a><!-- End Profile Iamge Icon -->
@@ -98,7 +99,7 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Mentor/mentor") ?>">
+                                    <a class="dropdown-item d-flex align-items-center" href="<?= base_url("mentor/mentor") ?>">
                                         <i class="bi bi-mortarboard"></i>
                                         <span>Mentor Area</span>
                                     </a>
@@ -108,7 +109,7 @@
                                 </li>
                             <?php } else if ($this->session->userdata('role') == 2) { ?>
                                     <li>
-                                        <a class="dropdown-item d-flex align-items-center" href="<?= base_url("Mentor/mentor") ?>">
+                                        <a class="dropdown-item d-flex align-items-center" href="<?= base_url("mentor/mentor") ?>">
                                             <i class="bi bi-mortarboard"></i>
                                             <span>Mentor Area</span>
                                         </a>
@@ -212,8 +213,9 @@
                 </a>
             <?php } else { ?>
                 <?php
-                $check_certificate = $this->db->query("SELECT credential_id FROM certificates WHERE course_id='$mc->service_id' && user_learn_id='$mc->user_id';")->row();
-                if ($check_certificate->credential_id) {
+                $check_certificate = $this->db->query("SELECT COUNT(credential_id) AS credential_count FROM certificates WHERE course_id='$mc->service_id' && user_learn_id='$mc->user_id';")->row();
+
+                if ($check_certificate->credential_count > 0) {
                     ?>
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="<?= base_url('learning/exam/' . $service->service_id) ?>">
@@ -223,7 +225,6 @@
                     </li>
 
                 <?php } else { ?>
-
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="<?= base_url('learning/exam/' . $service->service_id) ?>">
                             <i class="bi bi-circle"></i>

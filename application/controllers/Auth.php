@@ -96,6 +96,7 @@ class auth extends CI_Controller
         } else {
             $data = [
                 'nickname' => htmlspecialchars($this->input->post('nickname', true)),
+                'img_profile' => 'profile-img.jpg',
                 'email' => htmlspecialchars($this->input->post('email', true)),
                 'username' => htmlspecialchars($this->input->post('username', true)),
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
