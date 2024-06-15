@@ -28,7 +28,7 @@ class Home extends CI_Controller {
 	}
 	public function index()
 	{
-		$data['services'] = $this->Services_m->getservices();
+		$data['services'] = $this->Services_m->getservices_publish();
 		$this->template->load('template','Home/home_v', $data);
 	}
 	public function about()
