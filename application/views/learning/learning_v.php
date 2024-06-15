@@ -142,6 +142,10 @@
                     </div>
                 </div>
             </div>
+            <?php if (!$this->session->userdata('user_id')) { ?>
+            <?php } else { ?>
+                <input type="hidden" id="role" name="role" value="<?= $user->role ?>">
+            <?php } ?>
             <div class="col-xl-9">
                 <div class="row align-items-top" id="courses">
                     <?php foreach ($courses as $cs) { ?>
@@ -318,29 +322,72 @@
                 async: true,
                 dataType: 'json',
                 success: function (data) {
-                    $("#courses").hide();
-                    var html = '';
-                    var i;
-                    for (i = 0; i < data.length; i++) {
-                        html += '<div class="col-lg-3">' +
-                            '<div class="card">' +
-                            '<div class="card-header">' +
-                            '<img src="images/' + data[i].img_service + '" class="card-img-top" alt="...">' +
-                            '<a href="<?= base_url('learning/course_detail/') ?>' + data[i].service_id + '"' +
-                            'class="card-link">' +
-                            '<h5 class="card-title">' + data[i].service_name + '</h5>' +
-                            '</a>' +
-                            '<h6 class="card-subtitle mb-2 text-muted">' + data[i].product_category_name + '</h6>' +
-                            '</div>' +
-                            '<div class="card-body pt-3">' +
-                            '<a href="<?= base_url('learning/course_detail/') ?>' + data[i].service_id + '"' +
-                            'class="card-link">Lihat detail</a>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>';
+                    if (!$.trim(data)) {
+                        // alert("What follows is blank: " + data);
+                        console.log(data);
+                        $("#courses").hide();
+                        var html = '';
+                        var role = $('#role').val();
+                        var i;
+                        if (role == 2) {
+                            html = '<div class="col-lg">' +
+                                '<div class="card text-center">' +
+                                '<div class="card-header">' +
+                                '<br>' +
+                                '<br>' +
+                                '<h6 class="card-subtitle mb-2 text-muted">Jadilah orang pertama yang membuat kursus di kelas ini</h6>' +
+                                '</div>' +
+                                '<div class="card-body pt-3">' +
+                                '<div class="text-center">' +
+                                '<a href="<?= base_url('mentor/mentor/add_course') ?>" class="btn btn-success"><i class="ri ri-upload-2-fill me-1"></i>Buat Course</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                            $('#courses_category').html(html);
+                        } else {
+                            html = '<div class="col-lg">' +
+                                '<div class="card text-center">' +
+                                '<div class="card-header">' +
+                                '<br>' +
+                                '<br>' +
+                                '<h6 class="card-subtitle mb-2 text-muted">Tidak ada kelas</h6>' +
+                                '</div>' +
+                                '<div class="card-body pt-3">' +
+                                '<div class="text-center">' +
+                                // '<a href= class="btn btn-success"><i class="ri ri-upload-2-fill me-1"></i>Login</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                            $('#courses_category').html(html);
+                        }
                     }
-                    $('#courses_category').html(html);
-                    // console.log(data);
+                    else {
+                        $("#courses").hide();
+                        var html = '';
+                        var i;
+                        for (i = 0; i < data.length; i++) {
+                            html += '<div class="col-lg-3">' +
+                                '<div class="card">' +
+                                '<div class="card-header">' +
+                                '<img src="images/' + data[i].img_service + '" class="card-img-top" alt="...">' +
+                                '<a href="<?= base_url('learning/course_detail/') ?>' + data[i].service_id + '"' +
+                                'class="card-link">' +
+                                '<h5 class="card-title">' + data[i].service_name + '</h5>' +
+                                '</a>' +
+                                '<h6 class="card-subtitle mb-2 text-muted">' + data[i].product_category_name + '</h6>' +
+                                '</div>' +
+                                '<div class="card-body pt-3">' +
+                                '<a href="<?= base_url('learning/course_detail/') ?>' + data[i].service_id + '"' +
+                                'class="card-link">Lihat detail</a>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                        }
+                        $('#courses_category').html(html);
+                    }
+
                 }
             });
             return false;
