@@ -24,18 +24,30 @@
                                     <a class="nav-link collapsed" data-bs-toggle="modal"
                                         data-bs-target="#verticalycentered-2">
                                         <i class="bi bi-grid"></i>
-                                        <span>Dashboard Saya</span>
+                                        <span>Dashboard saya</span>
                                     </a>
                                 </li>
                             <?php } else { ?>
                                 <li class="nav-item">
                                     <a class="nav-link collapsed" href="<?= base_url("mydashboard") ?>">
                                         <i class="bi bi-grid"></i>
-                                        <span>Dashboard Saya</span>
+                                        <span>Dashboard saya</span>
                                     </a>
                                 </li>
                             <?php } ?>
 
+                            <li class="nav-item">
+                                <a class="nav-link collapsed" href="<?= base_url('/sharing/menulis') ?>">
+                                    <i class="bi bi-pencil-square"></i>
+                                    <span>Mulai menulis</span>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link collapsed" href="pages-error-404.html">
+                                    <i class="bi bi-bar-chart"></i>
+                                    <span>Sharing everything</span>
+                                </a>
+                            </li> -->
 
                             <li class="nav-item">
                                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse"
@@ -56,61 +68,11 @@
                                                 <i
                                                     class="bi bi-circle"></i><span><?= $categori->product_category_name ?></span>
                                             </a>
-                                            <!-- <a
-                                                href="<?= base_url('/learning/course_category/' . $categori->product_category_id) ?>"
-                                                >
-                                                <i
-                                                    class="bi bi-circle"></i><span><?= $categori->product_category_name ?></span>
-                                            </a> -->
                                         </li>
                                     <?php } ?>
 
                                 </ul>
                             </li><!-- End Components Nav -->
-
-
-                            <!-- <li class="nav-item">
-                                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse"
-                                    href="#">
-                                    <i class="bi bi-layout-text-window-reverse"></i><span>Kelas Business</span><i
-                                        class="bi bi-chevron-down ms-auto"></i>
-                                </a>
-                                <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                                    <li>
-                                        <a href="tables-general.html">
-                                            <i class="bi bi-circle"></i><span>Management</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="tables-data.html">
-                                            <i class="bi bi-circle"></i><span>Communication</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="tables-data.html">
-                                            <i class="bi bi-circle"></i><span>Business Strategy</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="tables-data.html">
-                                            <i class="bi bi-circle"></i><span>Leadership</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="tables-data.html">
-                                            <i class="bi bi-circle"></i><span>Self Development</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> -->
-
-
-                            <li class="nav-item">
-                                <a class="nav-link collapsed" href="pages-error-404.html">
-                                    <i class="bi bi-bar-chart"></i>
-                                    <span>Top Kelas (On Development)</span>
-                                </a>
-                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="pages-error-404.html">
@@ -125,7 +87,7 @@
                                     <a class="nav-link collapsed" data-bs-toggle="modal"
                                         data-bs-target="#verticalycentered">
                                         <i class="bi bi-mortarboard"></i>
-                                        <span>Gabung Bumenet Inspiratif</span>
+                                        <span>Gabung bumenet inspiratif</span>
                                     </a>
                                 <?php } else if ($user->role == 0) { ?>
 
@@ -141,12 +103,25 @@
                         </ul>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-body">
+
+                        <h5 class="card-title">Rekomendasi Sharing</h5>
+                        <?php foreach ($categories as $categori) { ?>
+                            <button href="#"
+                                class="btn btn-sm btn-outline-secondary my-1"><span><?= $categori->product_category_name ?></span>
+                            </button>
+                        <?php } ?>
+
+                    </div>
+                </div>
             </div>
             <?php if (!$this->session->userdata('user_id')) { ?>
             <?php } else { ?>
                 <input type="hidden" id="role" name="role" value="<?= $user->role ?>">
             <?php } ?>
             <div class="col-xl-9">
+
                 <div class="row align-items-top" id="courses">
                     <?php foreach ($courses as $cs) { ?>
                         <div class="col-lg-3">
@@ -161,7 +136,8 @@
                                 </div>
                                 <div class="card-body pt-3">
                                     <a href="<?= base_url('/learning/course_detail/' . $cs->service_id) ?>"
-                                        class="card-link">Lihat detail</a>
+                                        class="card-link">Lihat
+                                        detail</a>
                                 </div>
                             </div>
                         </div>
@@ -169,7 +145,61 @@
                 </div>
                 <div class="row align-items-top" id="courses_category">
                 </div>
+                <div class="pagetitle">
+                    <h1>Sharing Everything</h1>
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#!">Topik yang mungkin menarik</a></li>
+                        </ol>
+                    </nav>
+                </div><!-- End Page Title -->
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Sharing Everything <span>| Topik yang mungkin menarik</span><a href="<?= base_url("sharing") ?>" id="btn-done"
+                            class="card-link btn btn-sm btn-outline-primary d-flex float-end">Lihat lebih banyak<i class="bi bi-arrow-right-short"></i>
+                        </a></h5>
+                        
+                    </div>
+                    <div class="row g-0">
+                        <?php foreach ($sharing as $share) { ?>
 
+                            <div class="col-md-2">
+                                <img src="images/sharing/<?= $share->img_sharing ?>"
+                                    class="img-fluid rounded-start py-4 px-4" alt="...">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="card-body">
+                                    <a href="<?= base_url('/sharing/content/' . $share->sharing_id) ?>" class="card-link">
+                                        <h5 class="card-title"><?= $share->title_content ?></h5>
+                                    </a>
+                                    <p class="card-text"><?php
+                                    $string = strip_tags($share->content);
+                                    if (strlen($string) > 150) {
+                                        $stringCut = substr($string, 0, 150);
+                                        $endPoint = strrpos($stringCut, ' ');
+
+                                        //if the string doesn't contain any space then it will cut without word basis.
+                                        $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                        $string .= '...';
+                                    }
+                                    echo $string;
+                                    ?></p>
+                                    <div class="row  card-footer">
+                                        <div class="col-md-8">
+                                            <h6><i class="bi bi-person"></i> <span><?= $share->nickname ?></span> • <?= $share->product_category_name ?></h6>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="<?= base_url('/sharing/content/' . $share->sharing_id) ?>"
+                                                class="card-link"><span>Baca lebih lanjut</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php } ?>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

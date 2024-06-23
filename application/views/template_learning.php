@@ -72,6 +72,8 @@
 
 
 
+
+
         <?php if (!$this->session->userdata('username')) { ?>
           <!-- <a href="<?= base_url() ?>auth" class="btn btn-primary mr-3" type="button">Log In</a> -->
           <a class="btn btn-outline-primary mt-1 mb-1" href="<?= base_url() ?>auth">
@@ -82,6 +84,16 @@
               Daftar sekarang
             </a></button>
         <?php } else { ?>
+
+          <li class="nav-item ">
+            <a class="nav-link nav-icon" href="<?= base_url('/sharing/menulis') ?>">
+              <i class="bi bi-pencil-square"></i>
+              <!-- <span>Menulis</span> -->
+               
+            </a>
+          </li>
+
+
           <li class="nav-item dropdown pe-3">
             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
               <img src="<?= base_url() ?>/images/profile/<?= $user->img_profile ?>" alt="Profile" class="rounded-circle">
@@ -177,19 +189,7 @@
 
   <!-- Vendor JS Files -->
   <!-- jQuery UI 1.11.4 -->
-  <!-- <script src="<?= base_url() ?>assets/assets-admin/vendor/jquery-ui/jquery-ui.min.js"></script> -->
 
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/chart.js/chart.umd.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/echarts/echarts.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/quill/quill.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/tinymce/tinymce.min.js"></script>
-  <script src="<?= base_url() ?>assets/assets-admin/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="<?= base_url() ?>assets/assets-admin/js/main.js"></script>
 
   <!-- CONTENTS -->
   <?= $contents ?>
@@ -211,6 +211,20 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
+
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/jquery-ui/jquery-ui.min.js"></script>
+
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/chart.js/chart.umd.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/echarts/echarts.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/quill/quill.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/tinymce/tinymce.min.js"></script>
+  <script src="<?= base_url() ?>assets/assets-admin/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="<?= base_url() ?>assets/assets-admin/js/main.js"></script>
 
 
   </script>

@@ -29,7 +29,7 @@
                     <i class="bi bi-book-fill"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>145</h6>
+                    <h6><?= $total_course ?></h6>
                     <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
 
                   </div>
@@ -51,7 +51,7 @@
                     <i class="bi bi-book-half"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>2</h6>
+                    <h6><?= $total_course_draft ?></h6>
                     <!-- <span class="text-danger small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
 
                   </div>
@@ -67,14 +67,14 @@
             <div class="card info-card customers-card">
 
               <div class="card-body">
-                <h5 class="card-title">Pengikut</h5>
+                <h5 class="card-title">Pengikut | <span>on development</span> </h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                     <i class="bi bi-people"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>22</h6>
+                    <h6>0</h6>
                     <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
 
                   </div>
@@ -93,7 +93,7 @@
             <div class="card recent-sales overflow-auto">
 
               <div class="card-body">
-                <h5 class="card-title">Daftar Kursus <span>| Kelas yang sudah anda buat</span></h5>
+                <h5 class="card-title">Daftar Kursus <span>| Kelas yang dibuat</span></h5>
 
                 <table class="table table-borderless datatable">
                   <thead>
@@ -105,12 +105,20 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row"><a href="#">#2457</a></th>
-                      <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                      <td>$64</td>
-                      <td><span class="badge bg-success">Approved</span></td>
-                    </tr>
+                    <?php $no = 1; ?>
+                    <?php foreach ($services as $service) { ?>
+                      <tr>
+                        <th scope="row"><a href="#"><?= $no++ ?></a></th>
+                        <td><a href="<?= base_url('mentor/mentor/course/'. $service->service_id) ?>" class="text-primary"><?= ucfirst($service->service_name) ?></a></td>
+                        <?php $total_student = $this->db->query("SELECT course_id FROM course_user WHERE course_id='$service->service_id';")->num_rows(); ?>
+                        <td><?= $total_student ?></td>
+                        <?php if ($service->status_course == 1) { ?>
+                          <td><span class="badge bg-success">release</span></td>
+                        <?php } else { ?>
+                          <td><span class="badge bg-warning">draft</span></td>
+                        <?php } ?>
+                      </tr>
+                    <?php } ?>
                   </tbody>
                 </table>
 

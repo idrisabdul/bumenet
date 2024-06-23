@@ -170,7 +170,7 @@
                                 <button href="" onclick="alertLogin('<?= base_url('auth') ?>')"
                                     class="btn btn-primary buy_now" type="button">Beli Sekarang</button>
                             <?php } else if ($user_id->user_id == 0) { ?>
-                                    <button href="" class="btn btn-primary" id="add_course" type="button">Beli Sekarang</button>
+                                    <button href="" class="btn btn-primary" id="add_course" type="button"><?php echo $service->service_price == 0 ? 'Masukkan ke daftar belajar' : 'Beli Sekarang';?></button>
                             <?php } else if ($this->session->userdata('user_id') == $user_id->user_id) { ?>
                                         <a href="<?= base_url() ?>learning/learning_course/<?= $service->service_id ?>"
                                             class="btn btn-primary" id="start_learning" type="button">Mulai

@@ -18,6 +18,10 @@ class mentor extends CI_Controller
 	{
 		$user_id = $this->session->userdata('user_id');
 		$data['user'] = $this->Mycourse_m->getuser($user_id);
+		$data['total_course'] = $this->db->query("SELECT service_name FROM services WHERE service_created_by='$user_id' AND status_course = '1'")->num_rows();
+		$data['total_course_draft'] = $this->db->query("SELECT service_name FROM services WHERE service_created_by='$user_id' AND status_course = '0'")->num_rows();
+		$data['services'] = $this->Services_m->getservices_byuserid($user_id);
+		// echo $data['total_course'];
 		$this->template->load('template_mentor', 'mentor/mentor_v', $data);
 	}
 

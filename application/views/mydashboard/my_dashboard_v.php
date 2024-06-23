@@ -16,7 +16,8 @@
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img src="<?= base_url() ?>images/profile/<?= $user->img_profile ?>" alt="Profile" class="rounded-circle">
+                        <img src="<?= base_url() ?>images/profile/<?= $user->img_profile ?>" alt="Profile"
+                            class="rounded-circle">
                         <h2>Hai, <?= ucfirst($this->session->userdata('nickname')) ?></h2>
                         <h3><?= ucfirst($this->session->userdata('role_name')) ?></h3>
                         <?php if ($user->role == 4) { ?>
@@ -35,289 +36,208 @@
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="<?= base_url("mydashboard/myaccount") ?>">
                                     <i class="bi bi-person"></i>
-                                    <span>Akun Saya</span>
+                                    <span>Akun saya</span>
                                 </a>
-                            </li><!-- End Blank Page Nav -->
-
-                            <!-- <li class="nav-item">
-                                <a class="nav-link collapsed" href="pages-error-404.html">
-                                    <i class="bi bi-grid"></i>
-                                    <span>Kelas yang Lulus</span>
-                                </a>
-                            </li> -->
-
+                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link collapsed" href="<?= base_url("mydashboard") ?>">
                                     <i class="bi bi-bar-chart"></i>
-                                    <span>Progres Belajar</span>
+                                    <span>Progres belajar</span>
                                 </a>
-                            </li><!-- End Error 404 Page Nav -->
+                            </li>
 
-
-
+                            <li class="nav-item" id="my_writing">
+                                <a class="nav-link collapsed" href="#">
+                                    <i class="bi bi-pencil-square"></i>
+                                    <span>Tulisan saya</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
+
             </div>
             <div class="col-xl-9">
-                <?php if (!$mycourses) { ?>
-                    <img src="<?= base_url() ?>/assets/img/empty-removebg-preview.png" class="rounded mx-auto d-block"
-                        alt="...">
-                    <!-- <h5 class="card-title text-center">Yuk Ambil kelas sekar</h5> -->
+                <div id="my_learning">
+                    <?php if (!$mycourses) { ?>
+                        <img src="<?= base_url() ?>/assets/img/empty-removebg-preview.png" class="rounded mx-auto d-block"
+                            alt="...">
+                        <!-- <h5 class="card-title text-center">Yuk Ambil kelas sekar</h5> -->
 
-                <?php } ?>
-                <?php foreach ($mycourses as $mc) { ?>
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="images/<?= $mc->img_service ?>" class="img-fluid rounded-start" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $mc->service_name ?></h5>
-
-                                    <p class="card-text">
-                                        <?php
-                                        $string = strip_tags($mc->service_description);
-                                        if (strlen($string) > 150) {
-                                            $stringCut = substr($string, 0, 150);
-                                            $endPoint = strrpos($stringCut, ' ');
-
-                                            //if the string doesn't contain any space then it will cut without word basis.
-                                            $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                                            $string .= '...';
-                                        }
-                                        echo $string;
-                                        ?>
-                                    </p>
+                    <?php } ?>
+                    <?php foreach ($mycourses as $mc) { ?>
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="images/<?= $mc->img_service ?>" class="img-fluid rounded-start" alt="...">
                                 </div>
-                                <div class="card-footer">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <span>Progres belajar</span>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $mc->service_name ?></h5>
+
+                                        <p class="card-text">
                                             <?php
-                                            $progress_done = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id' && status_progress='1';")->row();
-                                            $all_progress = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id';")->row();
-                                            // echo $progress_done->total_progress;
-                                            // echo $progress_done->total_progress;
-                                            $progress = round($progress_done->total_progress / $all_progress->total_progress * 100, 2);
+                                            $string = strip_tags($mc->service_description);
+                                            if (strlen($string) > 150) {
+                                                $stringCut = substr($string, 0, 150);
+                                                $endPoint = strrpos($stringCut, ' ');
+
+                                                //if the string doesn't contain any space then it will cut without word basis.
+                                                $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+                                                $string .= '...';
+                                            }
+                                            echo $string;
                                             ?>
-                                            <div class="progress mt-2">
+                                        </p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <span>Progres belajar</span>
+                                                <?php
+                                                $progress_done = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id' && status_progress='1';")->row();
+                                                $all_progress = $this->db->query("SELECT COUNT(learning_progress_id) AS total_progress FROM learning_progress WHERE learning_course_id='$mc->service_id' && user_id='$mc->user_id';")->row();
+                                                // echo $progress_done->total_progress;
+                                                // echo $progress_done->total_progress;
+                                                $progress = round($progress_done->total_progress / $all_progress->total_progress * 100, 2);
+                                                ?>
+                                                <div class="progress mt-2">
                                                 <div class="progress-bar" role="progressbar" style="width: <?= $progress ?>%"
                                                     aria-valuenow="<?= $progress ?>" aria-valuemin="0" aria-valuemax="100"><?= $progress ?>%
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-5 mt-4">
-                                            <?php if ($progress < 100) { ?>
-                                                <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
-                                                    class="card-link">Lanjut
-                                                    belajar</a>
-                                            <?php } else { ?>
-                                                <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
-                                                    class="card-link">Review ulang</a>
-                                                    &nbsp;&nbsp;
-                                                <!-- <a href="<?= base_url() ?>mydashboard/get_certificate/<?= $mc->service_id ?>"
-                                                    class="card-link">Unduh Sertifikat</a> -->
-                                                <?php
-                                                $check_certificate = $this->db->query("SELECT credential_id FROM certificates WHERE course_id='$mc->service_id' && user_learn_id='$mc->user_id';")->row();
-                                                ?>
-                                                <?php if ($check_certificate) { ?>
-                                                    <a href="<?= base_url() ?>learning/certificates/<?= $mc->service_id ?>"
-                                                        class="card-link">Lihat Sertifikat</a>
+                                            </div>
+                                            <div class="col-md-5 mt-4">
+                                                <?php if ($progress < 100) { ?>
+                                                    <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
+                                                        class="card-link">Lanjut
+                                                        belajar</a>
                                                 <?php } else { ?>
-                                                    <a href="<?= base_url() ?>learning/exam/<?= $mc->service_id ?>"
-                                                        class="card-link">Kerjakan Ujian</a>
+                                                    <a href="<?= base_url() ?>learning/learning_course/<?= $mc->service_id ?>"
+                                                        class="card-link">Review ulang</a>
+                                                    &nbsp;&nbsp;
+                                                    <!-- <a href="<?= base_url() ?>mydashboard/get_certificate/<?= $mc->service_id ?>"
+                                                    class="card-link">Unduh Sertifikat</a> -->
+                                                    <?php
+                                                    $check_certificate = $this->db->query("SELECT credential_id FROM certificates WHERE course_id='$mc->service_id' && user_learn_id='$mc->user_id';")->row();
+                                                    ?>
+                                                    <?php if ($check_certificate) { ?>
+                                                        <a href="<?= base_url() ?>learning/certificates/<?= $mc->service_id ?>"
+                                                            class="card-link">Lihat Sertifikat</a>
+                                                    <?php } else { ?>
+                                                        <a href="<?= base_url() ?>learning/exam/<?= $mc->service_id ?>"
+                                                            class="card-link">Kerjakan Ujian</a>
+                                                    <?php } ?>
                                                 <?php } ?>
-                                            <?php } ?>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    <?php } ?>
+                </div>
+                <!-- <div id="list_writing"></div> -->
+                <div id="my-write">
+                    <div class="col-12">
+                        <div class="card recent-sales overflow-auto">
+                            <div class="card-body">
+                                <h5 class="card-title">Tulisan saya <span>| daftar tulisan yang sudah go publish</span>
+                                </h5>
+
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th scope="col">#</th> -->
+                                            <th scope="col">Judul</th>
+                                            <th scope="col">Tanggal Publis</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="list_writing">
+                                        <!-- <div id="list_writing"></div> -->
+                                        <!-- <tr>
+                                            <td>X</td>
+                                            <td>X</td>
+                                            <td>X</td>
+                                         </tr> -->
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                <?php } ?>
+                </div>
+
             </div>
     </section>
 
 </main><!-- End #main -->
 
+<!-- DELETE ITEM MODAL MODULE -->
+<div class="modal fade" id="basicModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Anda Yakin?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Data yang dihapus tidak akan bisa dikembalikan.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <a id="btn-delete" class="btn btn-danger" href="#">Hapus</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <script type="text/javascript">
+    function deleteConfirm(url) {
+        console.log(url);
+        $('#btn-delete').attr('href', url);
+        $('#basicModal').modal('show');
+    }
 
     $(document).ready(function () {
-        // show_course();
+        $("#my-write").hide();
 
-        function show_course() {
-            $.ajax({
-                type: 'ajax',
-                url: '<?php echo site_url('Learning/course_category') ?>',
-                async: true,
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    var html = '';
-                    var i;
-                    for (i = 0; i < data.length; i++) {
-                        html += '<div class="col-lg-3">' +
-                            '<div class="card">' +
-                            '<div class="card-header">' +
-                            '<img src="images/' + data[i].img_service + '" class="card-img-top" alt="...">' +
-                            '<a href="<?= base_url('learning/course_detail/') ?>' + data[i].service_id + '"' +
-                            'class="card-link">' +
-                            '<h5 class="card-title">' + data[i].service_name + '</h5>' +
-                            '</a>' +
-                            '<h6 class="card-subtitle mb-2 text-muted">' + data[i].product_category_name + '</h6>' +
-                            '</div>' +
-                            '<div class="card-body pt-3">' +
-                            '<a href="' + data[i].img_service + '"' +
-                            'class="card-link">Lihat detail</a>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>';
-                    }
-                    $('#courses').html(html);
-                    // console.log(data.length);
-                }
-
-            });
-        }
-
-        $("#components-nav li").click(function () {
+        $("#my_writing").click(function () {
             var id = this.id;
+            $("#my-write").show();
             $.ajax({
-                url: "<?php echo site_url('Learning/course_category'); ?>",
+                url: "<?php echo site_url('Sharing/tulisan_saya'); ?>",
                 method: "POST",
-                data: {
-                    id: id
-                },
                 async: true,
                 dataType: 'json',
                 success: function (data) {
-                    $("#courses").hide();
+                    $("#my_learning").hide();
                     var html = '';
                     var i;
                     for (i = 0; i < data.length; i++) {
-                        html += '<div class="col-lg-3">' +
-                            '<div class="card">' +
-                            '<div class="card-header">' +
-                            '<img src="images/' + data[i].img_service + '" class="card-img-top" alt="...">' +
-                            '<a href="<?= base_url('learning/course_detail/') ?>' + data[i].service_id + '"' +
-                            'class="card-link">' +
-                            '<h5 class="card-title">' + data[i].service_name + '</h5>' +
-                            '</a>' +
-                            '<h6 class="card-subtitle mb-2 text-muted">' + data[i].product_category_name + '</h6>' +
-                            '</div>' +
-                            '<div class="card-body pt-3">' +
-                            '<a href="<?= base_url('learning/course_detail/') ?>' + data[i].service_id + '"' +
-                            'class="card-link">Lihat detail</a>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>';
+                        html +=
+                            '<tr>' +
+                            // '<td>'+i+'</td>' +
+                            '<td>' + data[i].title_content + '</td>' +
+                            '<td>' + data[i].date + '</td>' +
+                            '<td style="text-align:right;">' +
+                            '<a href="<?= base_url('sharing/edit/') ?>' + data[i].sharing_id + '" class="btn btn-info btn-sm item_edit">Edit</a>' + ' ' +
+                            '<button type="button" href="#!" onclick="deleteConfirm(`<?= base_url('sharing/delete/') ?>' + data[i].sharing_id + '`)" class="btn btn-danger btn-sm item_delete"> Delete</button> ' +
+                        '</td>' +
+                            '</tr>';
                     }
-                    $('#courses_category').html(html);
+                    $('#list_writing').html(html);
                     // console.log(data);
                 }
             });
-            return false;
-
-            console.log(this.id)
-        });
-
-        //
-        var x = 0;
-        $('#add_submodule').click(function () {
-            x = x + 1;
-            newRowAdd =
-                '<div id="form_module">' +
-                '<br><br><div class="row mb-3">' +
-                '<div class="row mb-3">' +
-                '<label for="inputText" class="col-sm-2 col-form-label"><b>SubModule Name</b></label>' +
-                '<div class="col-sm-8">' +
-                '<input type="text" name="submodule_name[]" class="form-control" required>' +
-                '</div>' +
-                '<button type="button" id="remove_module" class="col-sm-1 btn btn-danger float-end"><i class="bi bi-trash me-1"></i></button>' +
-                '</div>' +
-                '<div class="row mb-3">' +
-                '<label for="inputPassword" class="col-sm-2 col-form-label">SubContent Module</label>' +
-                '<div class="col-sm-10">' +
-                '<textarea class="form-control" name="submodule_content[]" required style="height: 100px"></textarea>' +
-                '</div>' +
-                '</div>' +
-                '</div>';
-            $('#course_module').append(newRowAdd);
-        });
-        $("body").on("click", "#remove_module", function () {
-            $(this).parents("#form_module").remove();
-        });
-    });
-
-    $(document).ready(function () {
-        $('#save_and_publish').click(function () {
-            var id = $('#course_id').val();
-            $.ajax({
-                url: "<?php echo site_url('Admin/Product/save_and_publish'); ?>",
-                method: "POST",
-                data: {
-                    id: id
-                },
-                async: true,
-                dataType: 'json',
-                success: function (data) {
-                    $("#courses").hide();
-                    window.location.replace("<?php echo site_url('Admin/Product/'); ?>");
-                }
-            });
-            return false;
-        });
-    });
-
-
-
-
-    // REFERENSI
-    $(document).ready(function () {
-        $('#select_user').show();
-        $('#input_user').hide();
-        $('[name="my_checkbox"]').change(function () {
-            if ($('#checkbox_inp').is(':checked')) {
-                $('#input_user').show();
-                $('#id_users').prop('disabled', true);
-                $('#nama_penerima').prop('disabled', false);
-            } else {
-                $('#input_user').hide();
-                $('#nama_penerima').prop('disabled', true);
-                $('#id_users').prop('disabled', false);
-            }
         });
 
     });
 
-    $(document).ready(function () {
-        $('#select_ass_num').change(function () {
-            var id = $(this).val();
-            //  var string_text = $(this).text();
-            // alert(id);
-            var string = $("#select_ass_num option:selected").text();
-            $.ajax({
-                url: "<?php echo site_url('Asset/get_lastid_asset_number'); ?>",
-                method: "POST",
-                data: {
-                    id: id
-                },
-                async: true,
-                dataType: 'json',
-                success: function (data) {
-                    $("#asset_number_txt").val(string + '-' + data);
-                    $("#asset_number_txtowe").val(string + '-' + data);
-                    $("#numbering").val(data);
-                    $("#id_asset_number").val(id);
-                }
-            });
-            return false;
-        });
-    });
+
 </script>

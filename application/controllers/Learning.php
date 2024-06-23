@@ -26,6 +26,7 @@ class learning extends CI_Controller
 		$this->load->model('Services_m');
 		$this->load->model('Users_m');
 		$this->load->model('Mycourse_m');
+		$this->load->model('Sharing_m');
 
 	}
 	public function index()
@@ -35,6 +36,7 @@ class learning extends CI_Controller
 		$data['user'] = $this->Users_m->getuser_byid($user_id);
 		$data['courses'] = $this->Services_m->getservices_publish();
 		$data['categories'] = $this->Services_m->getproductcategory();
+		$data['sharing'] = $this->Sharing_m->getsharing();
 		$this->template->load('template_learning', 'learning/learning_v', $data);
 	}
 
