@@ -52,7 +52,8 @@
                                             <div class="row  card-footer">
                                                 <div class="col-md-8">
                                                     <h6><i class="bi bi-person"></i> <span><?= $share->nickname ?></span> •
-                                                        <?= $share->product_category_name ?></h6>
+                                                        <?= $share->product_category_name ?>
+                                                    </h6>
 
                                                 </div>
                                                 <div class="col-md-4">
@@ -77,15 +78,20 @@
                                         <div class="text-center mt-5 mb-2">
                                             <h6 class="card-subtitle mb-2 text-muted">Artikel tidak ditemukan, mulailah dengan
                                                 dirimu sendiri dengan menulis di topik ini</h6>
-                                            <a href="<?= base_url('sharing/menulis') ?>" class="card-link"><i
-                                                    class="bi bi-pencil-square me-1 mx-2"></i>Mulai menulis</a>
+                                            <?php if (!$this->session->userdata('user_id')) { ?>
+                                                <a href="<?= base_url('auth') ?>" class="card-link"><i
+                                                        class="bi bi-pencil-square me-1 mx-2"></i>Mulai menulis</a>
+                                            <?php } else { ?>
+                                                <a href="<?= base_url('sharing/menulis') ?>" class="card-link"><i
+                                                        class="bi bi-pencil-square me-1 mx-2"></i>Mulai menulis</a>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 <?php } else { ?>
                                     <?php foreach ($sharing_cat->result() as $sc) { ?>
                                         <div class="row">
                                             <div class="col-md-2">
-                                                <img src="images/sharing/<?= $sc->img_sharing ?>"
+                                                <img src="<?= base_url() ?>images/sharing/<?= $sc->img_sharing ?>"
                                                     class="img-fluid rounded-start py-4 px-4" alt="...">
                                             </div>
                                             <div class="col-md-10">
@@ -132,3 +138,15 @@
         </div>
     </div>
 </main>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function alertLogin(url) {
+        console.log(url);
+        $('#btn-login').attr('href', url);
+        $('#basicModal').modal('show');
+    }
+
+
+</script>

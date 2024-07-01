@@ -1,3 +1,49 @@
+<style>
+    pre {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        line-height: 70%;
+        max-width: 900px;
+        overflow-x: auto;
+        /* Enable horizontal scrolling */
+        white-space: pre;
+
+    }
+
+    code {
+        font-family: Consolas, "Courier New", monospace;
+        color: #d63384;
+    }
+
+    h3 {
+        color: #333;
+        /* Warna teks */
+        font-size: 24px;
+        /* Ukuran font */
+        margin-top: 20px;
+        /* Jarak atas */
+        margin-bottom: 20px;
+        /* Jarak bawah */
+        font-weight: bold;
+        /* Menebalkan teks */
+    }
+
+    h1 {
+        color: #333;
+        /* Warna teks */
+        font-size: 24px;
+        /* Ukuran font */
+        margin-top: 20px;
+        /* Jarak atas */
+        margin-bottom: 20px;
+        /* Jarak bawah */
+        font-weight: bold;
+        /* Menebalkan teks */
+    }
+</style>
+
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -9,7 +55,7 @@
                 <li class="breadcrumb-item active"><?= $sharing->nickname ?></li>
             </ol>
         </nav>
-        
+
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -26,7 +72,8 @@
                             <div class="card-body" id="submodule_content">
                                 <h5 class="card-title mt-2" id="judul_submodule"><?= $sharing->title_content ?>
                                 </h5>
-                                <div id="content_submodule"><?php echo nl2br($sharing->content) ?>
+                                <div id="content_submodule" class="lh-lg"><?php echo nl2br($sharing->content) ?>
+                                    <!-- <p class="lh-lg">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p> -->
                                 </div>
                             </div>
                             <div class="card-footer" style="display: none;">

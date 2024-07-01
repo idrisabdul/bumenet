@@ -27,11 +27,16 @@ class sharing extends CI_Controller
 
 	public function menulis()
 	{
-		$user_id = $this->session->userdata('user_id');
-		$data['user'] = $this->Mycourse_m->getuser($user_id);
-		$data['product_category'] = $this->Services_m->getproductcategory();
-		// $data['module'] = $this->Services_m->getmodule_by_id($module_id);
-		$this->template->load('template_learning', 'sharing/create_content_v', $data);
+		if (!$this->session->userdata('user_id')) {
+			show_404();
+		} else {
+			$user_id = $this->session->userdata('user_id');
+			$data['user'] = $this->Mycourse_m->getuser($user_id);
+			$data['product_category'] = $this->Services_m->getproductcategory();
+			// $data['module'] = $this->Services_m->getmodule_by_id($module_id);
+			$this->template->load('template_learning', 'sharing/create_content_v', $data);
+		}
+
 	}
 
 	public function insert_content()
@@ -145,6 +150,31 @@ class sharing extends CI_Controller
 		unlink('images/sharing/' . $img_sharing_del->img_sharing);
 		$this->db->delete('sharing', ['sharing_id' => $id]);
 		redirect('mydashboard');
+	}
+
+	public function redirect_by_id($id)
+	{
+		$title = $this->Sharing_m->getsharing_byid($id);
+		if ($title->title_content) {
+			redirect('sharing/show/' . urlencode($title->title_content));
+		} else {
+			show_404();
+		}
+	}
+
+	public function show($title_content)
+	{
+		$decoded_name = urldecode($title_content);
+		$id = $this->Sharing_m->getsharingid_bytitle($decoded_name);
+		if ($id) {
+			$this->load->library('upload');
+			$user_id = $this->session->userdata('user_id');
+			$data['sharing'] = $this->Sharing_m->getsharing_byid($id);
+			$data['user'] = $this->Mycourse_m->getuser($user_id);
+			$this->template->load('template_learning', 'sharing/content_v', $data);
+		} else {
+			show_404();
+		}
 	}
 
 }

@@ -31,6 +31,17 @@
     <!-- Template Main CSS File -->
     <link href="<?= base_url() ?>assets/assets-admin/css/style.css" rel="stylesheet">
 
+    <style>
+        iframe {
+            width: 100%;
+            /* Set width to 100% */
+            height: 500px;
+            /* Set a specific height */
+            border: none;
+            /* Remove default border */
+        }
+    </style>
+
 </head>
 
 <body>

@@ -169,7 +169,7 @@
                             </div>
                             <div class="col-md-10">
                                 <div class="card-body">
-                                    <a href="<?= base_url('/sharing/content/' . $share->sharing_id) ?>" class="card-link">
+                                    <a href="<?= base_url('/sharing/redirect_by_id/' . $share->sharing_id) ?>" class="card-link">
                                         <h5 class="card-title"><?= $share->title_content ?></h5>
                                     </a>
                                     <p class="card-text"><?php
@@ -190,7 +190,7 @@
 
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="<?= base_url('/sharing/content/' . $share->sharing_id) ?>"
+                                            <a href="<?= base_url('/sharing/redirect_by_id/' . $share->sharing_id) ?>"
                                                 class="card-link"><span>Baca lebih lanjut</span></a>
                                         </div>
                                     </div>

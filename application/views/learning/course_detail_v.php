@@ -168,7 +168,7 @@
                         <div class="d-grid gap-2 mt-2">
                             <?php if (!$this->session->userdata('user_id')) { ?>
                                 <button href="" onclick="alertLogin('<?= base_url('auth') ?>')"
-                                    class="btn btn-primary buy_now" type="button">Beli Sekarang</button>
+                                    class="btn btn-primary buy_now" type="button"><?php echo $service->service_price == 0 ? 'Masukkan ke daftar belajar' : 'Beli Sekarang';?></button>
                             <?php } else if ($user_id->user_id == 0) { ?>
                                     <button href="" class="btn btn-primary" id="add_course" type="button"><?php echo $service->service_price == 0 ? 'Masukkan ke daftar belajar' : 'Beli Sekarang';?></button>
                             <?php } else if ($this->session->userdata('user_id') == $user_id->user_id) { ?>
