@@ -31,6 +31,17 @@
     <!-- Template Main CSS File -->
     <link href="<?= base_url() ?>assets/assets-admin/css/style.css" rel="stylesheet">
 
+    <style>
+        iframe {
+            width: 100%;
+            /* Set width to 100% */
+            height: 500px;
+            /* Set a specific height */
+            border: none;
+            /* Remove default border */
+        }
+    </style>
+
 </head>
 
 <body>
@@ -150,7 +161,7 @@
                         <i class="bi bi-circle"></i><span>
                             <?= $mc->module_name ?></span>
                         <i class="bi bi-chevron-down ms-auto"></i>
-                        
+
                     </a>
                     <ul id="components-nav<?= $no2++ ?>" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <?php $submodule = $this->db->query("SELECT * FROM submodule_course WHERE module_course_id='$mc->module_course_id'"); ?>
