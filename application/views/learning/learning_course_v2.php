@@ -40,6 +40,50 @@
             border: none;
             /* Remove default border */
         }
+
+		pre {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        line-height: 70%;
+        max-width: 900px;
+        overflow-x: auto;
+        /* Enable horizontal scrolling */
+        white-space: pre;
+
+    }
+
+    code {
+        font-family: Consolas, "Courier New", monospace;
+        color: #d63384;
+    }
+
+    h3 {
+        color: #333;
+        /* Warna teks */
+        font-size: 24px;
+        /* Ukuran font */
+        margin-top: 20px;
+        /* Jarak atas */
+        margin-bottom: 20px;
+        /* Jarak bawah */
+        font-weight: bold;
+        /* Menebalkan teks */
+    }
+
+    h1 {
+        color: #333;
+        /* Warna teks */
+        font-size: 24px;
+        /* Ukuran font */
+        margin-top: 20px;
+        /* Jarak atas */
+        margin-bottom: 20px;
+        /* Jarak bawah */
+        font-weight: bold;
+        /* Menebalkan teks */
+    }
     </style>
 
 </head>
