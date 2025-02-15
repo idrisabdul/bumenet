@@ -41,7 +41,7 @@
 			/* Remove default border */
 		}
 
-		pre {
+		pre.ql-syntax {
 			background-color: #f4f4f4;
 			padding: 20px;
 			border: 1px solid #ddd;
