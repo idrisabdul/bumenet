@@ -20,17 +20,12 @@
 
 							<li class="nav-item">
 								<button class="nav-link active" data-bs-toggle="tab"
-									data-bs-target="#profile-overview">Implementasi CI/CD Pipeline</button>
+									data-bs-target="#profile-overview">Implementation CI/CD Pipeline</button>
 							</li>
 
 							<li class="nav-item">
 								<button class="nav-link" data-bs-toggle="tab"
-									data-bs-target="#profile-edit">Containerization & Kubernetes</button>
-							</li>
-
-							<li class="nav-item">
-								<button class="nav-link" data-bs-toggle="tab"
-									data-bs-target="#profile-settings">Implementasi Tools DevOps</button>
+									data-bs-target="#profile-settings">Implementation Tools Application</button>
 							</li>
 
 							<li class="nav-item">
@@ -64,90 +59,151 @@
 										mencegah bug masuk ke produksi. <br><br>
 										✅ Deployment Cepat & Aman <br> Otomatisasi deployment ke berbagai environment
 										(staging, production) dengan rollback jika diperlukan. <br><br>
-										✅ Integrasi dengan Docker & Kubernetes <br> Memastikan aplikasi berjalan stabil di
-										container & cloud-native environment. <br><br>
-										✅ Monitoring & Notifikasi <br> Terintegrasi dengan Slack, email, dan dashboard
-										untuk update status pipeline secara langsung. <br><br>
-										✅ Custom Workflow Sesuai Kebutuhan <br> Jenkinsfile yang disesuaikan untuk proyek
-										Anda, mendukung multi-stage pipeline.
+										✅ Integrasi dengan Docker & Kubernetes <br> Memastikan aplikasi berjalan stabil
+										di
+										container & cloud-native environment.
 									</div>
 								</div>
 
-							</div>
+								<h5 class="card-title">With captions</h5>
 
-							<div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-								<h5 class="card-title">Materi yang akan Kamu pelajari pada kelas ini</h5>
-								<div class="list-group">
-									<div class="accordion" id="accordionExample">
-										<?php $no = 1; ?>
-										<?php $no2 = 1; ?>
-										<?php foreach ($module_course as $mc) { ?>
-											<div class="accordion-item">
-												<h2 class="accordion-header" id="headingOne">
-													<button class="accordion-button collapsed" type="button"
-														data-bs-toggle="collapse" data-bs-target="#collapseOne<?= $no++ ?>"
-														aria-expanded="false" aria-controls="collapseOne">
-														<?= $mc->module_name ?>
-													</button>
-												</h2>
-												<div id="collapseOne<?= $no2++ ?>" class="accordion-collapse collapse"
-													aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-													<?php $submodule = $this->db->query("SELECT * FROM submodule_course WHERE module_course_id='$mc->module_course_id'"); ?>
-													<ul class="list-group list-group-flush"></ul>
-													<?php foreach ($submodule->result() as $sm) { ?>
-														<li class="list-group-item">
-															<a href="#!">
-																<i class="bi bi-lock-fill mr-1"></i>
-																<span><?= $sm->submodule_name ?></span>
-															</a>
-														</li>
-													<?php } ?>
-													</ul>
-												</div>
+								<!-- Slides with captions -->
+								<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+									<div class="carousel-indicators">
+										<button type="button" data-bs-target="#carouselExampleCaptions"
+											data-bs-slide-to="0" class="active" aria-current="true"
+											aria-label="Slide 1"></button>
+										<button type="button" data-bs-target="#carouselExampleCaptions"
+											data-bs-slide-to="1" aria-label="Slide 2"></button>
+										<button type="button" data-bs-target="#carouselExampleCaptions"
+											data-bs-slide-to="2" aria-label="Slide 3"></button>
+									</div>
+									<div class="carousel-inner">
+										<div class="carousel-item active">
+											<img src="<?= base_url() ?>images/slides-1.png" class="d-block w-100"
+												alt="...">
+											<div class="carousel-caption d-none d-md-block">
+												<h5>First slide label</h5>
+												<p>Some representative placeholder content for the first slide.</p>
 											</div>
-										<?php } ?>
+										</div>
+										<div class="carousel-item">
+											<img src="<?= base_url() ?>images/slides-2.jpg" class="d-block w-100"
+												alt="...">
+											<div class="carousel-caption d-none d-md-block">
+												<h5>Second slide label</h5>
+												<p>Some representative placeholder content for the second slide.</p>
+											</div>
+										</div>
+										<div class="carousel-item">
+											<img src="<?= base_url() ?>images/slides-3.jpg" class="d-block w-100"
+												alt="...">
+											<div class="carousel-caption d-none d-md-block">
+												<h5>Third slide label</h5>
+												<p>Some representative placeholder content for the third slide.</p>
+											</div>
+										</div>
+									</div>
 
-									</div><!-- End Default Accordion Example -->
-								</div>
+									<button class="carousel-control-prev" type="button"
+										data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Previous</span>
+									</button>
+									<button class="carousel-control-next" type="button"
+										data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Next</span>
+									</button>
+
+								</div><!-- End Slides with captions -->
+
 							</div>
 
 							<div class="tab-pane fade profile-edit profile-overview pt-3" id="profile-settings">
 
-								<div class="row mb-3">
-									<label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
-										Image</label>
-									<div class="col-md-8 col-lg-9">
-										<!-- <img src="<?= base_url() ?>images/profile/<?= $service->img_profile ?>"
-											alt="Profile"> -->
-										<div class="pt-2">
-											<!-- <a href="#" class="btn btn-primary btn-sm"
-													title="Upload new profile image"><i class="bi bi-upload"></i></a> -->
-										</div>
+								<h5 class="card-title">Solusi Profesional untuk Instalasi dan Konfigurasi Teknologi Anda
+								</h5>
+								<div class="row">
+									<div class="col-lg-9 col-md-8">Di era digital yang berkembang pesat, memiliki sistem
+										yang handal dan efisien adalah kunci keberhasilan bisnis. Kami menawarkan
+										layanan Implementation Tools Application, yaitu solusi profesional dan
+										menyeluruh untuk instalasi serta konfigurasi berbagai tools teknologi penting
+										seperti database, containerization, orchestration, dan infrastruktur berbasis
+										cloud.
 									</div>
 								</div>
-								<input type="text" hidden id="user_id"
-									value="<?= $this->session->userdata('user_id') ?>">
-								<input type="text" hidden id="course_id" value="<?= $service->service_id ?>">
 
+								<h5 class="card-title"> Keunggulan Layanan Implementation Tools Application Kami:</h5>
 								<div class="row">
-									<div class="col-lg-3 col-md-4 label ">Nama Instruktur</div>
-									<!-- <div class="col-lg-9 col-md-8"><?= $service->nickname ?></div> -->
+									<div class="col-lg-9 col-md-8">
+										✅ Deployment Docker & Containerization (Docker, Podman, Kubernetes, dan
+										Rancher.) <br> Modernisasi aplikasi Anda dengan teknologi container yang
+										memungkinkan efisiensi, portabilitas, dan skalabilitas tinggi. <br><br>
+										✅ Instalasi Database (MySQL, PostgreSQL, MongoDB, dll.)<br> Kami memastikan
+										database Anda terpasang dengan benar,
+										dikonfigurasi optimal, serta siap digunakan untuk performa maksimal, bahkan kami
+										juga support instalasi HA agar aplikasi berjalan lebih optimal. <br><br>
+										✅ Instalasi Tools DevOps <br> Tingkatkan efisiensi pengembangan dan deployment
+										aplikasi Anda dengan layanan Instalasi Tools DevOps dari kami! Kami menyediakan
+										solusi profesional untuk instalasi, konfigurasi, dan optimasi berbagai tools
+										DevOps, termasuk GitLab, Jenkins, MinIO, Docker, Kubernetes, Ansible,
+										Prometheus, dan banyak lagi. <br>
+									</div>
 								</div>
 
-								<div class="row">
-									<div class="col-lg-3 col-md-4 label ">Tentang Instruktur</div>
-									<!-- <div class="col-lg-9 col-md-8"><?= $service->about_person ?></div> -->
-								</div>
+								<h5 class="card-title">With captions</h5>
 
-								<div class="row">
-									<div class="col-lg-3 col-md-4 label">Perusahaan</div>
-									<!-- <div class="col-lg-9 col-md-8"><?= $service->current_company ?></div> -->
-								</div>
+								<!-- Slides with captions -->
+								<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+									<div class="carousel-indicators">
+										<button type="button" data-bs-target="#carouselExampleCaptions"
+											data-bs-slide-to="0" class="active" aria-current="true"
+											aria-label="Slide 1"></button>
+										<button type="button" data-bs-target="#carouselExampleCaptions"
+											data-bs-slide-to="1" aria-label="Slide 2"></button>
+										<button type="button" data-bs-target="#carouselExampleCaptions"
+											data-bs-slide-to="2" aria-label="Slide 3"></button>
+									</div>
+									<div class="carousel-inner">
+										<div class="carousel-item active">
+											<img src="<?= base_url() ?>images/slides-1.png" class="d-block w-100"
+												alt="...">
+											<div class="carousel-caption d-none d-md-block">
+												<h5>First slide label</h5>
+												<p>Some representative placeholder content for the first slide.</p>
+											</div>
+										</div>
+										<div class="carousel-item">
+											<img src="<?= base_url() ?>images/slides-2.jpg" class="d-block w-100"
+												alt="...">
+											<div class="carousel-caption d-none d-md-block">
+												<h5>Second slide label</h5>
+												<p>Some representative placeholder content for the second slide.</p>
+											</div>
+										</div>
+										<div class="carousel-item">
+											<img src="<?= base_url() ?>images/slides-3.jpg" class="d-block w-100"
+												alt="...">
+											<div class="carousel-caption d-none d-md-block">
+												<h5>Third slide label</h5>
+												<p>Some representative placeholder content for the third slide.</p>
+											</div>
+										</div>
+									</div>
 
-								<div class="row">
-									<div class="col-lg-3 col-md-4 label">Job</div>
-									<!-- <div class="col-lg-9 col-md-8"><?= $service->current_job ?></div> -->
-								</div>
+									<button class="carousel-control-prev" type="button"
+										data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Previous</span>
+									</button>
+									<button class="carousel-control-next" type="button"
+										data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="visually-hidden">Next</span>
+									</button>
+
+								</div><!-- End Slides with captions -->
 
 							</div>
 						</div><!-- End Bordered Tabs -->
@@ -164,19 +220,17 @@
 								<h2 class="accordion-header" id="headingOne">
 									<button class="accordion-button" type="button" data-bs-toggle="collapse"
 										data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										Accordion Item #1
+										Mengapa Memilih Kami?
 									</button>
 								</h2>
 								<div id="collapseOne" class="accordion-collapse collapse show"
 									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 									<div class="accordion-body">
-										<strong>This is the first item's accordion body.</strong> It is hidden by
-										default, until the collapse plugin adds the appropriate classes that we use to
-										style each element. These classes control the overall appearance, as well as the
-										showing and hiding via CSS transitions. You can modify any of this with custom
-										CSS or overriding our default variables. It's also worth noting that just about
-										any HTML can go within the <code>.accordion-body</code>, though the transition
-										does limit overflow.
+										Tim ahli siap membantu
+										dan memberikan solusi terbaik untuk kebutuhan Anda.
+										Jangan biarkan kendala teknis menghambat pertumbuhan bisnis Anda! Percayakan
+										instalasi dan konfigurasi teknologi kepada kami agar Anda dapat fokus pada
+										inovasi dan pengembangan bisnis.
 									</div>
 								</div>
 							</div>
@@ -184,19 +238,14 @@
 								<h2 class="accordion-header" id="headingTwo">
 									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 										data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-										Accordion Item #2
+										Apakah saya mendapatkan dokumentasi setelah instalasi?
 									</button>
 								</h2>
 								<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
 									data-bs-parent="#accordionExample">
 									<div class="accordion-body">
-										<strong>This is the second item's accordion body.</strong> It is hidden by
-										default, until the collapse plugin adds the appropriate classes that we use to
-										style each element. These classes control the overall appearance, as well as the
-										showing and hiding via CSS transitions. You can modify any of this with custom
-										CSS or overriding our default variables. It's also worth noting that just about
-										any HTML can go within the <code>.accordion-body</code>, though the transition
-										does limit overflow.
+										<strong>Tentu!</strong> Kami memberikan panduan lengkap dan dokumentasi teknis
+										agar Anda dapat memahami dan mengelola sistem dengan lebih mudah.
 									</div>
 								</div>
 							</div>
@@ -205,19 +254,15 @@
 									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 										data-bs-target="#collapseThree" aria-expanded="false"
 										aria-controls="collapseThree">
-										Accordion Item #3
+										Berapa lama proses instalasi dan konfigurasi?
 									</button>
 								</h2>
 								<div id="collapseThree" class="accordion-collapse collapse"
 									aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 									<div class="accordion-body">
-										<strong>This is the third item's accordion body.</strong> It is hidden by
-										default, until the collapse plugin adds the appropriate classes that we use to
-										style each element. These classes control the overall appearance, as well as the
-										showing and hiding via CSS transitions. You can modify any of this with custom
-										CSS or overriding our default variables. It's also worth noting that just about
-										any HTML can go within the <code>.accordion-body</code>, though the transition
-										does limit overflow.
+										Waktu pengerjaan tergantung pada kompleksitas sistem, biasanya berkisar antara
+										1-7 hari kerja. Kami juga menyediakan layanan prioritas untuk kebutuhan yang
+										lebih mendesak.
 									</div>
 								</div>
 							</div>
